@@ -1,0 +1,3 @@
+
+def putDatosGSM(trazaGSM, gpsData):
+	

@@ -1,0 +1,12 @@
+[Unit]
+Description=Chuteless service
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python /data/lirevenas/hav/chuteless.py
+Restart=always
+RestartSec=0
+
+[Install]
+WantedBy=multi-user.target
