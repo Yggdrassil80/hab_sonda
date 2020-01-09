@@ -1,3 +1,9 @@
+#################################################################################
+#               Proyecto:   GSMService                                          #
+#               Autor: Oscar Loras Delgado                                      #
+#                                                                               #
+#################################################################################
+
 import os
 import glob
 import time
@@ -11,9 +17,9 @@ import ConfigHelper
 #Creacion del logger para los logs de aplicacion
 loggerLog = logging.getLogger('server_logger')
 loggerLog.setLevel(logging.DEBUG)
-inf = logging.FileHandler('/data/hab_sonda/logs/GSMService.log')
+inf = logging.FileHandler('/data/lirevenas/logs/GSMService.log')
 inf.setLevel(logging.DEBUG)
-formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%$
+formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%$')
 inf.setFormatter(formatterInformer)
 loggerLog.addHandler(inf)
 

@@ -1,6 +1,9 @@
-#!/usr/bin/python
+#################################################################################
+#               Proyecto:   cameraService                                       #
+#               Autor: Oscar Loras Delgado                                      #
+#                                                                               #
+#################################################################################
 
-# Can enable debug output by uncommenting:
 import time
 import logging
 import Camara

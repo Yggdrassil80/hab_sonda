@@ -109,7 +109,7 @@ def isCamaraActivo():
         cfg.read([CONF_PATH])
         t = cfg.get("Camara", "camara_activo")
         return int(t)
-     except:
+    except:
         #loggerLog.error("[ConfigHelper][isCamaraActivo] ERROR");
         return "valor vacio"
 
@@ -146,17 +146,6 @@ def getTiempoMuestreoBMP():
     except:
         #loggerLog.error("[ConfigHelper][getTiempoMuestreoBMP] ERROR");
         return int(-1)
-
-#Metodo que recupera el modo de vuelo del Hav (pre-vuelo o vuelo)
-def leerModoVueloConf():
-    try:
-        cfg = ConfigParser.ConfigParser()
-        cfg.read([CONF_PATH])
-        modo = cfg.get("modo_vuelo", "modo")
-        return modo
-    except:
-        #loggerLog.error("[ConfigHelper][leerModoVueloConf] ERROR");
-        return "null"
 
 #Metodo que recupera la altura a partir de la cual se desactivara el envio de datos por GSM
 def leerAlturaGSMActivacion():

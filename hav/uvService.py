@@ -1,6 +1,9 @@
-#!/usr/bin/python
+#################################################################################
+#               Proyecto:   uvService                                           #
+#               Autor: Oscar Loras Delgado                                      #
+#                                                                               #
+#################################################################################
 
-# Can enable debug output by uncommenting:
 import time
 import logging
 import UVHelper.veml6070 as veml6070

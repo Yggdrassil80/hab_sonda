@@ -1,3 +1,9 @@
+#################################################################################
+#               Proyecto:   Lora1Service                                        #
+#               Autor: Oscar Loras Delgado                                      #
+#                                                                               #
+#################################################################################
+
 import os
 import glob
 import time
@@ -6,14 +12,14 @@ import logging
 import RFHelper
 import ConfigHelper
 
-SENSOR_FILE = "/data/hab_sonda/logs/sensores.log"
+SENSOR_FILE = "/data/lirevenas/logs/sensores.log"
 
 #Creacion del logger para los logs de aplicacion
 loggerLog = logging.getLogger('server_logger')
 loggerLog.setLevel(logging.DEBUG)
-inf = logging.FileHandler('/data/hab_sonda/logs/Lora1Service.log')
+inf = logging.FileHandler('/data/lirevenas/logs/Lora1Service.log')
 inf.setLevel(logging.DEBUG)
-formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%$
+formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%$')
 inf.setFormatter(formatterInformer)
 loggerLog.addHandler(inf)
 
@@ -33,14 +39,14 @@ while True:
             #2.1. si existe
             #2.2. coger la ultima linea y enviar. Esperar tiempodeenvioRF y volver a comprobar si el archivo sensores.log existe
             loggerLog.debug("[Lora1Service] Envio de traza almacenada en log por RF...")
-            RFHelper.putUltimoDatoRF(usbRF, '/data/hab_sonda/logs/sensores.log')
+            RFHelper.putUltimoDatoRF(usbRF, '/data/lirevenas/logs/sensores.log')
             loggerLog.debug("[Lora1Service] Traza enviada OK")
         #2.3. si no existe
         else:
             #2.4.   Esto seria un estado de emergencia en el cual se asume que no hay datos de sensores.
             # Se pasaria a intentar enviar la ultima linea del archivo de log del servicio de GPS
             loggerLog.warn("[Lora1Service] Envio de traza de GPS, no archivo de datos detectado...")
-            RFHelper.putUltimoDatoRF(usbRF, '/data/hab_sonda/logs/gpsdata.log')
+            RFHelper.putUltimoDatoRF(usbRF, '/data/lirevenas/logs/gpsdata.log')
             loggerLog.warn("[Lora1Service] Traza enviada OK")
 
     except Exception as a:

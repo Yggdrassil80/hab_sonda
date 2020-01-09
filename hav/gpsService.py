@@ -1,8 +1,9 @@
 #################################################################################
-#		Proyecto: Liverenas						#
-# 		Autor: Oscar Loras Delgado					#
-#										#
+#		Proyecto: gpsService					        #
+# 		Autor: Oscar Loras Delgado				        #
+#									                    #
 #################################################################################
+
 import os
 import glob
 import time
@@ -33,7 +34,7 @@ loggerLog.addHandler(inf)
 
 #Metodo que crea la traza base que se escribira en FS
 def creacionTraza(gpsData):
-        return "|" + str(gpsData[0].split(".")[0]) + "|" + str(gpsData[1]) + "," + str(gpsData[2]) + "|" + str(gpsData[3]) + "|" + str(gpsData[4]) + "|" + str(gpsData[5]) + "|"
+        return "|" + str(gpsData[0].split(".")[0]) + "|" + str(round(gpsData[1],4)) + "," + str(round(gpsData[2],4)) + "|" + str(gpsData[3]) + "|" + str(gpsData[4]) + "|" + str(round(gpsData[5],4)) + "|"
 
 #################################################################################
 #	Inicio Aplicacion #
@@ -93,17 +94,13 @@ loggerLog.info("[GPSService][Main] Fecha seteada OK!")
 while True:
 
 	try:
-		#loggerLog.info("[GPSService][Main] Pasa1")
 		gpsData = GPSHelper.getGPSData(puertoUSB)
-		#loggerLog.info("[GPSService][Main] Pasa2")
 		gpsDataExtendet = GPSHelper.getGPSDataExtendet(puertoUSB)
-		#loggerLog.info("[GPSService][Main] Pasa3")
 		gpsDataExtendet[0] = gpsData[0]
-		#loggerLog.info("[GPSService][Main] Pasa4")
 		loggerLog2.info(creacionTraza(gpsDataExtendet))
-		#loggerLog.info("[GPSService][Main] Pasa5")
 		time.sleep(tiempoMuestreoGPS)
-	except:
-		loggerLog.error("[GPSService][Main] Se ha producido un error inesperado, se continua iterando...")
+	except Exception, e:
+                loggerLog.error("[GPSService][Main][ERROR] " + str(e))
+		loggerLog.error("[GPSService][Main][ERROR] Se ha producido un error inesperado, se continua iterando...")
 		time.sleep(5)
 

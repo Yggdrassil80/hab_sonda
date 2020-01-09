@@ -5,7 +5,7 @@ import logging
 
 loggerLog = logging.getLogger('server_logger-GSM')
 loggerLog.setLevel(logging.DEBUG)
-inf = logging.FileHandler('/data/chuteless/logs/wsp-GSM.log')
+inf = logging.FileHandler('/data/lirevenas/logs/wsp-GSM.log')
 inf.setLevel(logging.DEBUG)
 formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%d %H:%M:%S')
 inf.setFormatter(formatterInformer)

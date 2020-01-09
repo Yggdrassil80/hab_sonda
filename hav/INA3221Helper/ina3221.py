@@ -31,6 +31,12 @@ INA3221_CONFIG_ENABLE_CHAN1   =          (0x4000)  # Enable Channel 1
 INA3221_CONFIG_ENABLE_CHAN2   =          (0x2000)  # Enable Channel 2
 INA3221_CONFIG_ENABLE_CHAN3   =          (0x1000)  # Enable Channel 3
 
+INA3221_CONFIG_DISABLE_CHAN1  =          (0x0000)  # Disable Channel 1
+INA3221_CONFIG_DISABLE_CHAN2  =          (0x0000)  # Disable Channel 2
+INA3221_CONFIG_DISABLE_CHAN3  =          (0x0000)  # Disable Channel 3
+
+INA3221_CONFIG_ACTIVE_CHANLS  =          "111"     # All channels active at the same time
+
 INA3221_CONFIG_AVG2     =                (0x0800)  # AVG Samples Bit 2 - See table 3 spec
 INA3221_CONFIG_AVG1     =                (0x0400)  # AVG Samples Bit 1 - See table 3 spec
 INA3221_CONFIG_AVG0     =                (0x0200)  # AVG Samples Bit 0 - See table 3 spec
@@ -72,18 +78,79 @@ class SDL_Pi_INA3221():
     ###########################
     # INA3221 Code
     ###########################
-    def __init__(self, twi=1, addr=INA3221_ADDRESS, shunt_resistor = SHUNT_RESISTOR_VALUE  ):
+    def __init__(self, twi=1, addr=INA3221_ADDRESS, shunt_resistor = SHUNT_RESISTOR_VALUE, active_channels = INA3221_CONFIG_ACTIVE_CHANLS, reset = 0):
         self._bus = smbus.SMBus(twi)
         self._addr = addr
-        config = INA3221_CONFIG_ENABLE_CHAN1 |		\
-                    INA3221_CONFIG_ENABLE_CHAN2 |	\
-                    INA3221_CONFIG_ENABLE_CHAN3 |	\
-                    INA3221_CONFIG_AVG1 |		\
-                    INA3221_CONFIG_VBUS_CT2 |		\
-                    INA3221_CONFIG_VSH_CT2 |		\
-                    INA3221_CONFIG_MODE_2 |		\
-                    INA3221_CONFIG_MODE_1 |		\
-                    INA3221_CONFIG_MODE_0
+
+        config = "1"
+
+        if (reset == 0):
+
+            if (active_channels == "111"):
+                config = INA3221_CONFIG_ENABLE_CHAN1 |          \
+                        INA3221_CONFIG_ENABLE_CHAN2 |       \
+                        INA3221_CONFIG_ENABLE_CHAN3 |       \
+                        INA3221_CONFIG_AVG1 |               \
+                        INA3221_CONFIG_VBUS_CT2 |           \
+                        INA3221_CONFIG_VSH_CT2 |            \
+                        INA3221_CONFIG_MODE_2 |             \
+                        INA3221_CONFIG_MODE_1 |             \
+                        INA3221_CONFIG_MODE_0
+            elif (active_channels == "100"):
+                config = INA3221_CONFIG_ENABLE_CHAN1 |          \
+                        INA3221_CONFIG_DISABLE_CHAN2 |       \
+                        INA3221_CONFIG_DISABLE_CHAN3 |       \
+                        INA3221_CONFIG_AVG1 |               \
+                        INA3221_CONFIG_VBUS_CT2 |           \
+                        INA3221_CONFIG_VSH_CT2 |            \
+                        INA3221_CONFIG_MODE_2 |             \
+                        INA3221_CONFIG_MODE_1 |             \
+                        INA3221_CONFIG_MODE_0
+            elif (active_channels == "010"):
+                config = INA3221_CONFIG_DISABLE_CHAN1 |          \
+                        INA3221_CONFIG_ENABLE_CHAN2 |       \
+                        INA3221_CONFIG_DISABLE_CHAN3 |       \
+                        INA3221_CONFIG_AVG1 |               \
+                        INA3221_CONFIG_VBUS_CT2 |           \
+                        INA3221_CONFIG_VSH_CT2 |            \
+                        INA3221_CONFIG_MODE_2 |             \
+                        INA3221_CONFIG_MODE_1 |             \
+                        INA3221_CONFIG_MODE_0
+
+            elif (active_channels == "001"):
+                config = INA3221_CONFIG_DISABLE_CHAN1 |          \
+                        INA3221_CONFIG_DISABLE_CHAN2 |       \
+                        INA3221_CONFIG_ENABLE_CHAN3 |       \
+                        INA3221_CONFIG_AVG1 |               \
+                        INA3221_CONFIG_VBUS_CT2 |           \
+                        INA3221_CONFIG_VSH_CT2 |            \
+                        INA3221_CONFIG_MODE_2 |             \
+                        INA3221_CONFIG_MODE_1 |             \
+                        INA3221_CONFIG_MODE_0
+            elif (active_channels == "000"):
+                config = INA3221_CONFIG_DISABLE_CHAN1 |          \
+                        INA3221_CONFIG_DISABLE_CHAN2 |       \
+                        INA3221_CONFIG_DISABLE_CHAN3 |       \
+                        INA3221_CONFIG_AVG1 |               \
+                        INA3221_CONFIG_VBUS_CT2 |           \
+                        INA3221_CONFIG_VSH_CT2 |            \
+                        INA3221_CONFIG_MODE_2 |             \
+                        INA3221_CONFIG_MODE_1 |             \
+                        INA3221_CONFIG_MODE_0
+
+        else:
+            config = INA3221_CONFIG_RESET
+
+
+        #config = INA3221_CONFIG_ENABLE_CHAN1 |		\
+        #            INA3221_CONFIG_ENABLE_CHAN2 |	\
+        #            INA3221_CONFIG_ENABLE_CHAN3 |	\
+        #            INA3221_CONFIG_AVG1 |		\
+        #            INA3221_CONFIG_VBUS_CT2 |		\
+        #            INA3221_CONFIG_VSH_CT2 |		\
+        #            INA3221_CONFIG_MODE_2 |		\
+        #            INA3221_CONFIG_MODE_1 |		\
+        #            INA3221_CONFIG_MODE_0
 
 
 
