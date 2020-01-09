@@ -6,7 +6,7 @@
     + [Diagrama del Software](#diagrama-del-software)
   * [Modulos](#modulos)
     + [Introducción](#introducci-n-2)
-    + [BMP](#bmp-1)
+    + [BMP](#bmp)
     + [MPU](#mpu)
     + [GPS](#gps)
     + [RF](#rf)
@@ -26,32 +26,17 @@
 
 ## Introducción
 
-Proyecto1 que recoge el código fuente base de una sonda de tipo HAB basada en Raspbian (Raspberry Pi ,3B o Zero W) y la gestión de la operación de sistemas diversos (Temperatura, Presión, Camara, Barometros, GPS, Radio Lora, Telemetria por SM, otros)
+Proyecto que recoge el código fuente base de una sonda de tipo HAB basada en Raspbian (Raspberry Pi ,3B o Zero W) y que pueda trabajar con diferentes tipos de sensores (Temperatura, Presión, Camara, Barometros, GPS, Radio Lora, Telemetria por SM, otros), que recupere datos de los mismos y los pueda enviar a una estación terrestre para, como objetivo final, poder ser recuperada y reutilizada.
 
-El proyecto se divide en varios directorios
-
-- <b>hav</b>: Acronimo de High Altitude Vehicle, donde se almacena todo el código de los diferentes componentes que integran la sonda.
-- <b>conf</b>: Directorio donde se almacena la configuración de los módulos que hay definidos en "hav"
-- <b>services</b>: La definición de los daemons de los procesos que corren sobre cada sensor/componente que integra la sonda
-- <b>test</b>: Directorio de pruebas donde se valida parte del software que hay en hav.
-
-## Diseño
-
-### Introducción
+## Software
 
 El software para la sonda esta pensado de forma que todos los procesos de generación de datos y de envio de datos se ejecuten como un proceso aislado. Luego, un proceso principal, que es el encargado de leer los archivos de datos que los procesos de los modulos de sensores van dejando y enviarlos por alguno de los mecanismos implementados (RF-Lora o SMS-GSM)
 
 Este sistema permite que, en caso de fallo de alguno de estos sensores, buses u otros componentes, el resto de procesos sigan funcionando correctamente, aumentando la robustez del sistema. Esta arquitectura además permite una gran escalabilidad, pudiendo añadir sistemas nuevos o sistemas resilientes llegado al caso, con suma facilidad.
 
-### Diagrama del Hardware
+![alt Diagrama del software](doc/img/Software_sonda.png)
 
-![alt Diagrama del hardware](/doc/img/Lirevenas_Diagrama_hardware.PNG)
-
-### Diagrama del Software
-
-![alt Diagrama del software](doc/img/Lirevenas_Diagrama_software_inicial.PNG)
-
-## Modulos
+## Componentes
 
 ### Introducción
 
@@ -88,7 +73,6 @@ sudo systemctl enable [nombre_servicio].service
 ```
 
 <b>IMPORTANTE</b>: Asegurarse que el script de python definido en el [Nombre_modulo.service] tiene permisos de ejecución (chmod 755)
-### BMP
 
 4. Finalmente, para arrancar o parar el servicio una vez la el SO haya arrancado, utilizar.
 ```
@@ -553,6 +537,123 @@ La severidad esta predefinida en niveles:
 ### Tipos de log
 
 [TODO]
+
+## Hardware
+
+En esta sección se explicarán los componentes utilizados y como ensamblarlos o conectarlos.
+
+### Diagrama del Hardware
+
+El diseño gira entorno a las capacidades de la raspberry de gestionar diferentes tipos de buses de datos. Se ha dado mas prioridad no a los mas eficientes si no a los mas sencillos de operar y que permiten una mayor escalabilidad a futuro.
+
+![alt Diagrama del hardware](/doc/img/Hardware_sonda.png)
+
+### Bus I2C
+
+Permite interconectar gran variedad de dispositivos con la Pi con una topologia de estrella, es decir, todos los dispositivos conectados se comportan como slave y la pi como master.
+
+Además, utiliza solo 2 pines, el SCL y el SCA y puede implementarse un adaptador muy simple de este bus para conectar muchos dispositivos.
+
+![labron de I2C](/doc/img/ladron_i2c.png)
+
+### USBs
+
+En este caso, se ha optado por utilizar adaptadores CP2102 de puerto serie a USB para los componentes de GPS, RF LoRa y GSM. De esta forma pueden probarse y trabajar con ellos externamente fuera del montaje de la propia sonda y, llegado el caso y con drivers adecuados, montarlos en SOs diferentes.
+
+![cp2102](/doc/img/cp2102.png)
+
+### Listado de componentes
+
+A continuación se expone la lista de componentes utilizados:
+
+- Raspberry pi Zero W (aunque puede ser una 3B o 4) mas tarjeta de memoria (16Gb)
+
+![Descripción](/doc/img/foto.png)
+
+- Adaptador para baterias de litio de tipo 16850 y bateria
+
+![Descripción](/doc/img/foto.png)
+
+- Chip de GPS UBLOX NEO 6M o 7.
+
+![Descripción](/doc/img/foto.png)
+
+- Chips adaptadores de serie a USB CP2102
+
+![Descripción](/doc/img/foto.png)
+
+- Chip SIM900A para el envio de SMS por GSM + tarjeta SIM 
+
+![Descripción](/doc/img/foto.png)
+
+- Chip ebyte E32-TTL-100 para el envio de datos por RF LoRa en 433Mhz.
+
+![Descripción](/doc/img/foto.png)
+
+- Chip BMP280 para temperatura y presión
+
+![Descripción](/doc/img/foto.png)
+
+- Chip INA219 para control de voltage
+
+![Descripción](/doc/img/foto.png)
+
+- Chip VEML6070 para la medida de radiación UV
+
+![Descripción](/doc/img/foto.png)
+
+- Chip MPU9250 para la medida de la aceleración, inclinación y orientación.
+
+![Descripción](/doc/img/foto.png)
+
+Como material de soporte sera preciso:
+
+- Tornilleria de m2 de nylon
+
+![Descripción](/doc/img/foto.png)
+
+- cables de circuito de tipo hembra-hembra
+
+![Descripción](/doc/img/foto.png)
+
+- Conectores para circuito
+
+![Descripción](/doc/img/foto.png)
+
+- Soporte adaptable para los circuitos (carton-pluma o equivalente)
+- Antena para 433 del chip de RF
+
+![Descripción](/doc/img/foto.png)
+
+- Antena con adaptador a ufl para el GPS
+
+![Descripción](/doc/img/foto.png)
+
+- Si se usa el SIM900A, antena de GSM
+
+![Descripción](/doc/img/foto.png)
+
+- Cable de antena estrecho
+
+![Descripción](/doc/img/foto.png)
+
+- Adaptadores de cable de antena SMA (macho-hembra) y RP-SMA (macho-hembra)
+
+![Descripción](/doc/img/foto.png)
+
+De las herramientas, las mas específicas serían:
+
+- Soldador
+- Estaño
+- Tornavis estrella fino (m2 o m3)
+
+### Tecnicas y procedimientos de ensamblado
+
+[TODO]
+
+
+
+
 
 
 
