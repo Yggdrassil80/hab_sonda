@@ -554,13 +554,13 @@ Permite interconectar gran variedad de dispositivos con la Pi con una topologia 
 
 Además, utiliza solo 2 pines, el SCL y el SCA y puede implementarse un adaptador muy simple de este bus para conectar muchos dispositivos.
 
-![labron de I2C](/doc/img/ladron_i2c.png)
+![labron de I2C](/doc/img/I2C-Interface.png)
 
 ### USBs
 
 En este caso, se ha optado por utilizar adaptadores CP2102 de puerto serie a USB para los componentes de GPS, RF LoRa y GSM. De esta forma pueden probarse y trabajar con ellos externamente fuera del montaje de la propia sonda y, llegado el caso y con drivers adecuados, montarlos en SOs diferentes.
 
-![cp2102](/doc/img/cp2102.png)
+![cp2102](/doc/img/cp2102.jpg)
 
 ### Listado de componentes
 
@@ -568,11 +568,11 @@ A continuación se expone la lista de componentes utilizados:
 
 - Raspberry pi Zero W (aunque puede ser una 3B o 4) mas tarjeta de memoria (16Gb)
 
-![Descripción](/doc/img/foto.png)
+![raspberry_pi_zero](/doc/img/Raspberry_pi_zero_w.jpg)
 
 - Adaptador para baterias de litio de tipo 16850 y bateria
 
-![Descripción](/doc/img/foto.png)
+![Adaptador baterias 18650](/doc/img/cargador_18650.jpg)
 
 - Chip de GPS UBLOX NEO 6M o 7.
 
