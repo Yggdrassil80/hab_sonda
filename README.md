@@ -576,70 +576,68 @@ A continuación se expone la lista de componentes utilizados:
 
 - Chip de GPS UBLOX NEO 6M o 7.
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/GPS-Ublox-NEO-6M.jpg)
 
 - Chips adaptadores de serie a USB CP2102
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/cp2102.jpg)
 
 - Chip SIM900A para el envio de SMS por GSM + tarjeta SIM 
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/sim900a.jpg)
 
 - Chip ebyte E32-TTL-100 para el envio de datos por RF LoRa en 433Mhz.
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/e32-ttl-100.jpg)
 
 - Chip BMP280 para temperatura y presión
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/bmp280.jpg)
 
 - Chip INA219 para control de voltage
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/ina219.jpg)
 
 - Chip VEML6070 para la medida de radiación UV
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/veml6070.jpg)
 
 - Chip MPU9250 para la medida de la aceleración, inclinación y orientación.
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/mpu9250.jpg)
 
 Como material de soporte sera preciso:
 
 - Tornilleria de m2 de nylon
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/nylon.jpg)
 
 - cables de circuito de tipo hembra-hembra
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/cable-circuito.jpg)
 
 - Conectores para circuito
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/conector-circuito.jpg)
 
 - Soporte adaptable para los circuitos (carton-pluma o equivalente)
 - Antena para 433 del chip de RF
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/antena_433.jpg)
 
 - Antena con adaptador a ufl para el GPS
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/ufl-cable.jpg)
 
 - Si se usa el SIM900A, antena de GSM
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/antena_gsm.jpg)
 
 - Cable de antena estrecho
 
-![Descripción](/doc/img/foto.png)
-
 - Adaptadores de cable de antena SMA (macho-hembra) y RP-SMA (macho-hembra)
 
-![Descripción](/doc/img/foto.png)
+![Descripción](/doc/img/sma-smarp.jpg)
 
 De las herramientas, las mas específicas serían:
 
