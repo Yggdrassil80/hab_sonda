@@ -37,18 +37,17 @@ veml = veml6070.Veml6070()
 
 if act == 1:
 
-	while True:
-		try:
-  			veml.set_integration_time(veml6070.INTEGRATIONTIME_4T)
-  			uv_raw = veml.get_uva_light_intensity_raw()
-			uv = veml.get_uva_light_intensity()
-			logger.info(str(round(uv,2)))
-			time.sleep(tiempoMuestreoUV)
-		except Exception, e:
-			loggerLog.error("[uvService] Exception: " + str(e))
-			loggerLog.error("[uvService] Se ha producido un error, se sigue iterando...")
-			time.sleep(5)
-
+    while True:
+        try:
+            veml.set_integration_time(veml6070.INTEGRATIONTIME_4T)
+            uv_raw = veml.get_uva_light_intensity_raw()
+            uv = veml.get_uva_light_intensity()
+            logger.info(str(round(uv,2)))
+            time.sleep(tiempoMuestreoUV)
+        except Exception as e:
+            loggerLog.error("[uvService] Exception: " + str(e))
+            loggerLog.error("[uvService] Se ha producido un error, se sigue iterando...")
+            time.sleep(5)
 else:
-	loggerLog.warn("[uvService] El modulo no esta activado!")
+    loggerLog.warn("[uvService] El modulo no esta activado!")
 

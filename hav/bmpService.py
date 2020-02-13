@@ -40,7 +40,7 @@ if act == 1:
 	while True:
 
 		try:
-			loggerLog.info("[bmpService] inicio")
+			#loggerLog.info("[bmpService] inicio")
 			bmpTemp = sensor.get_temperature()
 			#loggerLog.info("[bmpService] temperatura leida")
 			bmpPres = sensor.get_pressure()
@@ -52,7 +52,7 @@ if act == 1:
 
 			time.sleep(tiempoMuestreoBMP)
 
-		except Exception, e:
+		except Exception as e:
 			loggerLog.error("[bmpService] Exception: " + str(e))
 			loggerLog.error("[bmpService] Se ha producido un error, se sigue iterando...")
 			time.sleep(5)

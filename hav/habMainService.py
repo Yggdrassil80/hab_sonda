@@ -27,7 +27,7 @@ loggerLog = logging.getLogger('server_logger1')
 loggerLog.setLevel(logging.DEBUG)
 inf = logging.FileHandler('/data/lirevenas/logs/hab_sonda.log')
 inf.setLevel(logging.DEBUG)
-formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%S')
+formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%d %H:%M:%S')
 inf.setFormatter(formatterInformer)
 loggerLog.addHandler(inf)
 
@@ -67,31 +67,42 @@ while True:
             pathSensor = sensorLogFile(sensorType)
             #2.2. comprobar si el archivo de log del sensor existe.
             if (os.path.exists(pathSensor)):
-                f=file(pathSensor,"r")
-                #2.3. Si existe, recuperar la ultima traza escrita (aunque tengan tiempos de muestreo diferentes, son pocos
-                # segundos de diferencia, luego se entiende que pueden estar asociados al timestamp del logger principal)
-                lastLine = f.readlines()[-1]
-                #2.3.1 Para evitar el procesamiento del ultimo "|" se elimina.
-                ll = lastLine[:-2]
-                loggerLog.debug("[HABMain] Linea leida: [" + ll + "]")
-                dataSensorArray = ll.split('|')
-                #2.4. Se procesa la linea para eliminar el primer datos de la linea, que corresponde siempre al timestamp.
-                i = 0
-                datosProcesados = ""
-                for data in dataSensorArray:
-                    if (i > 0):
-                        datosProcesados = datosProcesados + "|" + data
-                    i = i + 1
-                    loggerLog.debug("[HABMain][datosProcesados: " + datosProcesados + "]")
-                f.close()
-            	#2.5. Asociar los datos recuperados del log del sensor S a la traza principal.
-            	trazaDatos = trazaDatos + datosProcesados
-            	loggerLog.debug("[HABMain][trazaDatos: " + trazaDatos + "]")
+                f=open(pathSensor,"r")
+                isSensorFileFull = os.stat(pathSensor).st_size>0
 
-        #3. Finalizado el proceso para todos los sensores, escribir la traza en el archivo sensores.log
-        logger.info(trazaDatos)
+                #2.2.1 Si existe y es el archivo de gps (critico) y esta vacio, se trarta de un error de inicializacion o que el GPS
+                #no ha cogido cobertura aun. Se ha de seguir iterando pero sin procesar ningun sensor, ya que sin GPS los datos no tienen contexto
+                if (sensorType == "gps" and isSensorFileFull):
 
-    except Exception, e:
+                    #2.3. Si existe, recuperar la ultima traza escrita (aunque tengan tiempos de muestreo diferentes, son pocos
+                    # segundos de diferencia, luego se entiende que pueden estar asociados al timestamp del logger principal)
+                    lastLine = f.readlines()[-1]
+                    loggerLog.debug("[HABMain] Ultima linea leida [" + lastLine + "]")
+                    #2.3.1 Para evitar el procesamiento del ultimo "|" se elimina.
+                    ll = lastLine[:-2]
+                    loggerLog.debug("[HABMain] Linea leida: [" + ll + "]")
+                    dataSensorArray = ll.split('|')
+                    #2.4. Se procesa la linea para eliminar el primer datos de la linea, que corresponde siempre al timestamp.
+                    i = 0
+                    datosProcesados = ""
+                    for data in dataSensorArray:
+                        if (i > 0):
+                            datosProcesados = datosProcesados + "|" + data
+                        i = i + 1
+                        loggerLog.debug("[HABMain][datosProcesados: " + datosProcesados + "]")
+                    f.close()
+            	    #2.5. Asociar los datos recuperados del log del sensor S a la traza principal.
+                    trazaDatos = trazaDatos + datosProcesados
+                    loggerLog.debug("[HABMain][trazaDatos: " + trazaDatos + "]")
+
+                    #3. Finalizado el proceso para todos los sensores, escribir la traza en el archivo sensores.log
+                    logger.info(trazaDatos)
+                else:
+                    loggerLog.warn("[HABMain] OJO, si el sensor era el gps probablemente su archivo de datos este aun vacio...")
+            else:
+                loggerLog.warn("[HABMain] OJO, no se ha encontrado archivo de datos del sensor [" + sensorType + "]")
+
+    except Exception as e:
         loggerLog.error("[HABMain][ERROR] " + str(e))
 
     time.sleep(t)

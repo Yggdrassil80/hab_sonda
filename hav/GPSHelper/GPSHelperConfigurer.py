@@ -156,10 +156,10 @@ class UbxStream(object):
             return msg
 
     def nav_config(self, dynModel):
-		msg = UbxMessage('06', '24', msg_type="tx", dynModel=dynModel)
-		self.dev.write(msg.msg)
-		if(self.__confirmation()):
-			return msg
+        msg = UbxMessage('06', '24', msg_type="tx", dynModel=dynModel)
+        self.dev.write(msg.msg)
+        if(self.__confirmation()):
+            return msg
 			
     # diables all NMEA messages by default using ubx class / ids
     # 0xF0 = 240 / 0xF1 = 241

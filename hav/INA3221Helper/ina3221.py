@@ -153,8 +153,6 @@ class SDL_Pi_INA3221():
         #            INA3221_CONFIG_MODE_0
 
 
-
-
         self._write_register_little_endian(INA3221_REG_CONFIG, config)
 
 

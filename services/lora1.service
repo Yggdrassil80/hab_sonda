@@ -1,10 +1,10 @@
 [Unit]
-Description=MPU Service
+Description=LORA1 Service
 After=multi-user.target
 
 [Service]
 Type=idle
-ExecStart=/usr/bin/python3 /data/lirevenas/hav/mpuService.py
+ExecStart=/usr/bin/python3 /data/lirevenas/hav/lora1Service.py
 Restart=always
 RestartSec=0
 

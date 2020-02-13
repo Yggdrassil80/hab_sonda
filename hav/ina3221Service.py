@@ -39,43 +39,43 @@ CHANNEL2 = 2
 CHNANEL3 = 3
 
 while True:
-	try:
 
-		busvoltage1 = -100
-		shuntvoltage1 = -100
-		current_mA1 = -100
-		loadvoltage1 = -100
+    try:
+        busvoltage1 = -100
+        shuntvoltage1 = -100
+        current_mA1 = -100
+        loadvoltage1 = -100
 
-		busvoltage2 = -100
-                shuntvoltage2 = -100
-                current_mA2 = -100
-                loadvoltage2 = -100
+        busvoltage2 = -100
+        shuntvoltage2 = -100
+        current_mA2 = -100
+        loadvoltage2 = -100
 
-		busvoltage3 = -100
-                shuntvoltage3 = -100
-                current_mA3 = -100
-                loadvoltage3 = -100
+        busvoltage3 = -100
+        shuntvoltage3 = -100
+        current_mA3 = -100
+        loadvoltage3 = -100
 
-		loggerLog.info("[Ina3221Service] inicio")
-  		busvoltage1 = ina.getBusVoltage_V(CHANNEL1)
-		shuntvoltage1 = ina.getShuntVoltage_mV(CHANNEL1)
-		current_mA1 = ina.getCurrent_mA(CHANNEL1)
-		loadvoltage1 = busvoltage1 + (shuntvoltage1 / 1000)
+        loggerLog.info("[Ina3221Service] inicio")
+        busvoltage1 = ina.getBusVoltage_V(CHANNEL1)
+        shuntvoltage1 = ina.getShuntVoltage_mV(CHANNEL1)
+        current_mA1 = ina.getCurrent_mA(CHANNEL1)
+        loadvoltage1 = busvoltage1 + (shuntvoltage1 / 1000)
 
-		busvoltage2 = ina.getBusVoltage_V(CHANNEL2)
-                shuntvoltage2 = ina.getShuntVoltage_mV(CHANNEL2)
-                current_mA2 = ina.getCurrent_mA(CHANNEL2)
-                loadvoltage2 = busvoltage2 + (shuntvoltage2 / 1000)
-		#busvoltage3 = ina.getBusVoltage_V(CHANNEL3)
-                #shuntvoltage3 = ina.getShuntVoltage_mV(CHANNEL3)
-                #current_mA3 = ina.getCurrent_mA(CHANNEL3)
-                #loadvoltage3 = busvoltage3 + (shuntvoltage3 / 1000)
+        busvoltage2 = ina.getBusVoltage_V(CHANNEL2)
+        shuntvoltage2 = ina.getShuntVoltage_mV(CHANNEL2)
+        current_mA2 = ina.getCurrent_mA(CHANNEL2)
+        loadvoltage2 = busvoltage2 + (shuntvoltage2 / 1000)
+        #busvoltage3 = ina.getBusVoltage_V(CHANNEL3)
+        #shuntvoltage3 = ina.getShuntVoltage_mV(CHANNEL3)
+        #current_mA3 = ina.getCurrent_mA(CHANNEL3)
+        #loadvoltage3 = busvoltage3 + (shuntvoltage3 / 1000)
 
-		logger.info(str(round(busvoltage1,4)) + "|" + str(round(shuntvoltage1,4)) + "|" + str(round(current_mA1,4)) + "|" + str(round(loadvoltage1,4)) 
+        logger.info(str(round(busvoltage1,4)) + "|" + str(round(shuntvoltage1,4)) + "|" + str(round(current_mA1,4)) + "|" + str(round(loadvoltage1,4)) 
 			+ "|" + str(round(busvoltage2,4)) + "|" + str(round(shuntvoltage2,4)) + "|" + str(round(current_mA2,4)) + "|" + str(round(loadvoltage2,4)) 
 			+ "|" + str(round(busvoltage3,4)) + "|" + str(round(shuntvoltage3,4)) + "|" + str(round(current_mA3,4)) + "|" + str(round(loadvoltage3,4)))
-		time.sleep(tiempoMuestreoINA3221)
-	except Exception, e:
-		loggerLog.error("[Ina3221Service] Exception: " + str(e))
-		loggerLog.error("[Ina3221Service] Se ha producido un error, se sigue iterando...")
-		time.sleep(5)
+        time.sleep(tiempoMuestreoINA3221)
+    except Exception as e:
+        loggerLog.error("[Ina3221Service] Exception: " + str(e))
+        loggerLog.error("[Ina3221Service] Se ha producido un error, se sigue iterando...")
+        time.sleep(5)

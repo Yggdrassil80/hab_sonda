@@ -31,19 +31,19 @@ loggerLog.info("[CameraService][Conf] tiempoTomaImagen: " + str(tiempoTomaImagen
 
 if act == 1:
 
-	while True:
-		try:
-			loggerLog.info("[CameraService][Main] Inicio de toma de imagen de camara interna...")
-                        #Toma imagen de alta resolucion para despues
-                        nombreImagen = Camara.tomarImagen(resolucionMax, basePathImage, int(5), "HD", "png")
-                        loggerLog.info("[cameraService][Main] Imagen tomada OK")
-                        #Toma Image de baja resolucion para su envio
-                        #nombreImagen = Camara.tomarImagen(gpsData, resolucionRF, basePathImage, int(3), "RF", "jpeg")
-                        #nombreImagenRaw = Camara.convertirImagenToRaw(nombreImagen, basePathImage)
-			time.sleep(tiempoTomaImagen)
+    while True:
+        try:
+            loggerLog.info("[CameraService][Main] Inicio de toma de imagen de camara interna...")
+            #Toma imagen de alta resolucion para despues
+            nombreImagen = Camara.tomarImagen(resolucionMax, basePathImage, int(5), "HD", "png")
+            loggerLog.info("[cameraService][Main] Imagen tomada OK")
+            #Toma Image de baja resolucion para su envio
+            #nombreImagen = Camara.tomarImagen(gpsData, resolucionRF, basePathImage, int(3), "RF", "jpeg")
+            #nombreImagenRaw = Camara.convertirImagenToRaw(nombreImagen, basePathImage)
+            time.sleep(tiempoTomaImagen)
 
-		except Exception, e:
-			loggerLog.error("[CameraService] Exception: " + str(e))
-			loggerLog.error("[CameraService] Se ha producido un error, se sigue iterando...")
+        except Exception as e:
+            loggerLog.error("[CameraService] Exception: " + str(e))
+            loggerLog.error("[CameraService] Se ha producido un error, se sigue iterando...")
 else:
-	loggerLog.warn("[CamareService] La camara no ha sido activada!")
+    loggerLog.warn("[CamareService] La camara no ha sido activada!")
