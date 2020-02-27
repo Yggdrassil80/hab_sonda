@@ -581,7 +581,7 @@ Los servicios de cada componente, una vez configurados para arrancarse en el ini
 
 - Logs de datos del componente. Acostumbran a encontrarse en /[PATH_DE_INSTALACION/hab_sonda/logs/[nombre_componente]data.log
 - Logs del funcionamiento del componente. Se pueden encontrar en /[PATH_DE_INSTALACION/hab_sonda/logs/[nombre_componente]Service.log
-- [TODO]
+- Logs del sistema Operativo. Se pueden encontrar en /var/log y pueden contener información relevante sobre los servicios, fallos en buses, etc.
 
 ## Hardware
 
