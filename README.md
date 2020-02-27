@@ -53,11 +53,11 @@ Los pasos son:
 3. Activar el bus I2C. 
 Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#activaci-n-i2c-en-raspbian)
 
-4. Instalar librerias de Python3 de apoyo
-   Las librerias de python necesarias son las siguientes:
+4. Instalar librerias de Python3 de apoyo. Las librerias de python necesarias son las siguientes:
    * picamera
    * lib2
    * ...
+   
 y la forma de instalarlas es mediante la instrucción
 ```
    pip3 install [nombre_libreria]
