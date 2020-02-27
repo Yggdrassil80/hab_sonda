@@ -202,7 +202,7 @@ Para la activación del bus I2C, revisar la sección de configuración "Activaci
 
 #### Calibración
 
-[TODO]
+No se tratará en este proyecto.
 
 #### Configuracíón
 
@@ -265,8 +265,6 @@ donde,
 
 - usbGPS: corresponde al puerto USB al que esta conectado el adaptador cp2102 del GPS. Es importante destacar que este puerto puede cambiar en función de los dispositivos conectados a la raspberry y el slot USB donde se conecten, con lo que se deberá comprobar manualmente que esta configuración es correcta.
 - tiempoMuestreoGPS: que informa sobre el tiempo entre muestras de datos de GPS. Es importante destacar que el GPS no empieza a dar datos de posición de forma inmediata cuando arranca, sino que requeriere unos minutos de "autocalibrado" antes de empezar a recibir paquetes NMEA con datos (GCRMC y GCACC). Luego, suponiendo la configuración correcta de USB, se puede entender como normal que no haya datos de posición nada mas arrancar.
-
-[TODO]
 
 ### RF
 
@@ -579,7 +577,11 @@ La severidad esta predefinida en niveles:
 
 ### Tipos de log
 
-[TODO]
+Los servicios de cada componente, una vez configurados para arrancarse en el inicio, generan, potencialmente varios tipos de logs.
+
+- Logs de datos del componente. Acostumbran a encontrarse en /[PATH_DE_INSTALACION/hab_sonda/logs/[nombre_componente]data.log
+- Logs del funcionamiento del componente. Se pueden encontrar en /[PATH_DE_INSTALACION/hab_sonda/logs/[nombre_componente]Service.log
+- [TODO]
 
 ## Hardware
 
