@@ -1,8 +1,9 @@
 - [HAB_sonda](#hab-sonda)
   * [Introducción](#introducci-n)
   * [Software](#software)
+  * [Getting Started](#getting-started)
   * [Componentes](#componentes)
-    + [Introducción](#introducci-n-1)
+    + [Generación de Servicios](#generaci-n-de-servicios)
     + [BMP](#bmp)
     + [MPU](#mpu)
     + [GPS](#gps)
@@ -16,7 +17,7 @@
   * [Configuraciones Genéricas](#configuraciones-gen-ricas)
     + [Activación I2C en Raspbian](#activaci-n-i2c-en-raspbian)
   * [Logging](#logging)
-    + [Introducción](#introducci-n-12)
+    + [Introducción](#introducci-n-11)
     + [Tipos de log](#tipos-de-log)
   * [Hardware](#hardware)
     + [Diagrama del Hardware](#diagrama-del-hardware)
@@ -39,9 +40,39 @@ Este sistema permite que, en caso de fallo de alguno de estos sensores, buses u 
 
 ![alt Diagrama del software](doc/img/Software_sonda.png)
 
+## Getting Started
+
+Este apartado esta pensado para, sin tener el detalle exacto de todos los componentes y tecnicas que se explican mas adelante, poner en funcionamiento el software de la sonda.
+
+Los pasos son:
+
+1. Disponer de una raspberry Pi con una versión de raspbian instalada y funcionando correctamente.
+2. Conectar todos los sistemas periféricos (camara, sensores, etc.)
+3. Activar el bus I2C.
+   Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#activaci-n-i2c-en-raspbian)
+4. Instalar librerias de Python3 de apoyo
+   Las librerias de python necesarias son las siguientes:
+   - picamera
+   - lib2
+   ...
+   y la forma de instalarlas es mediante la instrucción
+   pip3 install [nombre_libreria]
+5. Realizar un clone del proyecto hab_sonda sobre la raspberry
+   El proceso es simple.
+   1. Abrir una consola del SO.
+   2. Posicionarse en el directorio que se desee (se recomienda /data)
+   3. Ejecutar la instrucción de clonado del repositorio "hab_sonda" con el comando:
+      git clone https://github.com/Yggdrassil80/hab_sonda
+   IMPORTANTE: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica    que todas las configuraciones dependeran de ese path base.
+6. Configurar el archivo de configuración.
+   1. Para realizar esta acción se ha de configurar el archivo /[PATH_DE_INSTALACION]/conf/hav.conf
+   2. Los detalles de configuración de cada sensor se pueden consultar en la sección de configuración de cada módulo descritos en la sección [Componentes](#componentes)
+7. Configurar y activar los servicios
+   Ver el punto [Generación de Servicios](#generaci-n-de-servicios)
+
 ## Componentes
 
-### Introducción
+### Generación de Servicios
 
 Como se ha indicado, la idea es que cada componente nuevo que se agrege, se conciba como un servicio que se ejecute en el arranque de la pi en un orden preestablecido y con las dependencias que se desee.
 
