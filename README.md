@@ -59,19 +59,19 @@ Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#act
    * lib2
    * ...
 y la forma de instalarlas es mediante la instrucción
-'''
+```
    pip3 install [nombre_libreria]
-'''
+```
 
 5. Realizar un clone del proyecto hab_sonda sobre la raspberry
    El proceso es simple.
    1. Abrir una consola del SO.
    2. Posicionarse en el directorio que se desee (se recomienda /data)
    3. Ejecutar la instrucción de clonado del repositorio "hab_sonda" con el comando:
-'''
+```
 git clone https://github.com/Yggdrassil80/hab_sonda
-'''
-'''''IMPORTANTE''''': Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependeran de ese path base.
+```
+<b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependeran de ese path base.
    
 6. Configurar el archivo de configuración.
    1. Para realizar esta acción se ha de configurar el archivo /[PATH_DE_INSTALACION]/conf/hav.conf
