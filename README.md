@@ -10,6 +10,7 @@
     + [RF](#rf)
     + [UV](#uv)
     + [INA3221](#ina3221)
+    + [INA219](#ina219)
     + [GSM](#gsm)
     + [Camara](#camara)
     + [Proceso Principal](#proceso-principal)
