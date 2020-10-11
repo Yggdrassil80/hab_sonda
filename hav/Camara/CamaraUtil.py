@@ -9,7 +9,7 @@ from picamera import PiCamera
 #import logging
 #loggerLog1 = logging.getLogger('server_logger')
 #loggerLog1.setLevel(logging.INFO)
-#inf1 = logging.FileHandler('/data/wsp-virolai/logs/wsp-Camara.log')
+#inf1 = logging.FileHandler('/data/lirevenas/logs/wsp-Camara.log')
 #inf1.setLevel(logging.INFO)
 #formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%d %H:%M:%S')
 #inf1.setFormatter(formatterInformer)

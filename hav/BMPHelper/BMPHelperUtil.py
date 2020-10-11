@@ -11,7 +11,7 @@ def getBMPDataFromFile():
         #logger.info(str(bmpTemp) + "|" + str(bmpPres) + "|" + str(bmpAlti))
         bmpData = [float(0), int(0), float(0)]
         try:
-                with open('/data/chuteless/logs/bmpdata.log') as bmpdatafile:
+                with open('/data/lirevenas/logs/bmpdata.log') as bmpdatafile:
                         line = list(bmpdatafile)[-1]
                 bdata = line.split('|')
                 bmpData[0] = float(bdata[1])
