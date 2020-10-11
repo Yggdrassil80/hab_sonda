@@ -36,7 +36,7 @@ ina = ina3221.SDL_Pi_INA3221(active_channels="111")
 
 CHANNEL1 = 1
 CHANNEL2 = 2
-CHNANEL3 = 3
+CHANNEL3 = 3
 
 while True:
 
@@ -66,10 +66,11 @@ while True:
         shuntvoltage2 = ina.getShuntVoltage_mV(CHANNEL2)
         current_mA2 = ina.getCurrent_mA(CHANNEL2)
         loadvoltage2 = busvoltage2 + (shuntvoltage2 / 1000)
-        #busvoltage3 = ina.getBusVoltage_V(CHANNEL3)
-        #shuntvoltage3 = ina.getShuntVoltage_mV(CHANNEL3)
-        #current_mA3 = ina.getCurrent_mA(CHANNEL3)
-        #loadvoltage3 = busvoltage3 + (shuntvoltage3 / 1000)
+        
+        busvoltage3 = ina.getBusVoltage_V(CHANNEL3)
+        shuntvoltage3 = ina.getShuntVoltage_mV(CHANNEL3)
+        current_mA3 = ina.getCurrent_mA(CHANNEL3)
+        loadvoltage3 = busvoltage3 + (shuntvoltage3 / 1000)
 
         logger.info(str(round(busvoltage1,4)) + "|" + str(round(shuntvoltage1,4)) + "|" + str(round(current_mA1,4)) + "|" + str(round(loadvoltage1,4)) 
 			+ "|" + str(round(busvoltage2,4)) + "|" + str(round(shuntvoltage2,4)) + "|" + str(round(current_mA2,4)) + "|" + str(round(loadvoltage2,4)) 
