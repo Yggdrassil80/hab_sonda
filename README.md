@@ -79,6 +79,21 @@ git clone https://github.com/Yggdrassil80/hab_sonda
    1. Para realizar esta acción se ha de configurar el archivo /data/hab_sonda/conf/hav.conf
    2. Los detalles de configuración de cada sensor se pueden consultar en la sección de configuración de cada módulo descritos en la sección [Componentes](#componentes)
 
+* NOTA *: Llegado es punto, si se deseara, se puede cambiar el nombre "hab_sonda" por el nombre que se desee. Esto se puede hacer utilizando los comandos siguiente:
+
+```
+cd /data/hab_sonda
+grep -rli 'hab_sonda' * | xargs -i@ sed -i 's/hab_sonda/nombre_nuevo/g' @
+```
+
+Para que los cambios no provoquen errores de configuración, todo el directorio de configuración debería cambiar también a /data/nombre_nuevo
+
+Esto se puede hacer utilizando el comando:
+
+```
+mv -rf /data/hab_sonda /data/nombre_nuevo
+```
+
 7. Configurar y activar los servicios. Ver el punto [Generación de Servicios](#generaci-n-de-servicios)
 
 ## Componentes
