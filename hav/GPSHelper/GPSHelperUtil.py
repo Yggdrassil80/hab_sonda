@@ -10,7 +10,7 @@ import os
 #Creacion del logger para los logs de aplicacion
 loggerLog = logging.getLogger('server_logger_gps') 
 loggerLog.setLevel(logging.DEBUG)
-inf = logging.FileHandler('/data/lirevenas/logs/GPSlibrary.log')
+inf = logging.FileHandler('/data/hab_sonda/logs/GPSlibrary.log')
 inf.setLevel(logging.DEBUG) 
 formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%d %H:%M:%S') 
 inf.setFormatter(formatterInformer)

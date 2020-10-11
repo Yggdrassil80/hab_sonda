@@ -11,12 +11,12 @@ import logging
 import random
 import ConfigHelper
 
-BASE_PATH_LOG = "/data/lirevenas/logs/"
+BASE_PATH_LOG = "/data/hab_sonda/logs/"
 
 #Creacion del loger para los datos cientificos
 logger = logging.getLogger('server_logger')
 logger.setLevel(logging.INFO)
-fh = logging.FileHandler('/data/lirevenas/logs/sensores.log')
+fh = logging.FileHandler('/data/hab_sonda/logs/sensores.log')
 fh.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s%(message)s', datefmt='%H%M%S')
 fh.setFormatter(formatter)
@@ -25,7 +25,7 @@ logger.addHandler(fh)
 #Creacion del logger para los logs de aplicacion
 loggerLog = logging.getLogger('server_logger1')
 loggerLog.setLevel(logging.DEBUG)
-inf = logging.FileHandler('/data/lirevenas/logs/hab_sonda.log')
+inf = logging.FileHandler('/data/hab_sonda/logs/hab_sonda.log')
 inf.setLevel(logging.DEBUG)
 formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%d %H:%M:%S')
 inf.setFormatter(formatterInformer)
@@ -34,7 +34,7 @@ loggerLog.addHandler(inf)
 #######################################################################################
 
 #Metodo que dado un identificador de sensor (UV, BMP, MPU, etc) es capaz de retornar su archivo de dados "data" con el path completo.
-#algo asi como /data/lirevenas/logs/[id_sensor]data.log
+#algo asi como /data/hab_sonda/logs/[id_sensor]data.log
 def sensorLogFile(idSensor):
     path = BASE_PATH_LOG + idSensor + "data.log"
     loggerLog.debug("[sensorLogFile] Archivo de sensores recuperado: " + str(path))

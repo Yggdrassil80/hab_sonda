@@ -9,7 +9,7 @@ import os
 def getINA219DataFromFile():
     ina219Data = ["ERROR"]
     try:
-        with open('/data/lirevenas/logs/ina219data.log') as ina219datafile:
+        with open('/data/hab_sonda/logs/ina219data.log') as ina219datafile:
             line = list(ina219datafile)[-1]
         bdata = line.split('|')
         ina219Data[0] = str(bdata[1])

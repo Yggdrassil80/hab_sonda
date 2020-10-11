@@ -17,7 +17,7 @@ import ConfigHelper
 #Creacion del logger para los logs del servicio de GPS
 loggerLog2 = logging.getLogger('server_logger2')
 loggerLog2.setLevel(logging.INFO)
-inf2 = logging.FileHandler('/data/lirevenas/logs/gpsdata.log')
+inf2 = logging.FileHandler('/data/hab_sonda/logs/gpsdata.log')
 inf2.setLevel(logging.INFO)
 formatterInformer2 = logging.Formatter('[%(asctime)s][%(levelname)s]%(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 inf2.setFormatter(formatterInformer2)
@@ -26,7 +26,7 @@ loggerLog2.addHandler(inf2)
 #Creacion del logger para los logs de aplicacion
 loggerLog = logging.getLogger('server_logger1')
 loggerLog.setLevel(logging.DEBUG)
-inf = logging.FileHandler('/data/lirevenas/logs/gpsService.log')
+inf = logging.FileHandler('/data/hab_sonda/logs/gpsService.log')
 inf.setLevel(logging.DEBUG)
 formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%d %H:%M:%S')
 inf.setFormatter(formatterInformer)

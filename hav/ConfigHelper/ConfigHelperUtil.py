@@ -5,13 +5,13 @@ import logging
 
 #loggerLog = logging.getLogger('server_logger-config')
 #loggerLog.setLevel(logging.INFO)
-#inf = logging.FileHandler('/data/lirevenas/logs/wsp-Config.log')
+#inf = logging.FileHandler('/data/hab_sonda/logs/wsp-Config.log')
 #inf.setLevel(logging.INFO)
 #formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%d %H:%M:%S')
 #inf.setFormatter(formatterInformer)
 #loggerLog.addHandler(inf)
 
-CONF_PATH = "/data/lirevenas/conf/hav.conf"
+CONF_PATH = "/data/hab_sonda/conf/hav.conf"
 
 #Metodo que informa sobre la configuracion de la traza de sensores que se quiere enviar
 def getConfiguracionTraza():

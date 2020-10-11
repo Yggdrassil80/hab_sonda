@@ -9,7 +9,7 @@ def getMPU6050DataFromFile():
 
     mpuData = [float(0), float(0), float(0), float(0), float(0), float(0), float(0)]
     try:
-        with open('/data/lirevenas/logs/mpudata.log') as mpudatafile:
+        with open('/data/hab_sonda/logs/mpudata.log') as mpudatafile:
             line = list(mpudatafile)[-1]
         mdata = line.split('|')
         mpuData[0] = float(mdata[1])
@@ -28,7 +28,7 @@ def getMPU9250DataFromFile():
 
     mpuData = [float(0), float(0), float(0), float(0), float(0), float(0), float(0), float(0), float(0), float(0)]
     try:
-        with open('/data/lirevenas/logs/mpudata.log') as mpudatafile:
+        with open('/data/hab_sonda/logs/mpudata.log') as mpudatafile:
             line = list(mpudatafile)[-1]
         mdata = line.split('|')
         mpuData[0] = float(mdata[1])

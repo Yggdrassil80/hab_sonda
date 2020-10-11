@@ -74,11 +74,11 @@ y la forma de instalarlas es mediante la instrucción
 git clone https://github.com/Yggdrassil80/hab_sonda
 ```
 <b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependeran de ese path base.
-   
+
 6. Configurar el archivo de configuración.
-   1. Para realizar esta acción se ha de configurar el archivo /[PATH_DE_INSTALACION]/conf/hav.conf
+   1. Para realizar esta acción se ha de configurar el archivo /data/hab_sonda/conf/hav.conf
    2. Los detalles de configuración de cada sensor se pueden consultar en la sección de configuración de cada módulo descritos en la sección [Componentes](#componentes)
-   
+
 7. Configurar y activar los servicios. Ver el punto [Generación de Servicios](#generaci-n-de-servicios)
 
 ## Componentes
@@ -487,7 +487,7 @@ resolucionRFX=320
 resolucionRFY=240
 resolucionMaxX=1920
 resolucionMaxY=1080
-pathImagenesBase=/data/lirevenas/images/
+pathImagenesBase=/data/hab_sonda/images/
 
 donde,
 
@@ -576,7 +576,7 @@ sudo raspi-config
 A modo de comprobación, se puede utilizar la herramienta i2c-detect, simplemente ejecutando "i2cdetect -y 1" en linea de comandos y donde se muestra los dispositivos que estan usando el mapa de registros del I2C
 
 ```
-pi@raspberrypi:/data/lirevenas/hav $ i2cdetect -y 1
+pi@raspberrypi:/data/hab_sonda/hav $ i2cdetect -y 1
      0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
 00:          -- -- -- -- -- -- -- -- -- -- -- -- --
 10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

@@ -14,12 +14,12 @@ import ConfigHelper
 
 from pathlib import Path
 
-SENSOR_FILE = "/data/lirevenas/logs/sensores.log"
+SENSOR_FILE = "/data/hab_sonda/logs/sensores.log"
 
 #Creacion del logger para los logs de aplicacion
 loggerLog = logging.getLogger('server_logger')
 loggerLog.setLevel(logging.DEBUG)
-inf = logging.FileHandler('/data/lirevenas/logs/lora1Service.log')
+inf = logging.FileHandler('/data/hab_sonda/logs/lora1Service.log')
 inf.setLevel(logging.DEBUG)
 formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%d %H:%M:%S')
 inf.setFormatter(formatterInformer)
@@ -51,7 +51,7 @@ while True:
             #2.4.   Esto seria un estado de emergencia en el cual se asume que no hay datos de sensores.
             # Se pasaria a intentar enviar la ultima linea del archivo de log del servicio de GPS
             loggerLog.warn("[Lora1Service] Envio de traza de GPS, no archivo de datos detectado...")
-            RFHelper.putUltimoDatoRF(usbRF, '/data/lirevenas/logs/gpsdata.log')
+            RFHelper.putUltimoDatoRF(usbRF, '/data/hab_sonda/logs/gpsdata.log')
             loggerLog.warn("[Lora1Service] Traza enviada OK")
 
     except Exception as e:

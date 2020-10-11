@@ -13,7 +13,7 @@ import ConfigHelper
 #Creacion del loger para los datos cientificos
 logger = logging.getLogger('server_logger')
 logger.setLevel(logging.INFO)
-fh = logging.FileHandler('/data/lirevenas/logs/ina3221data.log')
+fh = logging.FileHandler('/data/hab_sonda/logs/ina3221data.log')
 fh.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s|%(message)s|', datefmt='%Y-%m-%d %H:%M:%S')
 fh.setFormatter(formatter)
@@ -22,7 +22,7 @@ logger.addHandler(fh)
 #Creacion del logger para los logs de aplicacion
 loggerLog = logging.getLogger('server_logger1')
 loggerLog.setLevel(logging.INFO)
-inf = logging.FileHandler('/data/lirevenas/logs/ina3221Service.log')
+inf = logging.FileHandler('/data/hab_sonda/logs/ina3221Service.log')
 inf.setLevel(logging.INFO)
 formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%d %H:%M:%S')
 inf.setFormatter(formatterInformer)

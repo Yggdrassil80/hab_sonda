@@ -13,7 +13,7 @@ import ConfigHelper
 #Creacion del logger para los logs de aplicacion
 loggerLog = logging.getLogger('server_logger1')
 loggerLog.setLevel(logging.INFO)
-inf = logging.FileHandler('/data/lirevenas/logs/CameraService.log')
+inf = logging.FileHandler('/data/hab_sonda/logs/CameraService.log')
 inf.setLevel(logging.INFO)
 formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]', datefmt='%Y-%m-%d %H:%M:%S')
 inf.setFormatter(formatterInformer)

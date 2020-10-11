@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=idle
-ExecStart=/usr/bin/python3 /data/lirevenas/hav/ina3221Service.py
+ExecStart=/usr/bin/python3 /data/hab_sonda/hav/ina3221Service.py
 Restart=always
 RestartSec=0
 
