@@ -56,6 +56,7 @@ Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#act
 4. Instalar librerias de Python3 de apoyo. Las librerias de python necesarias son las siguientes:
    * picamera
    * lib2
+   * adafruit-circuitpython-ina219
    * ...
    
 y la forma de instalarlas es mediante la instrucción
@@ -383,6 +384,42 @@ donde,
 
 - ina3221_activo: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
 - tiempoMuestreoINA3221: informa sobre el tiempo de toma de datos del sensor.
+
+### INA219
+
+#### Introducción
+
+De forma analoga al ina3321 este módulo permite conocer la intensidad y el voltage que circula a través de sus dos entradas, V+ y V-.
+
+Se puede utilizar para controlar el estado de las baterias. A diferencia del Ina3221 solo tiene un canal.
+
+#### Conexión
+
+El circuito funciona a través del bus I2C de la pi. Luego deberá conectarse al SCL y al SCA de dicho puerto. Se alimenta a 5V con los que también se deberá conectar al Vcc 5V de la pi y a uno de los pines de GND también de la PI.
+
+Para poder medir tensiones, uso mas común, la entrada V+ deberá conectarse al borne + de la bateria y el V- al borne negativo de la misma. Destacar que para que arroje medidas correctas, el V- debe estar conectado a GND, luego se ha de buscar un pin GND de la pi y conectarlo en paralelo con el - de la bateria para que las medidas de voltaje de la misma sean correctas.
+
+#### Descripción
+
+Esta versión del INA219 permite solo la toma de medidas de un solo canal a la vez. Luego, si se configura en paralelo (ver apartado anterior) solo se medira tensión, mientras que si se conecta en serie, solo se podrá medir intensidad.
+
+* NOTA *: La tensión máxima que soporta es de 26V y la intensidad máxima es de 3.2A. Eso son medidas límite que se han de intentar no alcanzar, ya que reduciran la vida útil del dispositivo.
+
+#### Configuración
+
+El módulo dispone de confguración específica en el archivo conf/hav.conf
+
+ina219_activo=1
+tiempoMuestreoINA219=10
+
+donde,
+
+- ina219_activo: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
+- tiempoMuestreoINA219: informa sobre el tiempo de toma de datos del sensor.
+
+Para poder utilizarlo es necesario descargar la libreria de ADAfruit correspondiente mediante la instrucción.
+
+sudo pip3 install adafruit-circuitpython-ina219
 
 ### GSM
 
