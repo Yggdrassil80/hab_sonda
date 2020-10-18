@@ -374,6 +374,7 @@ donde,
 
 - usbRF: corresponde al puerto USB al que esta conectado el adaptador cp2102 del componente de RF (Lora ebyte). Es importante destacar que este puerto puede cambiar en función de los dispositivos conectados a la raspberry y el slot USB donde se conecten, con lo que se deberá comprobar manualmente que esta configuración es correcta.
 
+<b> IMPORTANTE: </b> Para que exista comunicación entre dos componentes de este tipo, ambos han de estar configurados en la misma frequencia y canal.
 
 ### UV
 
