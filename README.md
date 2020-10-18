@@ -1,6 +1,6 @@
 - [HAB_sonda](#hab-sonda)
   * [Introducción](#introducci-n)
-  * [Software](#software)
+  * [Diagrama de Sistemas](#diagrama-de-sistemas)
   * [Getting Started](#getting-started)
   * [Componentes](#componentes)
     + [Generación de Servicios](#generaci-n-de-servicios)
@@ -33,7 +33,7 @@
 
 Proyecto que recoge el código fuente base de una sonda de tipo HAB basada en Raspbian (Raspberry Pi ,3B o Zero W) y que pueda trabajar con diferentes tipos de sensores (Temperatura, Presión, Camara, Barometros, GPS, Radio Lora, Telemetria por SM, otros), que recupere datos de los mismos y los pueda enviar a una estación terrestre para, como objetivo final, poder ser recuperada y reutilizada.
 
-## Software
+## Diagrama de Sistemas
 
 El software para la sonda esta pensado de forma que todos los procesos de generación de datos y de envio de datos se ejecuten como un proceso aislado. Luego, un proceso principal, que es el encargado de leer los archivos de datos que los procesos de los modulos de sensores van dejando y enviarlos por alguno de los mecanismos implementados (RF-Lora o SMS-GSM)
 
