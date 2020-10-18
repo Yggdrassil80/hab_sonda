@@ -333,7 +333,7 @@ Se utiliza para el envio de datos tomados por los sensores exceptuando las image
 
 El módulo seleccionado permite de ebyte viene ya preconfigurado. Se conecta a la raspberry a través del puerto serie y, mediante un adaptador CP2102, a un slot USB.
 
-Dispone además de dos pines de configuración, M0 y M1 que, para que pueda funcionar en modo recepción y emisión han de estar a 0V (ojo, no en Z).
+Dispone además de dos pines de configuración, M0 y M1 que, para que pueda funcionar en modo recepción y emisión han de estar a 0V (ojo, no en Z). Osea, conectados al GND de la PI.
 
 Para poder configurar los parametros internos del chip M0 y M1 han de configurarse ambos a 1 lógico (3.3 o 5 V).
 
