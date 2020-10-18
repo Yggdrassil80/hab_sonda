@@ -2,7 +2,7 @@
   * [Introducción](#introducci-n)
   * [Diagrama de Sistemas](#diagrama-de-sistemas)
   * [Getting Started](#getting-started)
-  * [Configuraciones Genéricas](#configuraciones-gen-ricas)
+  * [Configuraciones Genéricas](#configuraciones-genericas)
     + [Generación de Servicios](#generaci-n-de-servicios)
     + [Activación I2C en Raspbian](#activaci-n-i2c-en-raspbian)
   * [Componentes](#componentes)
@@ -47,7 +47,12 @@ Este apartado esta pensado para, sin tener el detalle exacto de todos los compon
 
 Los pasos son:
 
-1. Disponer de una raspberry Pi con una versión de raspbian instalada y funcionando correctamente. 
+1. Disponer de una raspberry Pi con una versión de raspbian instalada y funcionando correctamente. Ejecutar antes de nada:
+
+```
+sudo apt get update
+```
+
 
 2. Conectar todos los sistemas periféricos (camara, sensores, etc.)
 
@@ -96,7 +101,7 @@ mv -rf /data/hab_sonda /data/nombre_nuevo
 
 7. Configurar y activar los servicios. Ver el punto [Generación de Servicios](#generaci-n-de-servicios)
 
-## Configuraciones Genéricas
+## Configuraciones Genericas
 
 ### Generación de Servicios
 
