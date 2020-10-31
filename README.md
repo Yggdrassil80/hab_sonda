@@ -488,6 +488,8 @@ La interacción con el chip es mediante protocolo AT. El detalle de este protoco
 
 https://components101.com/wireless/sim900a-gsm-module
 
+Destacar que el componente lleva implementado un mecanismo de envio de SMS gobernado por la altura del GPS. El objetivo es enviar SMS solo en un rango de alturas concretos, cuando se espera que los SMSs puedan llegar.
+
 #### Conexión
 
 El modulo se conecta a la raspberry por puerto série y se utiliza un adaptador CP2102 para adaptar el puerto serie a USB y poder conectarlo asi a uno de los slots USB de la raspberry.
@@ -497,7 +499,8 @@ El modulo se conecta a la raspberry por puerto série y se utiliza un adaptador 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
 gsm_activo=1
-alturaActivacion=1
+alturaActivacion=300
+alturaDesactivacion=3000
 usbGSM=/dev/ttyUSB1
 listaMoviles=+34666666666,+34699999999
 pin=6666
@@ -507,7 +510,8 @@ donde,
 
 - gsm_activo: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
 - tiempoTrazaGSM: informa sobre el tiempo que transcurre entre el envio de datos por SMS
-- alturaActivacion: Altura por debajo de la cual el modulo de GSM funciona. Este parametro tiene sentido porque por encima de 2 o 3 mil metros, la cobertura de GSM suele ser inexistente. De esta forma se ahorra bateria. Con el valor por defecto, 1, se consigue un efecto de deativación del modulo. Este parametro se ha de configurar adecuadamente antes del lanzamiento.
+- alturaActivacion: Altura a partir de la cual el módulo intentará enviar SMSs con la última traa de datos que disponga. El valor se recomienda configurarlo 100 o 200 metros por encima de la altura del lugar de lanzamiento para que, una vez se encienda la sonda, no empiece a enviar SMS inmediatamente (ahorro de costes)
+- alturaDesactivacion: Altura a partir de la cual el módulo de GSM dejará de enviar SMSs. Esto debe ser así porque superados los 2 o 3mil metros, ya no hay cobertura GSM (ahorro de costes)
 - usbGSM: corresponde al puerto USB al que esta conectado el adaptador cp2102 del componente de GSM. Es importante destacar que este puerto puede cambiar en función de los dispositivos conectados a la raspberry y el slot USB donde se conecten, con lo que se deberá comprobar manualmente que esta configuración es correcta.
 - listaMoviles: lista de numeros de telefono movil a los cuales se enviará el SMS con la traza. Es importante que el numero tengo +34 (código pais españa) y sin ningún espacio.
 - pin: código pin de la tarjeta SIM que utiliza el componente.

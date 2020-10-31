@@ -135,16 +135,6 @@ def getTiempoMuestreoBMP():
     except:
         return int(-1)
 
-#Metodo que recupera la altura a partir de la cual se desactivara el envio de datos por GSM
-def leerAlturaGSMActivacion():
-    try:
-        cfg = configparser.ConfigParser()
-        cfg.read([CONF_PATH])
-        h = cfg.get("GSM", "alturaActivacion")
-        return float(h)
-    except:
-        return float(1)
-
 #Metodo que recupera el intervalo en segundos entre toma y toma de datos de los sensores
 def getTiempoMuestreoConf():
     try:
@@ -261,3 +251,23 @@ def getPinGSM():
         return pin
     except:
         return "0000"
+
+#Metodo que recupera la altura a partir de la cual se desactivara el envio de datos por GSM
+def leerAlturaGSMDesactivacion():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        h = cfg.get("GSM", "alturaDesactivacion")
+        return float(h)
+    except:
+        return float(1)
+
+#Metodo que recupera la altura a partir de la cual se activara el envio de datos por GSM
+def leerAlturaGSMActivacion():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        h = cfg.get("GSM", "alturaActivacion")
+        return float(h)
+    except:
+        return float(1)
