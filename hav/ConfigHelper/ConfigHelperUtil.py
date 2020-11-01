@@ -271,3 +271,14 @@ def leerAlturaGSMActivacion():
         return float(h)
     except:
         return float(1)
+
+#Metodo que recupera el el identificador de misión del HAB
+def getIDMision():
+    try:
+        cfg = ConfigParser.ConfigParser()
+        cfg.read([CONF_PATH])
+        idmision = cfg.get("RF", "idMision")
+        return idmision
+    except:
+        #loggerLog.error("[ConfigHelper][getIDMision] ERROR");
+        return "Puerto Vacio"

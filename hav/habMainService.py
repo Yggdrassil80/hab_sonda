@@ -52,6 +52,8 @@ def sensorLogFile(idSensor):
 t = ConfigHelper.getTiempoMuestreoConf()
 trazaConf = ConfigHelper.getConfiguracionTraza()
 loggerLog.debug("[HABMain] Sensores configurados: " + str(trazaConf))
+idMision = ConfigHelper.getIDMision()
+loggerLog.debug("[HABMain] Id de misión: " + str(idMision))
 #2. Para cada tipo de dato definido en la traza a enviar hacer.
 
 trazaBase = trazaConf.split(',')
@@ -95,8 +97,8 @@ while True:
                     trazaDatos = trazaDatos + datosProcesados
                     loggerLog.debug("[HABMain][trazaDatos: " + trazaDatos + "]")
 
-                    #3. Finalizado el proceso para todos los sensores, escribir la traza en el archivo sensores.log
-                    logger.info(trazaDatos)
+                    #3. Finalizado el proceso para todos los sensores, escribir la traza en el archivo sensores.log añadiendole el idMision
+                    logger.info(trazaDatos + "|" + idMision + "|")
                 else:
                     loggerLog.warn("[HABMain] OJO, si el sensor era el gps probablemente su archivo de datos este aun vacio...")
             else:

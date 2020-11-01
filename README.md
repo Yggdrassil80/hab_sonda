@@ -582,11 +582,13 @@ El módulo dispone de confguración específica en el archivo conf/hav.conf
 
 tiempoMuestreo=15
 configuracionTraza=gps,bmp,uv,ina3221
+idMision=NOMBREMISION
 
 donde,
 
 - tiempoMuestreo: corresponde al intervalo de tiempo en el que se realizará la acción se sintesis de archivos de datos para construir una linea del archivo de datos sensores.log
 - configuracionTraza: corresponde a la lista de modulos de los cuales se intentará recuperar archivos de datos. El orden de los datos en el archivo sensores.log lo determina el orden de los módulos de esta lista.
+- idMision: Este valor será el string que se adjuntará a cada traza que se envíe. Es muy importante, ya que en caso de que hubiera mas HABs volando a la vez, identifica de forma unequívoca el HAB que emite trazas.
 
 ### Servicio de Configuración
 
