@@ -60,6 +60,7 @@ sudo apt get update
 Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#activaci-n-i2c-en-raspbian)
 
 4. Instalar librerias de Python3 de apoyo. Las librerias de python necesarias son las siguientes:
+   * image
    * picamera
    * lib2
    * adafruit-circuitpython-ina219
@@ -70,6 +71,13 @@ y la forma de instalarlas es mediante la instrucción
    pip3 install [nombre_libreria]
 ```
 
+4.1. Instalar librerias del SO necesarias para algunas dependencias del componente software de la camara integrada.
+
+´´´
+sudo apt-get install libopenjp2-7
+sudo apt-get install libtiff5
+´´´ 
+
 5. Realizar un clone del proyecto hab_sonda sobre la raspberry
    El proceso es simple.
    1. Abrir una consola del SO.
@@ -79,6 +87,13 @@ y la forma de instalarlas es mediante la instrucción
 git clone https://github.com/Yggdrassil80/hab_sonda
 ```
 <b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependeran de ese path base.
+
+5.1. Si no existe, crear manualmente el directorio images:
+
+```
+cd /data/hab_sonda/
+mkdir images
+```
 
 6. Configurar el archivo de configuración.
    1. Para realizar esta acción se ha de configurar el archivo /data/hab_sonda/conf/hav.conf
@@ -176,6 +191,22 @@ pi@raspberrypi:/data/hab_sonda/hav $ i2cdetect -y 1
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- --
 ```
+
+### Activación Cámara
+
+Si se desea utilizar la camara de la raspberry pi que estaría conectada a través del puerto SPI de la pi será preciso antes habilitarla.
+
+De forma muy similar a la activación del bus I2C, se han de ejecutar los siguientes comandos:
+
+1. Ejecutar:
+
+```
+sudo raspi-config
+```
+
+2. Navegar por las opciones siguientes [Interfacing Options -> Camera -> Activate]. Pasados unos segundos la camara queda activada.
+
+<b>IMPORTANTE</b> La configuración solicitará reiniciar la pi.
 
 ## Componentes
 

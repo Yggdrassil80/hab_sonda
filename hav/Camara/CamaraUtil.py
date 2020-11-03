@@ -29,7 +29,7 @@ def tomarImagen(res, baseImagePath, tiempoEspera, tipo, formato):
         camera.start_preview()
         #loggerLog.info("[Camara][tomarImagen] Tomando datos raw...");
         time.sleep(tiempoEspera)
-        fecha = datetime.datetime.now().strftime("%y-%m-%d-%H-%M")
+        fecha = datetime.datetime.now().strftime("%y-%m-%d-%H-%M-%S")
         camera.capture(baseImagePath + fecha + '-' + tipo + '.' + formato, formato)
         #print('Foto tomada y guardada en: ' + baseImagePath + fecha + '-' + tipo + '.' + formato)
         camera.stop_preview()

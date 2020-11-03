@@ -146,7 +146,7 @@ def getTiempoMuestreoConf():
         return int(10)
 
 #Metodo que recupera el intervalo en segundos para tomar una imagen
-def getMaxTiempoImagen():
+def getTiempoTomaImagen():
     try:
         cfg = configParser.configParser()
         cfg.read([CONF_PATH])
