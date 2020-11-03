@@ -2,9 +2,10 @@
   * [Introducción](#introducci-n)
   * [Diagrama de Sistemas](#diagrama-de-sistemas)
   * [Getting Started](#getting-started)
-  * [Configuraciones Genéricas](#configuraciones-genericas)
+  * [Configuraciones Genericas](#configuraciones-genericas)
     + [Generación de Servicios](#generaci-n-de-servicios)
     + [Activación I2C en Raspbian](#activaci-n-i2c-en-raspbian)
+    + [Activación Cámara](#activaci-n-c-mara)
   * [Componentes](#componentes)
     + [BMP](#bmp)
     + [MPU](#mpu)
@@ -53,7 +54,6 @@ Los pasos son:
 sudo apt get update
 ```
 
-
 2. Conectar todos los sistemas periféricos (camara, sensores, etc.)
 
 3. Activar el bus I2C. 
@@ -71,14 +71,14 @@ y la forma de instalarlas es mediante la instrucción
    pip3 install [nombre_libreria]
 ```
 
-4.1. Instalar librerias del SO necesarias para algunas dependencias del componente software de la camara integrada.
+5. Instalar librerias del SO necesarias para algunas dependencias del componente software de la camara integrada.
 
 ´´´
 sudo apt-get install libopenjp2-7
 sudo apt-get install libtiff5
 ´´´ 
 
-5. Realizar un clone del proyecto hab_sonda sobre la raspberry
+6. Realizar un clone del proyecto hab_sonda sobre la raspberry
    El proceso es simple.
    1. Abrir una consola del SO.
    2. Posicionarse en el directorio que se desee (se recomienda /data)
@@ -88,14 +88,14 @@ git clone https://github.com/Yggdrassil80/hab_sonda
 ```
 <b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependeran de ese path base.
 
-5.1. Si no existe, crear manualmente el directorio images:
+7. Si no existe, crear manualmente el directorio images:
 
 ```
 cd /data/hab_sonda/
 mkdir images
 ```
 
-6. Configurar el archivo de configuración.
+8. Configurar el archivo de configuración.
    1. Para realizar esta acción se ha de configurar el archivo /data/hab_sonda/conf/hav.conf
    2. Los detalles de configuración de cada sensor se pueden consultar en la sección de configuración de cada módulo descritos en la sección [Componentes](#componentes)
 
@@ -114,7 +114,7 @@ Esto se puede hacer utilizando el comando:
 mv -rf /data/hab_sonda /data/nombre_nuevo
 ```
 
-7. Configurar y activar los servicios. Ver el punto [Generación de Servicios](#generaci-n-de-servicios)
+9. Configurar y activar los servicios. Ver el punto [Generación de Servicios](#generaci-n-de-servicios)
 
 ## Configuraciones Genericas
 
