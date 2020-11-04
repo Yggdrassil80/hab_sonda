@@ -134,10 +134,11 @@ def parseGPS_GGA(data):
             
             alt = s[9]
             sat = s[7]
-                
+
+            loggerLog.debug("[GPSHelper][parseGPS_GGA] lat: " + str(lat) + " lon: " + str(lon))
             gpsData[0] = alt
-            gpsData[1] = str(lat)
-            gpsData[2] = str(lon)
+            gpsData[1] = lat
+            gpsData[2] = lon
             gpsData[3] = "OK"
         else:
             loggerLog.debug("[GPSHelper][parseGPS_GGA] Mensaje $GPGGA NO encontrado. Salir con KO")
@@ -176,7 +177,7 @@ def decode(coord):
         else:
             coordenada = float(0)
             loggerLog.debug("[GPSHelper][decode] Coordenada vacia Fin")
-            return coordenada
+        return coordenada
     except Exception as e:
         loggerLog.error("[GPSHelper][decode] ERROR se retorna coordenada a 0: " + str(e))
         return coordenada
@@ -224,8 +225,8 @@ def parseGPS_RMC(data):
 
             speed = s[7]
             date = s[9][0:2] + "-" + s[9][2:4] + "-" + s[9][4:6]
-            gpsDataExtendet[1] = str(lat)
-            gpsDataExtendet[2] = str(lon)
+            gpsDataExtendet[1] = lat
+            gpsDataExtendet[2] = lon
             gpsDataExtendet[3] = time
             gpsDataExtendet[4] = date
             #Conversion de nudos a m/s
