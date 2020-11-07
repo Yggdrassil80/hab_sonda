@@ -6,7 +6,6 @@
 
 import time
 import logging
-import INA219Helper.ina219 as ina219
 import board
 from adafruit_ina219 import ADCResolution, BusVoltageRange, INA219
 
