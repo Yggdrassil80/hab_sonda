@@ -36,7 +36,11 @@ Proyecto que recoge el código fuente base de una sonda de tipo HAB basada en Ra
 
 ## Diagrama de Sistemas
 
-El software para la sonda esta pensado de forma que todos los procesos de generación de datos y de envio de datos se ejecuten como un proceso aislado. Luego, un proceso principal, que es el encargado de leer los archivos de datos que los procesos de los modulos de sensores van dejando y enviarlos por alguno de los mecanismos implementados (RF-Lora o SMS-GSM)
+El software para la sonda esta pensado de forma que todos los procesos de generación de datos y de envio de datos se ejecuten como un proceso del Sistema Operativo (Raspbian) aislado. Cada uno de estos procesos tiene su propio control de errores y su configuración. Además, cada uno de ellos generan un archivo de log y otro de datos. En el archivo de datos, con la frecuencia configurada, aparecen los datos de dicho sensor.
+
+Luego, un proceso principal, que es el encargado de leer los archivos de datos que los procesos de los modulos de sensores van dejando y conformar lo que será la traza de sensores final. Notar que, los diferentes instrumentos configurados pueden tener tiempos de muestreo diferentes, esto implica que, en el momento de ejecución de este proceso principal, se tomaran los últimos datos que existan en los archivos de datos de cada uno de los sensores. Esto es importante porque lo que se acabará enviando por RF o SMS no es mas que una síntesis de los datos generados. Para poder tener todos los datos con su máxima precisión, es imprescindible recuperar la sonda.
+
+La traza fusión con todos los datos es recuperada por los procesos de envio de datos (RF-Lora o SMS-GSM), que funcionan igual que los procesos de sensores, de forma aislada, enviando los datos que puedan encontrarse en el archivo unificado de trazas.
 
 Este sistema permite que, en caso de fallo de alguno de estos sensores, buses u otros componentes, el resto de procesos sigan funcionando correctamente, aumentando la robustez del sistema. Esta arquitectura además permite una gran escalabilidad, pudiendo añadir sistemas nuevos o sistemas resilientes llegado al caso, con suma facilidad.
 
