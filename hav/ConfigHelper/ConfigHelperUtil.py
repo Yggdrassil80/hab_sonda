@@ -24,6 +24,15 @@ def getConfiguracionTraza():
     except:
         return "null"
 
+#Metodo que informa sobre el estado de activacion del INA3221
+def isINA219Activo():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("INA219", "ina219_activo")
+        return int(t)
+    except:
+        return "valor vacio"
 
 #Metodo que informa sobre el estado de activacion del INA3221
 def isINA3221Activo():
@@ -31,6 +40,15 @@ def isINA3221Activo():
         cfg = configparser.ConfigParser()
         cfg.read([CONF_PATH])
         t = cfg.get("INA3221", "ina3221_activo")
+        return int(t)
+    except:
+        return "valor vacio"
+
+def getTiempoMuestreoINA219():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("INA219", "tiempoMuestreoINA219")
         return int(t)
     except:
         return "valor vacio"
