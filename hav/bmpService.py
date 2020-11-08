@@ -40,6 +40,7 @@ if act == 1:
 	while True:
 
 		try:
+                        #INICIO: Espacio para recuperar los datos del sensor a partir de la libreria
 			#loggerLog.info("[bmpService] inicio")
 			bmpTemp = sensor.get_temperature()
 			#loggerLog.info("[bmpService] temperatura leida")
@@ -48,8 +49,10 @@ if act == 1:
 			bmpAlti = sensor.get_altitude()
 			#loggerLog.info("[bmpService] alturaleida")
 
+                        #Escritura de datos en el archivo de datos del sensor. Todo lo que se escriba aqui sera lo que potencialmente se acabe enviando por telemetria.
 			logger.info(str(round(bmpTemp,2)) + "|" + str(round(bmpPres,4)) + "|" + str(int(bmpAlti)))
 
+                        #FINAL: Espacio para recuperar los datos del sensor a partir de la libreria
 			time.sleep(tiempoMuestreoBMP)
 
 		except Exception as e:
