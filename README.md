@@ -72,8 +72,10 @@ Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#act
    
 y la forma de instalarlas es mediante la instrucción
 ```
-   pip3 install [nombre_libreria]
+   sudo pip3 install [nombre_libreria]
 ```
+
+<b>NOTA:</b> Es muy importante utilizar sudo para la instalación de las librerias, ya que la instalación con pip3 instala la libreria para el usuario que ejecuta la instrucción. Si no se instala con sudo, al crear posteriormente los servicios, es posible que estos fallen al no poder utulizar las librerias instaladas con el usuario pi (usuario por defecto)
 
 5. Instalar librerias del SO necesarias para algunas dependencias del componente software de la camara integrada.
 
@@ -166,6 +168,16 @@ o
 
 sudo systemctl stop [nombre_servicio].service
 ```
+
+Finalmente, comentar que estas acciones estan actualmente automatizadas a traves de un script en el directorio /data/hav_sonda/utilities. 
+
+En dicho directorio se encuentran 3 scritps que agilizan la gestion de los servicios
+
+- habCatServiceEnabler.sh: Su ejecución ejecuta los pasos de esta seccion del 1 al 4 para todos los servicios que se encuentren en el archivo services.conf
+- habCatServiceDisabler.sh: Su ejecución para todos los servicios y posteriormente los desabilita del arranque que se encuentren en el archivo services.conf
+- habCatServiceOp.sh {status/start/stop}: Su ejecución permite obtener el estado de los servicios (status) pararlos (stop) o arrancarlos (start) que se encuentren en el archivo services.conf
+
+Sobre el archivo services.conf, se encuentra en /data/hav_sonda/utilities y unicamente contiene una linea con el nombre de los servicios separados por un espacio simple. Este archivo determina que servicios se cargaran en el arranque de la pi y el orden en que se desea que arranquen.
 
 ### Activación I2C en Raspbian
 
