@@ -72,9 +72,8 @@ while True:
                 f=open(pathSensor,"r")
                 isSensorFileFull = os.stat(pathSensor).st_size>0
 
-                #2.2.1 Si existe y es el archivo de gps (critico) y esta vacio, se trarta de un error de inicializacion o que el GPS
-                #no ha cogido cobertura aun. Se ha de seguir iterando pero sin procesar ningun sensor, ya que sin GPS los datos no tienen contexto
-                if (sensorType == "gps" and isSensorFileFull):
+                #2.2.1 Abrir el archivo del sensor y comprobar si tiene datos. Si no tiene, por cualquier motivo, no hacer nada y pasar al siguiente.
+                if (isSensorFileFull):
 
                     #2.3. Si existe, recuperar la ultima traza escrita (aunque tengan tiempos de muestreo diferentes, son pocos
                     # segundos de diferencia, luego se entiende que pueden estar asociados al timestamp del logger principal)
@@ -84,7 +83,7 @@ while True:
                     ll = lastLine[:-2]
                     loggerLog.debug("[HABMain] Linea leida: [" + ll + "]")
                     dataSensorArray = ll.split('|')
-                    #2.4. Se procesa la linea para eliminar el primer datos de la linea, que corresponde siempre al timestamp.
+                    #2.4. Se procesa la linea para eliminar el primer dato de la linea, que corresponde siempre al timestamp.
                     i = 0
                     datosProcesados = ""
                     for data in dataSensorArray:
@@ -95,22 +94,19 @@ while True:
                     f.close()
             	    #2.5. Asociar los datos recuperados del log del sensor S a la traza principal.
                     trazaDatos = trazaDatos + datosProcesados
-                    loggerLog.debug("[HABMain][trazaDatos: " + trazaDatos + "]")
+                    #loggerLog.debug("[HABMain][trazaDatos: " + trazaDatos + "]")
 
                     #3. Finalizado el proceso para todos los sensores, escribir la traza en el archivo sensores.log añadiendole el idMision
-                    logger.info(trazaDatos + "|" + idMision + "|")
+                    #logger.info(trazaDatos + "|" + idMision + "|")
                 else:
                     loggerLog.warn("[HABMain] OJO, si el sensor era el gps probablemente su archivo de datos este aun vacio...")
             else:
                 loggerLog.warn("[HABMain] OJO, no se ha encontrado archivo de datos del sensor [" + sensorType + "]")
-
+        #3. Finalizado el procesamiento de todos los sensores, se escribe la traza de datos en sensores.log y se añade el idMision
+        loggerLog.debug("[HABMain][trazaDatos: " + trazaDatos + "]")
+        logger.info(trazaDatos + "|" + idMision + "|")
     except Exception as e:
         loggerLog.error("[HABMain][ERROR] " + str(e))
 
     time.sleep(t)
-
-
-#NOTA: El proceso de envio, se va fuera de este programa, se entiende a partir de ahora que el envio de
-# datos puede realizarse con diversos mecanismos. Lora, GSM, etc. estos mecanismos de envio, ahora se cons
-# tituiran como servicios aparte.
 

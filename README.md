@@ -177,6 +177,12 @@ En dicho directorio se encuentran 3 scritps que agilizan la gestion de los servi
 - habCatServiceDisabler.sh: Su ejecución para todos los servicios y posteriormente los desabilita del arranque que se encuentren en el archivo services.conf
 - habCatServiceOp.sh {status/start/stop}: Su ejecución permite obtener el estado de los servicios (status) pararlos (stop) o arrancarlos (start) que se encuentren en el archivo services.conf
 
+para poder ejecutar cualquiera de estos comandos, posicionarse en el directorio utilities y ejecutar:
+
+```
+sudo ./{nombre_script}.sh {opciones_si_las_tuviera}
+```
+
 Sobre el archivo services.conf, se encuentra en /data/hav_sonda/utilities y unicamente contiene una linea con el nombre de los servicios separados por un espacio simple. Este archivo determina que servicios se cargaran en el arranque de la pi y el orden en que se desea que arranquen.
 
 ### Activación I2C en Raspbian

@@ -166,7 +166,7 @@ def getTiempoMuestreoConf():
 #Metodo que recupera el intervalo en segundos para tomar una imagen
 def getTiempoTomaImagen():
     try:
-        cfg = configParser.configParser()
+        cfg = configparser.configParser()
         cfg.read([CONF_PATH])
         h = cfg.get("Camara", "tiempoTomaImagen")
         return int(h)
@@ -179,7 +179,7 @@ def getResolucionImagenRF():
     resolucion = [int(0),int(0)]
 
     try:
-        cfg = ConfigParser.ConfigParser()
+        cfg = configparser.ConfigParser()
         cfg.read([CONF_PATH])
         resolucion[0] = cfg.get("Camara", "resolucionRFX")
         resolucion[1] = cfg.get("Camara", "resolucionRFY")
@@ -293,10 +293,11 @@ def leerAlturaGSMActivacion():
 #Metodo que recupera el el identificador de misión del HAB
 def getIDMision():
     try:
-        cfg = ConfigParser.ConfigParser()
+        cfg = configparser.ConfigParser()
         cfg.read([CONF_PATH])
         idmision = cfg.get("RF", "idMision")
         return idmision
     except:
         #loggerLog.error("[ConfigHelper][getIDMision] ERROR");
-        return "Puerto Vacio"
+        return "HABCAT00"
+
