@@ -443,6 +443,8 @@ Los valores serian del 1 al 7 y a cada uno de ellos le corresponde tantos watts/
 
 Este indice no esta aun implementado.
 
+Mas información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?Searchword=Veml6075&gclid=Cj0KCQiAnb79BRDgARIsAOVbhRqGm509nclCrdP307paU4pcb2jqKwJ6gcn2kXBONcwi0nqNO-tNmtsaAudAEALw_wcB)
+
 #### Configuracíón
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
