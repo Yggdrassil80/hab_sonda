@@ -79,10 +79,10 @@ y la forma de instalarlas es mediante la instrucción
 
 5. Instalar librerias del SO necesarias para algunas dependencias del componente software de la camara integrada.
 
-´´´
+```
 sudo apt-get install libopenjp2-7
 sudo apt-get install libtiff5
-´´´ 
+``` 
 
 6. Realizar un clone del proyecto hab_sonda sobre la raspberry
    El proceso es simple.
@@ -105,7 +105,7 @@ mkdir images
    1. Para realizar esta acción se ha de configurar el archivo /data/hab_sonda/conf/hav.conf
    2. Los detalles de configuración de cada sensor se pueden consultar en la sección de configuración de cada módulo descritos en la sección [Componentes](#componentes)
 
-* NOTA *: Llegado es punto, si se deseara, se puede cambiar el nombre "hab_sonda" por el nombre que se desee. Esto se puede hacer utilizando los comandos siguiente:
+* <b>NOTA</b>: Llegado es punto, si se deseara, se puede cambiar el nombre "hab_sonda" por el nombre que se desee. Esto se puede hacer utilizando los comandos siguiente:
 
 ```
 cd /data/hab_sonda
@@ -173,9 +173,9 @@ Finalmente, comentar que estas acciones estan actualmente automatizadas a traves
 
 En dicho directorio se encuentran 3 scritps que agilizan la gestion de los servicios
 
-- habCatServiceEnabler.sh: Su ejecución ejecuta los pasos de esta seccion del 1 al 4 para todos los servicios que se encuentren en el archivo services.conf
-- habCatServiceDisabler.sh: Su ejecución para todos los servicios y posteriormente los desabilita del arranque que se encuentren en el archivo services.conf
-- habCatServiceOp.sh {status/start/stop}: Su ejecución permite obtener el estado de los servicios (status) pararlos (stop) o arrancarlos (start) que se encuentren en el archivo services.conf
+- <b>habCatServiceEnabler.sh</b>: Su ejecución ejecuta los pasos de esta seccion del 1 al 4 para todos los servicios que se encuentren en el archivo services.conf
+- <b>habCatServiceDisabler.sh</b>: Su ejecución para todos los servicios y posteriormente los desabilita del arranque que se encuentren en el archivo services.conf
+- <b>habCatServiceOp.sh {status/start/stop}</b>: Su ejecución permite obtener el estado de los servicios (status) pararlos (stop) o arrancarlos (start) que se encuentren en el archivo services.conf
 
 para poder ejecutar cualquiera de estos comandos, posicionarse en el directorio utilities y ejecutar:
 
@@ -268,9 +268,10 @@ tiempoMuestreoBMP=10
 
 donde,
 
-- bmp_activo: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
-- tiempoMuestreoBMP: informa sobre el tiempo de toma de datos del sensor.
+- <b>bmp_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
+- <b>tiempoMuestreoBMP</b>: informa sobre el tiempo de toma de datos del sensor.
 
+Más información en su datasheet [aquí](https://cdn-shop.adafruit.com/datasheets/BST-BMP280-DS001-11.pdf)
 
 ### MPU
 
@@ -319,8 +320,10 @@ tiempoMuestreoMPU=11
 
 donde,
 
-- mpu_activo: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
-- tiempoMuestreoMPU: informa sobre el tiempo de toma de datos del sensor.
+- <b>mpu_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
+- <b>tiempoMuestreoMPU</b>: informa sobre el tiempo de toma de datos del sensor.
+
+Más información en su datasheet [aquí](https://components101.com/processors/mpu9250-9-axis-digital-motion-processor)
 
 ### GPS
 
@@ -369,8 +372,10 @@ tiempoMuestreoGPS=10
 
 donde,
 
-- usbGPS: corresponde al puerto USB al que esta conectado el adaptador cp2102 del GPS. Es importante destacar que este puerto puede cambiar en función de los dispositivos conectados a la raspberry y el slot USB donde se conecten, con lo que se deberá comprobar manualmente que esta configuración es correcta.
-- tiempoMuestreoGPS: que informa sobre el tiempo entre muestras de datos de GPS. Es importante destacar que el GPS no empieza a dar datos de posición de forma inmediata cuando arranca, sino que requeriere unos minutos de "autocalibrado" antes de empezar a recibir paquetes NMEA con datos (GCRMC y GCACC). Luego, suponiendo la configuración correcta de USB, se puede entender como normal que no haya datos de posición nada mas arrancar.
+- <b>usbGPS</b>: corresponde al puerto USB al que esta conectado el adaptador cp2102 del GPS. Es importante destacar que este puerto puede cambiar en función de los dispositivos conectados a la raspberry y el slot USB donde se conecten, con lo que se deberá comprobar manualmente que esta configuración es correcta.
+- <b>tiempoMuestreoGPS</b>: que informa sobre el tiempo entre muestras de datos de GPS. Es importante destacar que el GPS no empieza a dar datos de posición de forma inmediata cuando arranca, sino que requeriere unos minutos de "autocalibrado" antes de empezar a recibir paquetes NMEA con datos (GCRMC y GCACC). Luego, suponiendo la configuración correcta de USB, se puede entender como normal que no haya datos de posición nada mas arrancar.
+
+Más información en su datasheet [aquí](https://www.u-blox.com/sites/default/files/products/documents/NEO-6_DataSheet_(GPS.G6-HW-09005).pdf)
 
 ### RF
 
@@ -425,9 +430,11 @@ usbRF=/dev/ttyUSB2
 
 donde,
 
-- usbRF: corresponde al puerto USB al que esta conectado el adaptador cp2102 del componente de RF (Lora ebyte). Es importante destacar que este puerto puede cambiar en función de los dispositivos conectados a la raspberry y el slot USB donde se conecten, con lo que se deberá comprobar manualmente que esta configuración es correcta.
+- <b>usbRF</b>: corresponde al puerto USB al que esta conectado el adaptador cp2102 del componente de RF (Lora ebyte). Es importante destacar que este puerto puede cambiar en función de los dispositivos conectados a la raspberry y el slot USB donde se conecten, con lo que se deberá comprobar manualmente que esta configuración es correcta.
 
 <b> IMPORTANTE: </b> Para que exista comunicación entre dos componentes de este tipo, ambos han de estar configurados en la misma frequencia y canal.
+
+Más información en su datasheet [aquí](http://forum.arduino.cc/index.php?action=dlattach;topic=502618.0;attach=228256)
 
 ### UV
 
@@ -454,8 +461,8 @@ tiempoMuestreoUV=10
 
 donde,
 
-- uv_activo: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
-- tiempoMuestreoUV: informa sobre el tiempo de toma de datos del sensor.
+- <b>uv_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
+- <b>tiempoMuestreoUV</b>: informa sobre el tiempo de toma de datos del sensor.
 
 ### INA3221
 
@@ -479,7 +486,9 @@ Si se usa solo para medir un canal, las medidas son correctas.
 
 Los datos que permite recuperar son voltaje e intensidad.
 
-* NOTA *: Es conveniente recordar que para que las medidas sean las correctas, para medir intensidad, el canal utilizado ha de estar en serie con el circuito y para medir voltaje, en paralelo.
+* <b>NOTA</b>: Es conveniente recordar que para que las medidas sean las correctas, para medir intensidad, el canal utilizado ha de estar en serie con el circuito y para medir voltaje, en paralelo.
+
+Más información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?Searchword=Ina3221%20datasheet&gclid=Cj0KCQiAnb79BRDgARIsAOVbhRpiWS_J8SuHYHrsdyR1O_YKbvQJCmxB1GAHMc7wUeQHWpWxA4hbMc0aAlveEALw_wcB)
 
 #### Configuracíón
 
@@ -490,8 +499,8 @@ tiempoMuestreoINA3221=10
 
 donde,
 
-- ina3221_activo: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
-- tiempoMuestreoINA3221: informa sobre el tiempo de toma de datos del sensor.
+- <b>ina3221_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
+- <b>tiempoMuestreoINA3221</b>: informa sobre el tiempo de toma de datos del sensor.
 
 ### INA219
 
@@ -511,7 +520,9 @@ Para poder medir tensiones, uso mas común, la entrada V+ deberá conectarse al 
 
 Esta versión del INA219 permite solo la toma de medidas de un solo canal a la vez. Luego, si se configura en paralelo (ver apartado anterior) solo se medira tensión, mientras que si se conecta en serie, solo se podrá medir intensidad.
 
-* NOTA *: La tensión máxima que soporta es de 26V y la intensidad máxima es de 3.2A. Eso son medidas límite que se han de intentar no alcanzar, ya que reduciran la vida útil del dispositivo.
+* <b>NOTA</b>: La tensión máxima que soporta es de 26V y la intensidad máxima es de 3.2A. Eso son medidas límite que se han de intentar no alcanzar, ya que reduciran la vida útil del dispositivo.
+
+Más información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?Searchword=Ina219%20datasheet&gclid=Cj0KCQiAnb79BRDgARIsAOVbhRrAWCmmZurJqLYQYfbHrF05BukVSrTt4Gg0IVGeFlWTICFgfiO4YUsaAkPsEALw_wcB)
 
 #### Configuración
 
@@ -522,8 +533,8 @@ tiempoMuestreoINA219=10
 
 donde,
 
-- ina219_activo: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
-- tiempoMuestreoINA219: informa sobre el tiempo de toma de datos del sensor.
+- <b>ina219_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
+- <b>tiempoMuestreoINA219</b>: informa sobre el tiempo de toma de datos del sensor.
 
 Para poder utilizarlo es necesario descargar la libreria de ADAfruit correspondiente mediante la instrucción.
 
@@ -539,9 +550,7 @@ Este módulo se basa en el chip sim900A. Este módulo permite el envio de mensaj
 
 El software que controla este modulo se ha simplificado al máximo para que simplemente se le pase a los métodos de envio un string con el SMS que se desea que se envien.
 
-La interacción con el chip es mediante protocolo AT. El detalle de este protocolo y de todas las funcionalidades con este chip se puede encontrar aqui.
-
-https://components101.com/wireless/sim900a-gsm-module
+La interacción con el chip es mediante protocolo AT. El detalle de este protocolo y de todas las funcionalidades con este chip se puede encontrar [aquí](https://components101.com/wireless/sim900a-gsm-module)
 
 Destacar que el componente lleva implementado un mecanismo de envio de SMS gobernado por la altura del GPS. El objetivo es enviar SMS solo en un rango de alturas concretos, cuando se espera que los SMSs puedan llegar.
 
@@ -563,13 +572,13 @@ tiempoTrazaGSM=45
 
 donde,
 
-- gsm_activo: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
-- tiempoTrazaGSM: informa sobre el tiempo que transcurre entre el envio de datos por SMS
-- alturaActivacion: Altura a partir de la cual el módulo intentará enviar SMSs con la última traa de datos que disponga. El valor se recomienda configurarlo 100 o 200 metros por encima de la altura del lugar de lanzamiento para que, una vez se encienda la sonda, no empiece a enviar SMS inmediatamente (ahorro de costes)
-- alturaDesactivacion: Altura a partir de la cual el módulo de GSM dejará de enviar SMSs. Esto debe ser así porque superados los 2 o 3mil metros, ya no hay cobertura GSM (ahorro de costes)
-- usbGSM: corresponde al puerto USB al que esta conectado el adaptador cp2102 del componente de GSM. Es importante destacar que este puerto puede cambiar en función de los dispositivos conectados a la raspberry y el slot USB donde se conecten, con lo que se deberá comprobar manualmente que esta configuración es correcta.
-- listaMoviles: lista de numeros de telefono movil a los cuales se enviará el SMS con la traza. Es importante que el numero tengo +34 (código pais españa) y sin ningún espacio.
-- pin: código pin de la tarjeta SIM que utiliza el componente.
+- <b>gsm_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
+- <b>tiempoTrazaGSM</b>: informa sobre el tiempo que transcurre entre el envio de datos por SMS
+- <b>alturaActivacion</b>: Altura a partir de la cual el módulo intentará enviar SMSs con la última traa de datos que disponga. El valor se recomienda configurarlo 100 o 200 metros por encima de la altura del lugar de lanzamiento para que, una vez se encienda la sonda, no empiece a enviar SMS inmediatamente (ahorro de costes)
+- <b>alturaDesactivacion</b>: Altura a partir de la cual el módulo de GSM dejará de enviar SMSs. Esto debe ser así porque superados los 2 o 3mil metros, ya no hay cobertura GSM (ahorro de costes)
+- <b>usbGSM</b>: corresponde al puerto USB al que esta conectado el adaptador cp2102 del componente de GSM. Es importante destacar que este puerto puede cambiar en función de los dispositivos conectados a la raspberry y el slot USB donde se conecten, con lo que se deberá comprobar manualmente que esta configuración es correcta.
+- <b>listaMoviles</b>: lista de numeros de telefono movil a los cuales se enviará el SMS con la traza. Es importante que el numero tengo +34 (código pais españa) y sin ningún espacio.
+- <b>pin</b>: código pin de la tarjeta SIM que utiliza el componente.
 
 ### Camara
 
@@ -602,14 +611,16 @@ pathImagenesBase=/data/hab_sonda/images/
 
 donde,
 
-- camara_activo: informa sobre si el módulo esta activo o no.
-- tiempoTomaImagen: tiempo entre foto y foto.
-- tiempoExposicion: tiempo de exposición del sensor cmos de la camara(equivalente al tiempo de apertura del diafragma de la camara)
-- resolucionRFX: resolución mínima en el ejeX (anchura) de la foto que tomará la camara.
-- resolucionRFY: resolución mínima en el ejeY (altura) de la foto que tomará la camara.
-- resolucionMaxX: resolución máxima en el ejeX (anchura) de la foto que tomará la camara.
-- resolucionMaxY: resolución máxima en el ejeY (altura) de la foto que tomará la camara.
-- pathImagenesBase: path base en el filesystem del SO donde se ubicaran las fotos.
+- <b>camara_activo</b>: informa sobre si el módulo esta activo o no.
+- <b>tiempoTomaImagen</b>: tiempo entre foto y foto.
+- <b>tiempoExposicion</b>: tiempo de exposición del sensor cmos de la camara(equivalente al tiempo de apertura del diafragma de la camara)
+- <b>resolucionRFX</b>: resolución mínima en el ejeX (anchura) de la foto que tomará la camara.
+- <b>resolucionRFY</b>: resolución mínima en el ejeY (altura) de la foto que tomará la camara.
+- <b>resolucionMaxX</b>: resolución máxima en el ejeX (anchura) de la foto que tomará la camara.
+- <b>resolucionMaxY</b>: resolución máxima en el ejeY (altura) de la foto que tomará la camara.
+- <b>pathImagenesBase:</b> path base en el filesystem del SO donde se ubicaran las fotos.
+
+Mas información en su datasheet [aquí](https://www.raspberrypi.org/documentation/hardware/camera/)
 
 ### Proceso Principal
 
@@ -641,9 +652,9 @@ idMision=NOMBREMISION
 
 donde,
 
-- tiempoMuestreo: corresponde al intervalo de tiempo en el que se realizará la acción se sintesis de archivos de datos para construir una linea del archivo de datos sensores.log
-- configuracionTraza: corresponde a la lista de modulos de los cuales se intentará recuperar archivos de datos. El orden de los datos en el archivo sensores.log lo determina el orden de los módulos de esta lista.
-- idMision: Este valor será el string que se adjuntará a cada traza que se envíe. Es muy importante, ya que en caso de que hubiera mas HABs volando a la vez, identifica de forma unequívoca el HAB que emite trazas.
+- <b>tiempoMuestreo</b>: corresponde al intervalo de tiempo en el que se realizará la acción se sintesis de archivos de datos para construir una linea del archivo de datos sensores.log
+- <b>configuracionTraza</b>: corresponde a la lista de modulos de los cuales se intentará recuperar archivos de datos. El orden de los datos en el archivo sensores.log lo determina el orden de los módulos de esta lista.
+- <b>idMision</b>: Este valor será el string que se adjuntará a cada traza que se envíe. Es muy importante, ya que en caso de que hubiera mas HABs volando a la vez, identifica de forma unequívoca el HAB que emite trazas.
 
 ### Servicio de Configuración
 
