@@ -49,6 +49,7 @@ Este sistema permite que, en caso de fallo de alguno de estos sensores, buses u 
 ## Getting Started
 
 Este apartado esta pensado para, sin tener el detalle exacto de todos los componentes y tecnicas que se explican mas adelante, poner en funcionamiento el software de la sonda.
+IMPORTANTE: En este tutorial se asume que se dispone de una raspberry pi zero o equivalente con una versión de raspbian instalada correctamente. Si se esta en este punto, consultar el punto de instalación de raspbian y luego volver a este punto.
 
 Los pasos son:
 
@@ -824,6 +825,58 @@ De las herramientas, las mas específicas serían:
 ### Tecnicas y procedimientos de ensamblado
 
 [TODO]
+
+# Anexos
+
+## Instalación Raspbian.
+
+### Requisitos previos
+
+Para poder instalar raspbian en una raspberry pi zero, 3 o 4, se han de disponer de unos materiales previos mínimos:
+
+- Una targeta microSD de 8Gb como mínimo.
+- Un adaptador para tarjetas microSD a tarjetas SD para portatil
+- Un portatil o ordenador de sobremesa con lector de tarjetas SD o microSD (lo anterior no haria falta si fuera este último el caso)
+- Conexion a internet.
+
+### Proceso de Instalación
+
+Para realizar la instalación se han de seguir los siguientes pasos:
+
+1.- Ir a la página web de [raspbian|https://www.raspberrypi.org/] y descargarse el [PI Imager|https://www.raspberrypi.org/software/] en la sección de software.
+2.- Una vez descargado, instalarlo. 
+3.- Arrancar el programa. Mediante la opción "Operating System" nos permitirá seleccionar el Sistema Operativo que queramos. Seleccionar "Raspberry Pi OS 32"
+4.- Introducir la MicroSD (con o sin el adaptador) en la ranura del PC o portatil.
+5.- En la opción "SD Card" seleccionar la microSD introducida (se deberia presentar como una unidad de disco adicional en el SO).
+6.- Darle a "Write". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la SD.
+7.- Al finalizar, se pide que se extraiga la tarjeta microSD.
+8.- Volver a insertar la tarjeta, esta vez, para copiar dos archivos en el Filesystem que nos aparezca.
+       - Un archivo vacio que se llame, "ssh", tal cual, sin ningun contenido.
+       - Un archivo que lo llamaremos "wpa_supplicant.conf" que tendrá la lista de SSID de las wifis que queramos que la Pi se conecte automaticamente.
+
+Ejemplo de wpa_supplicant.conf:
+
+country=ES
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+network={
+	ssid="micasa"
+	psk="XXXXXXXXXXX"
+}
+
+network={
+	ssid="MOVISTOR_AE27"
+	psk="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+	key_mgmt=WPA-PSK
+}
+
+network={
+	ssid="miOtracasa"
+	psk="XXXXXXXXXXXXXXXXX"
+	key_mgmt=WPA-PSK
+}
+
+9.- Ahora si extraemos la tarjeta y la ponemos en la pi antes de arrancarla
 
 
 
