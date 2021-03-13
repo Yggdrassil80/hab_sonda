@@ -1,11 +1,11 @@
 - [HAB_sonda](#hab-sonda)
-  * [Introducción](#introducci-n)
+  * [Introducción](#introduccion)
   * [Diagrama de Sistemas](#diagrama-de-sistemas)
   * [Getting Started](#getting-started)
   * [Configuraciones Genericas](#configuraciones-genericas)
-    + [Generación de Servicios](#generaci-n-de-servicios)
-    + [Activación I2C en Raspbian](#activaci-n-i2c-en-raspbian)
-    + [Activación Cámara](#activaci-n-c-mara)
+    + [Generación de Servicios](#generacion-de-servicios)
+    + [Activación I2C en Raspbian](#activacion-i2c-en-raspbian)
+    + [Activación Cámara](#activacion-camara)
   * [Componentes](#componentes)
     + [BMP](#bmp)
     + [MPU](#mpu)
@@ -17,9 +17,9 @@
     + [GSM](#gsm)
     + [Camara](#camara)
     + [Proceso Principal](#proceso-principal)
-    + [Servicio de Configuración](#servicio-de-configuraci-n)
+    + [Servicio de Configuración](#servicio-de-configuracion)
   * [Logging](#logging)
-    + [Introducción](#introducci-n-12)
+    + [Introduccion](#introduccion-12)
     + [Tipos de log](#tipos-de-log)
   * [Hardware](#hardware)
     + [Diagrama del Hardware](#diagrama-del-hardware)
@@ -27,10 +27,14 @@
     + [USBs](#usbs)
     + [Listado de componentes](#listado-de-componentes)
     + [Tecnicas y procedimientos de ensamblado](#tecnicas-y-procedimientos-de-ensamblado)
+- [Anexos](#anexos)
+  * [Instalación Raspbian.](#instalacion-raspbian)
+    + [Requisitos previos](#requisitos-previos)
+    + [Proceso de Instalación](#proceso-de-instalacion)
 
 # HAB_sonda
 
-## Introducción
+## Introduccion
 
 Proyecto que recoge el código fuente base de una sonda de tipo HAB basada en Raspbian (Raspberry Pi ,3B o Zero W) y que pueda trabajar con diferentes tipos de sensores (Temperatura, Presión, Camara, Barometros, GPS, Radio Lora, Telemetria por SM, otros), que recupere datos de los mismos y los pueda enviar a una estación terrestre para, como objetivo final, poder ser recuperada y reutilizada.
 
@@ -121,11 +125,11 @@ Esto se puede hacer utilizando el comando:
 mv -rf /data/hab_sonda /data/nombre_nuevo
 ```
 
-9. Configurar y activar los servicios. Ver el punto [Generación de Servicios](#generaci-n-de-servicios)
+9. Configurar y activar los servicios. Ver el punto [Generacion de Servicios](#generaci-n-de-servicios)
 
 ## Configuraciones Genericas
 
-### Generación de Servicios
+### Generacion de Servicios
 
 Como se ha indicado, la idea es que cada componente nuevo que se agrege, se conciba como un servicio que se ejecute en el arranque de la pi en un orden preestablecido y con las dependencias que se desee.
 
@@ -186,7 +190,7 @@ sudo ./{nombre_script}.sh {opciones_si_las_tuviera}
 
 Sobre el archivo services.conf, se encuentra en /data/hav_sonda/utilities y unicamente contiene una linea con el nombre de los servicios separados por un espacio simple. Este archivo determina que servicios se cargaran en el arranque de la pi y el orden en que se desea que arranquen.
 
-### Activación I2C en Raspbian
+### Activacion I2C en Raspbian
 
 El bus I2C permite el mapeo de los componentes que estan conectados al mismo a través de una serie de registros de datos y control. Estos registros son específicos por cada componente, leyendo y escribiendo en estos registros de la forma indicada por cada fabricante es como se controlan.
 
@@ -215,7 +219,7 @@ pi@raspberrypi:/data/hab_sonda/hav $ i2cdetect -y 1
 70: -- -- -- -- -- -- -- --
 ```
 
-### Activación Cámara
+### Activacion Camara
 
 Si se desea utilizar la camara de la raspberry pi que estaría conectada a través del puerto SPI de la pi será preciso antes habilitarla.
 
@@ -328,7 +332,7 @@ Más información en su datasheet [aquí](https://components101.com/processors/m
 
 ### GPS
 
-#### Introducción
+#### Introduccion
 
 El GPS, permite determinar la ubicación exacta de la sonda. Su presencia y buen funcionamiento es capital para la recuperación de la misma.
 
@@ -380,7 +384,7 @@ Más información en su datasheet [aquí](https://www.u-blox.com/sites/default/f
 
 ### RF
 
-#### Introducción
+#### Introduccion
 
 El modulo de RF que se utilizará es un ebyte E32-TTL-100 que esta basado en la tecnologia LoRa (Long Range) del chip SX1278 de Semtech.
 
@@ -657,7 +661,7 @@ donde,
 - <b>configuracionTraza</b>: corresponde a la lista de modulos de los cuales se intentará recuperar archivos de datos. El orden de los datos en el archivo sensores.log lo determina el orden de los módulos de esta lista.
 - <b>idMision</b>: Este valor será el string que se adjuntará a cada traza que se envíe. Es muy importante, ya que en caso de que hubiera mas HABs volando a la vez, identifica de forma unequívoca el HAB que emite trazas.
 
-### Servicio de Configuración
+### Servicio de Configuracion
 
 #### Introducción
 
@@ -828,7 +832,7 @@ De las herramientas, las mas específicas serían:
 
 # Anexos
 
-## Instalación Raspbian.
+## Instalacion Raspbian.
 
 ### Requisitos previos
 
@@ -839,44 +843,44 @@ Para poder instalar raspbian en una raspberry pi zero, 3 o 4, se han de disponer
 - Un portatil o ordenador de sobremesa con lector de tarjetas SD o microSD (lo anterior no haria falta si fuera este último el caso)
 - Conexion a internet.
 
-### Proceso de Instalación
+### Proceso de Instalacion
 
 Para realizar la instalación se han de seguir los siguientes pasos:
 
-1.- Ir a la página web de [raspbian|https://www.raspberrypi.org/] y descargarse el [PI Imager|https://www.raspberrypi.org/software/] en la sección de software.
-2.- Una vez descargado, instalarlo. 
-3.- Arrancar el programa. Mediante la opción "Operating System" nos permitirá seleccionar el Sistema Operativo que queramos. Seleccionar "Raspberry Pi OS 32"
-4.- Introducir la MicroSD (con o sin el adaptador) en la ranura del PC o portatil.
-5.- En la opción "SD Card" seleccionar la microSD introducida (se deberia presentar como una unidad de disco adicional en el SO).
-6.- Darle a "Write". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la SD.
-7.- Al finalizar, se pide que se extraiga la tarjeta microSD.
-8.- Volver a insertar la tarjeta, esta vez, para copiar dos archivos en el Filesystem que nos aparezca.
+- Ir a la página web de [raspbian|https://www.raspberrypi.org/] y descargarse el [PI Imager|https://www.raspberrypi.org/software/] en la sección de software.
+- Una vez descargado, instalarlo. 
+- Arrancar el programa. Mediante la opción "Operating System" nos permitirá seleccionar el Sistema Operativo que queramos. Seleccionar "Raspberry Pi OS 32"
+- Introducir la MicroSD (con o sin el adaptador) en la ranura del PC o portatil.
+- En la opción "SD Card" seleccionar la microSD introducida (se deberia presentar como una unidad de disco adicional en el SO).
+- Darle a "Write". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la SD.
+- Al finalizar, se pide que se extraiga la tarjeta microSD.
+- Volver a insertar la tarjeta, esta vez, para copiar dos archivos en el Filesystem que nos aparezca.
        - Un archivo vacio que se llame, "ssh", tal cual, sin ningun contenido.
        - Un archivo que lo llamaremos "wpa_supplicant.conf" que tendrá la lista de SSID de las wifis que queramos que la Pi se conecte automaticamente.
 
 Ejemplo de wpa_supplicant.conf:
 
-country=ES
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-network={
-	ssid="micasa"
-	psk="XXXXXXXXXXX"
-}
+country=ES</br>
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</br>
+update_config=1</br>
+network={</br>
+	ssid="micasa"</br>
+	psk="XXXXXXXXXXX"</br>
+}</br>
 
-network={
-	ssid="MOVISTOR_AE27"
-	psk="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-	key_mgmt=WPA-PSK
-}
+network={</br>
+	ssid="MOVISTOR_AE27"</br>
+	psk="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"</br>
+	key_mgmt=WPA-PSK</br>
+}</br>
 
-network={
-	ssid="miOtracasa"
-	psk="XXXXXXXXXXXXXXXXX"
-	key_mgmt=WPA-PSK
-}
+network={</br>
+	ssid="miOtracasa"</br>
+	psk="XXXXXXXXXXXXXXXXX"</br>
+	key_mgmt=WPA-PSK</br>
+}</br>
 
-9.- Ahora si extraemos la tarjeta y la ponemos en la pi antes de arrancarla
+9.- Ahora si extraemos la tarjeta y la ponemos en la pi antes de arrancarla</br>
 
 
 
