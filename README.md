@@ -125,7 +125,7 @@ Esto se puede hacer utilizando el comando:
 mv -rf /data/hab_sonda /data/nombre_nuevo
 ```
 
-9. Configurar y activar los servicios. Ver el punto [Generacion de Servicios](#generaci-n-de-servicios)
+9. Configurar y activar los servicios. Ver el punto [Generacion de Servicios](#generacion-de-servicios)
 
 ## Configuraciones Genericas
 
@@ -417,7 +417,7 @@ Los siguientes parámetros de configuración de LoRa son los que corresponden a 
  - SF: Spread Factor
  - CR: Coding Rate
 
-La frecuencia central se encuentra en los 433 Mhz.
+La frecuencia central se encuentra en los 433 Mhz. Si se desea cambiar la frecuencia de operación se puede consultar como hacerlo en el siguiente enlace del Anexo.
 
 No se tiene información sobre que sync_word o que longitud de preambulo se esta usando.
 
