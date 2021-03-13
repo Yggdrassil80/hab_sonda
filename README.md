@@ -417,7 +417,7 @@ Los siguientes parámetros de configuración de LoRa son los que corresponden a 
  - SF: Spread Factor
  - CR: Coding Rate
 
-La frecuencia central se encuentra en los 433 Mhz. Si se desea cambiar la frecuencia de operación se puede consultar como hacerlo en el siguiente enlace del Anexo.
+La frecuencia central se encuentra en los 433 Mhz. Si se desea cambiar la frecuencia de operación se puede consultar como hacerlo en el siguiente enlace del [Anexo](#Cambio-frecuencias).
 
 No se tiene información sobre que sync_word o que longitud de preambulo se esta usando.
 
