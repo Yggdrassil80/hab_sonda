@@ -32,9 +32,11 @@ formatterInformer = logging.Formatter('[%(asctime)s][%(levelname)s][%(message)s]
 inf.setFormatter(formatterInformer)
 loggerLog.addHandler(inf)
 
-#Metodo que crea la traza base que se escribira en FS
+#Metodo que crea la traza base que se escribira en FS. El return comentado es para evitar enviar la fecha y hora GPS
 def creacionTraza(gpsData):
-    return "|" + str(gpsData[0].split(".")[0]) + "|" + str(round(gpsData[1],4)) + "," + str(round(gpsData[2],4)) + "|" + str(gpsData[3]) + "|" + str(gpsData[4]) + "|" + str(round(gpsData[5],4)) + "|"
+    return "|" + str(gpsData[0].split(".")[0]) + "|" + str(round(gpsData[1],4)) + "," + str(round(gpsData[2],4)) + "|" + str(round(gpsData[5],4)) + "|"
+    
+    #return "|" + str(gpsData[0].split(".")[0]) + "|" + str(round(gpsData[1],4)) + "," + str(round(gpsData[2],4)) + "|" + str(gpsData[3]) + "|" + str(gpsData[4]) + "|" + str(round(gpsData[5],4)) + "|"
 
 #################################################################################
 #	Inicio Aplicacion #
