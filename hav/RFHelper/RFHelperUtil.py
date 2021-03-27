@@ -42,7 +42,7 @@ def putUltimoDatoRF(usbPort, archivoDatos):
             #print ('Datos leidos: ' + lastLine)
             loggerLog.debug("[RFHelper][putUltimoDatoRF] Datos leidos");
             f.close()
-            loggerlog.debug("[RFHelper][putUltimoDatoRF] Archivo cerrado");
+            loggerLog.debug("[RFHelper][putUltimoDatoRF] Archivo cerrado");
 
             #Enviar byte a byte por RF
             for dato in lastLine:
