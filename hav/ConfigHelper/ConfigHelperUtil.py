@@ -301,3 +301,24 @@ def getIDMision():
         #loggerLog.error("[ConfigHelper][getIDMision] ERROR");
         return "HABCAT00"
 
+#Metodo que informa sobre el estado de activacion del sensor de temperatura DS18B20(dallas)
+def isDallasActivo():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("dallas", "dallas_activo")
+        return int(t)
+    except:
+        return "valor vacio"
+
+#Metodo que recupera el tiempo maximo de espera entre tomas de temperatura del sensor DS18B20(dallas)
+def getTiempoMuestreoDallas():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("dallas", "tiempoTrazaDallas")
+        return int(t)
+    except:
+        return int(60)
+
+

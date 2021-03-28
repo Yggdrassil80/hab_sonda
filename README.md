@@ -14,6 +14,7 @@
     + [UV](#uv)
     + [INA3221](#ina3221)
     + [INA219](#ina219)
+    + [DS18B20](#ds18b20)
     + [GSM](#gsm)
     + [Camara](#camara)
     + [Proceso Principal](#proceso-principal)
@@ -73,6 +74,7 @@ Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#act
    * picamera
    * lib2
    * adafruit-circuitpython-ina219
+   * W1ThermSensor
    * ...
    
 y la forma de instalarlas es mediante la instrucción
@@ -544,6 +546,23 @@ donde,
 Para poder utilizarlo es necesario descargar la libreria de ADAfruit correspondiente mediante la instrucción.
 
 sudo pip3 install adafruit-circuitpython-ina219
+
+### DS18B20
+
+#### Introducción
+
+El DS18B20 es un sensor de temperatura muy utilizado para soluciones con arduino y raspberry. Tiene un rango operativo de -55 a 125 grados celsius. Dispone de varios tipos de encapsulado pero el mas recomendado para medir temperaturas externas en un HAB seria el que viene con un recubrimiento hermético.
+
+#### Conexión
+
+Es muy sencilla, dispone de 3 pines, el GND y VDD que han de ir conectados a Ground y VDD (3.3v) en la raspberry. Dispone de un pin adicional de datos que por defecto siempre será el <b>GPIO4</b>. El único requisito es que se deberá configurar la interfaz "1-wire" de raspberry (procedimiento análogo a la activación del I2C, pero seleccionando 1-wire).
+
+#### Configuración
+
+Como el resto de componentes, dispone de un servicio propio denominado "dallas.service" que se configura igual que el resto de servicios disponibles. Dispone de 3 parámetros de configuración:
+
+- <b>tiempoMuestreoDallas:</b> que informa sobre el tiempo entre muestra y muestra que se esperar el time interno del servicio para leer el sensor y escribir los datos de temperatura leídos en un archivo de datos temporal.
+- <b>dallas_activo:</b> 0 o 1 indicando si el módulo esta activo o no.
 
 ### GSM
 
