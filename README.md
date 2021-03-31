@@ -29,6 +29,7 @@
     + [Listado de componentes](#listado-de-componentes)
     + [Tecnicas y procedimientos de ensamblado](#tecnicas-y-procedimientos-de-ensamblado)
 - [Anexos](#anexos)
+  * [Cambio frecuencias lora](Cambio-frecuencias-lora)
   * [Instalación Raspbian.](#instalacion-raspbian)
     + [Requisitos previos](#requisitos-previos)
     + [Proceso de Instalación](#proceso-de-instalacion)
@@ -867,7 +868,7 @@ La configuración se propone efectuarla utilizando el software propio de ebyte. 
 
 <b>IMPORTANTE</b>: Estos software corren solo en SO windows. 
 
-- RF-Setting: La ultima versión compatible con los E32-ttl-100 es [esta] (https://www.ebyte.com/en/pdf-down.aspx?id=1741). Aunque se pueden buscar otras variantes de este software [aqui](https://www.ebyte.com/en/data-download.html?page=2&id=37&cid=31#load)
+- RF-Setting: La ultima versión compatible con los E32-ttl-100 es [esta](https://www.ebyte.com/en/pdf-down.aspx?id=1741). Aunque se pueden buscar otras variantes de este software [aqui](https://www.ebyte.com/en/data-download.html?page=2&id=37&cid=31#load)
 - Access Port: La versión compatible con el E32-ttl-100 es [esta](https://www.ebyte.com/en/pdf-down.aspx?id=204)
 
 Además será necesario disponer de un componente de conversión de puerto serie a USB <b>Cp2102</b> y los drivers para windows de este, que se pueden descargar desde [aqui](https://www.silabs.com/documents/public/software/CP210x_Universal_Windows_Driver.zip) 
@@ -876,7 +877,7 @@ Además será necesario disponer de un componente de conversión de puerto serie
 
 Adicionalmente, se deberán crear un cableado especial que permimta pasar 0V al M0 y al M1, y 5V al M0 y al M1 para su configuración.
 
-![ConectorConfiguracionEbyte](/doc/img/conector-circuito.jpg)
+![ConectorConfiguracionEbyte](/doc/img/Conector_ebyte_config.jpg)
 
 ### Esquema electrico
 
@@ -886,13 +887,13 @@ Para poder configurar el chip será necesario realizar dos cableados diferentes,
 
 El esquema de configuración es el que sigue:
 
-![CableadoConfiguracionEbyte](/doc/img/cableadoConfiguración.PNG)
+![CableadoConfiguracionEbyte](/doc/img/CableadoConfiguracion.PNG)
 
 #### Cableado de Operación
 
 El esquema de Operación es el que sigue:
 
-![CableadoOperacionEbyte](/doc/img/cableadoOperacion.PNG)
+![CableadoOperacionEbyte](/doc/img/CableadoOperacion.PNG)
 
 ### Configuracion Lora
 
