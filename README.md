@@ -419,7 +419,7 @@ Los siguientes parámetros de configuración de LoRa son los que corresponden a 
  - SF: Spread Factor
  - CR: Coding Rate
 
-La frecuencia central se encuentra en los 433 Mhz. Si se desea cambiar la frecuencia de operación se puede consultar como hacerlo en el siguiente enlace del [Anexo](#Cambio-frecuencias).
+La frecuencia central se encuentra en los 433 Mhz. Si se desea cambiar la frecuencia de operación se puede consultar como hacerlo en el siguiente enlace del [Anexo](#Cambio-frecuencias-lora).
 
 No se tiene información sobre que sync_word o que longitud de preambulo se esta usando.
 
@@ -850,6 +850,67 @@ De las herramientas, las mas específicas serían:
 [TODO]
 
 # Anexos
+
+## Cambio frecuencias lora
+
+### Introduccion
+
+Uno de los principales problemas con los chips de Ebyte es la configuración de los parámetros internos del chip. Para poder alterar la configuración es necesario que los pins M0 y M1 estén seteados ambos a 1 (5V). Esto es un problema para con raspberry, ya que los GPIO solo son capaces de ofrecer un 1 lógico (TTL) a 3.3V.
+
+Esto inabilita de por si una configuración por software límpia, por lo que hay que implementar un mecanismo alternativo para poder configurar el chip.
+
+Dicho mecanismo alternativo se basará en crear un cableado especial que permita pasar 5V a los pines M0 y M1 de forma puntual, realizar su configuración y guarda en la EPROM del chip y luego, volver a dejarlos en M0 y M1 = 0 (GND) para poder operar con ellos con normalidad.
+
+### Requisitos previos
+
+La configuración se propone efectuarla utilizando el software propio de ebyte. Existen dos utilidades para poder trabajar con los ebytes:
+
+<b>IMPORTANTE</b>: Estos software corren solo en SO windows. 
+
+- RF-Setting: La ultima versión compatible con los E32-ttl-100 es [esta] (https://www.ebyte.com/en/pdf-down.aspx?id=1741). Aunque se pueden buscar otras variantes de este software [aqui](https://www.ebyte.com/en/data-download.html?page=2&id=37&cid=31#load)
+- Access Port: La versión compatible con el E32-ttl-100 es [esta](https://www.ebyte.com/en/pdf-down.aspx?id=204)
+
+Además será necesario disponer de un componente de conversión de puerto serie a USB <b>Cp2102</b> y los drivers para windows de este, que se pueden descargar desde [aqui](https://www.silabs.com/documents/public/software/CP210x_Universal_Windows_Driver.zip) 
+
+<b>NOTA</b>: En la misma web se pueden encontrar los de unix y mac, aunque no han sido testados en este tutorial.
+
+Adicionalmente, se deberán crear un cableado especial que permimta pasar 0V al M0 y al M1, y 5V al M0 y al M1 para su configuración.
+
+![ConectorConfiguracionEbyte](/doc/img/conector-circuito.jpg)
+
+### Esquema electrico
+
+Para poder configurar el chip será necesario realizar dos cableados diferentes, uno para configurarlo y otro para dejarlo en modo de transmisión, se denominarán de ahora en adelante <b>Cableado Configuración</b> y <b>Cableado de Operación</b> respectivamente.
+
+#### Cableado de Configuración
+
+El esquema de configuración es el que sigue:
+
+![CableadoConfiguracionEbyte](/doc/img/cableadoConfiguración.PNG)
+
+#### Cableado de Operación
+
+El esquema de Operación es el que sigue:
+
+![CableadoOperacionEbyte](/doc/img/cableadoOperacion.PNG)
+
+### Configuracion Lora
+
+Habiendo dispuesto todos los requisitos anteriores, la configuración del chip de Ebyte se efectuaria siguiendo los pasos siguientes:
+
+- Instalar los drivers del CP2012
+- Soldar el cableado especial, ver foto anterior.
+- Conectar el cable especial con el CP2012 y el chip de lora en la configuración <b>Cableado de Configuración</b>
+- Arrancar el software <b>RF Settings</b>
+- Conectar el CP2012 a un terminal USB del PC.
+- En el RF Settings, seleccionar el idioma ingles.
+- Averiguar el puerto COM donde se ha instalado el CP2012. El propio RF Settings muestra solo los COMs disponibles, se puede hacer por ensayo prueba y error o bien ir directamente a administración de dispositivos del windows y consultar que COMs hay conectados, el que nos interesa es uno que describe al CP2012.
+- Una vez detectado el COM donde esta el ebyte, seleccionar OpenPort
+![OpenPort](/doc/img/RFSettings1.PNG)
+- Posteriormente, pulsar "GetParams"
+![GetParams](/doc/img/RFSettings2.PNG)
+![GetParams](/doc/img/RFSettings3.PNG)
+- Tras un popup informando que los parámetros han sido recuperados, estos aparecen por pantalla.
 
 ## Instalacion Raspbian.
 
