@@ -913,6 +913,28 @@ Habiendo dispuesto todos los requisitos anteriores, la configuración del chip d
 ![GetParams](/doc/img/RFSettings3.PNG)
 - Tras un popup informando que los parámetros han sido recuperados, estos aparecen por pantalla.
 
+Llegado este punto, este tutorial solo se quedará en la modificación de la frecuencia central del chip. Pero existen multiples configuraciones adicionales que se podrian hacer. Sobre esto último, hay mas detalle [aquí](https://www.teachmemicro.com/e32-ttl-100-sx1278-lora-module/)
+
+El único parámetro que interesa cambiar es la frecuencia central, por defecto, el chip esta centrado en 433Mhz, que en Hexadecial corresponde al valor 0x17 y en decimal, al 23. Es este último valor el que podemos cambiar a un número entre 0 y 39, que son las frecuencias centrales disponibles para este módulo. Estas irian de los 410Mhz (0) a los 441Mhz(39)
+
+Se recomienda no moverse mucho de los 433Mhz por temas legales relativos al uso del espectro radio-electrico de esta banda, por lo que simplemente con indicar 22, 23 o 24 será suficiente.
+
+- A continuación, pulsar el boton "set param" y "close port". Esto dejará en EPROM del Chip la configuración del canal central que deseemos.
+- Como paso final, cambiar la configuración de cableado al <b>Cableado de Operacion</b>, de este modo el chip podrá empezar a trabajar en formato RX/TX.
+
+<b>IMPORTANTE</b>: Este proceso se ha de repetir dos veces como mínimo!, N veces para el/los chips de la/s antena/s y otro para el chip que irá en el HAB.
+
+### Verificación
+
+Adicionalmente, se puede utilizar la tool "Access Port" para comprobar que los chips funcionan correctamente con su nueva configuración. Para hacer esto, realizar el siguiente procedimiento:
+
+- Se requieren dos chips cp2012 y dos ebyte E32-ttl-100 debidamente configurados y conectados en <b>Cableado de Operacion</b>
+- Una vez así, conectarlos cada uno a un puerto USB diferente del PC.
+- Arrancar dos instancias diferentes de "Access Port". 
+- Configurar cada una con un COM asociado a cada CP2012 (averiguar el COM mirando el administrador de dispositivos)
+- A través de la interfaz grafica, escribir lo que se desee (texto cualesquiera) y observar que este aparece en la otra instancia de "Access Port" tal cual.
+- Verificar el procedimiento a la inversa, escribiendo desde la otra instancia y viendo que es recibido el texto desde la primera.
+
 ## Instalacion Raspbian.
 
 ### Requisitos previos
