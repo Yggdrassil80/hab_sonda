@@ -400,7 +400,7 @@ El módulo seleccionado permite de ebyte viene ya preconfigurado. Se conecta a l
 
 Dispone además de dos pines de configuración, M0 y M1 que, para que pueda funcionar en modo recepción y emisión han de estar a 0V (ojo, no en Z). Osea, conectados al GND de la PI.
 
-Para poder configurar los parametros internos del chip M0 y M1 han de configurarse ambos a 1 lógico (3.3 o 5 V).
+Para poder configurar los parametros internos del chip M0 y M1 han de configurarse ambos a 1 lógico (5 V).
 
 Toda la configuración los parametros de LoRa del chip se basa en el parametro de airrate que viene a ser el ancho de banda con el que transmite el chip.
 
