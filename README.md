@@ -154,7 +154,7 @@ After=multi-user.target
 
 [Service]
 Type=idle
-ExecStart=/usr/bin/python /[path_hubicación_proceso_python_arranque_servicio]/[nombre_servicio].py
+ExecStart=/usr/bin/python3 /[path_hubicación_proceso_python_arranque_servicio]/[nombre_servicio].py
 Restart=always
 RestartSec=0
 
@@ -274,7 +274,7 @@ Para conseguir unas medidas de temperatura y presión lo mas correctas posibles,
 
 Existen dentro del código del módulo del BMP280 que se puede encontrar en hav/BMP280/BMP280.py hay un par de métodos que se pueden utilizar para este menester, el compensate_temperature y el compensate_pressure.
 
-#### Configuracíón
+#### Configuración
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
@@ -616,7 +616,7 @@ donde,
 
 #### Introducción
 
-Este punto hace referencia explicitamente a la Pi cam, o la camara que puede conectarse directamente a la PI por CSI.
+Este punto hace referencia explicitamente a la Pi cam, o la camara que puede conectarse directamente a la PI por CSI. Actualmente el módulo da soporte para poder operar con la camara infraroja PiNoIR de raspberry.
 
 #### Descripción
 
@@ -627,6 +627,14 @@ Ejecutar:
 ```
 sudo pip install picamera
 ```
+
+##### NDVI
+
+El módulo de cámara permite poder tomar imágenes modificando el balance de rojos y azules para poder procesar las imágenes tomadas a posteriori con procesamientos de tipo NDVI. Se han definido 4 propiedades adicionales que permiten la configuración. Se detallan en la sección siguiente.
+
+Adicionalmente se ofrece una pequeña utilidad dentro del directorio /utilities/ndvi que permite el procesamiento de todas las imagenes almacenadas en el directorio de imagenes, por defecto (/data/hab_sonda/images) y las almacena procesadas en /data/hab_sonda/utilities/ndvi/ndvi.
+
+El detalle de su funcionamiento se puede encontrar en el Anexo [ndvi](ndvi)
 
 #### Configuración
 
@@ -640,6 +648,10 @@ resolucionRFY=240
 resolucionMaxX=1920
 resolucionMaxY=1080
 pathImagenesBase=/data/hab_sonda/images/
+ndviProcessingActive=1
+ndviBasePath=/data/hab_sonda/utilities/ndvi
+redAWB=2.26
+blueAWB=0.74
 
 donde,
 
@@ -651,6 +663,10 @@ donde,
 - <b>resolucionMaxX</b>: resolución máxima en el ejeX (anchura) de la foto que tomará la camara.
 - <b>resolucionMaxY</b>: resolución máxima en el ejeY (altura) de la foto que tomará la camara.
 - <b>pathImagenesBase:</b> path base en el filesystem del SO donde se ubicaran las fotos.
+- <b>ndviProcessingActive:</b> informa si se tendran en cuenta o no las configuraciones para la toma de imágenes compatibles con el procesamiento NDVI
+- <b>ndviBasePath:</b> path base donde se encuentra la utilidad para el procesamiento de los calculos NDVI
+- <b>redAWB:</b> Configuración de cámara para balance de rojos
+- <b>blueAWB:</b> Configuración de cámara para el balance de azules
 
 Mas información en su datasheet [aquí](https://www.raspberrypi.org/documentation/hardware/camera/)
 
@@ -991,6 +1007,55 @@ network={</br>
 }</br>
 
 9.- Ahora si extraemos la tarjeta y la ponemos en la pi antes de arrancarla</br>
+
+## ndvi
+
+### Introducción
+
+Toda la información sobre esta técnica se puede obtener [aquí](https://publiclab.org/wiki/ndvi), el ejemplo concreto en el que se baso el código adaptado de esta tool es [este](https://publiclab.org/notes/petter_mansson1/04-09-2019/low-cost-ndvi-analysis-using-raspberrypi-and-pinoir)
+
+### Herramientas
+
+Se ha creado una pequeña utilidad que permite que, imagenes capturadas con la configuración de la cámara compatible con NDVI, puedan ser procesadas a posteriori.
+
+<b>IMPORTANTE:</b> La utilidad se ha creado a partir del código de GITHUB de la entrada de ejemplo anterior, que es [esta](https://github.com/PiddePannkauga/ndviMachine)
+
+El código se ejecuta en <b>python2</b> no en python3, como el resto del código de este repositorio.
+
+El código tiene una dependencia externa que hay que cargarla para que funcione correctamente:
+
+```
+sudo apt-get install python-matplotlib
+```
+
+### Funcionamiento
+
+El procedimiento para hacer funcionar la tool es el siguiente:
+
+1.- Se asume que dentro del directorio /data/hav_sonda/images se encontraran todas las imágenes tomadas por la cámara con la configuración NDVI aplicada.
+2.- Ejecutar la siguiente instrucción:
+
+```
+cd /data/hab_sonda/utilities/ndvi
+python mainNDVI.py
+```
+
+3.- Si ha funcionado correctamente, el procesamiento informará logs de este tipo en la salida del comando:
+
+```
+[ndviProcess] Arrancando Procesamiento de imagenes por NDVI...:
+[ndviProcess] NDVIWorkspacePath: /data/hab_sonda/utilities/ndvi
+[ndviProcess] imageBasePath: /data/hab_sonda/images
+[ndviProcess] Procesando imagen: 21-04-18-15-46-14-HD.png ...
+[imgNDVIProcess] image: /data/hab_sonda/images/21-04-18-15-46-14-HD.png
+[imgNDVIProcess] processedImgFilename: /data/hab_sonda/images
+[imgNDVIProcess] imageOutPath: /data/hab_sonda/utilities/ndvi/ndvi/ndvi_21-04-18-15-46-14-HD.png
+[ndviProcess] Todas las imagenes procesadas OK!
+```
+
+4.- Finalmente, las imágenes transformadas podrán encontrarse dentro del directorio /data/hab_sonda/utilities/ndvi/ndvi.
+
+![ndvi_processed](/doc/img/ndvi_processed.PNG)
 
 
 
