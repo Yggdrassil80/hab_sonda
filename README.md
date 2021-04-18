@@ -40,6 +40,7 @@
   * [Instalación Raspbian.](#instalacion-raspbian)
     + [Requisitos previos](#requisitos-previos)
     + [Proceso de Instalación](#proceso-de-instalacion)
+  * [ndvi](#ndvi)
 
 # HAB_sonda
 
@@ -1010,7 +1011,7 @@ network={</br>
 
 ## ndvi
 
-### Introducción
+### Introduccion
 
 Toda la información sobre esta técnica se puede obtener [aquí](https://publiclab.org/wiki/ndvi), el ejemplo concreto en el que se baso el código adaptado de esta tool es [este](https://publiclab.org/notes/petter_mansson1/04-09-2019/low-cost-ndvi-analysis-using-raspberrypi-and-pinoir)
 
