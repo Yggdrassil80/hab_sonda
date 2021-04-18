@@ -18,12 +18,17 @@ from picamera import PiCamera
 
 #Metodo que toma una imagen con una resolucion concreta, con un tiempo de exposicion concreto
 # con un tipo (RF o HD) concreto y con un formato concreto.
-def tomarImagen(res, baseImagePath, tiempoEspera, tipo, formato):
+def tomarImagen(res, baseImagePath, tiempoEspera, tipo, formato, ndviActive, redAWB, blueAWB):
 
     try:
         #loggerLog1.info("[Camara][tomarImagen] Inicio");
         camera = PiCamera()
         #loggerLog1.info("[Camara][tomarImagen] PiCamera inicializado");
+        if (ndviActive==1):
+             customGains = (redAWB, blueAWB)
+             camera.awb_mode = "off"
+             camera.awb_gains = customGains
+
         camera.resolution = (int(res[0]), int(res[1]))
         #loggerlog1.info("[Camara][tomarImagen] Resolucion definida: " + res[0] + "x" + res[1]);
         camera.start_preview()

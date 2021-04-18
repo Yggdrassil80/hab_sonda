@@ -321,4 +321,42 @@ def getTiempoMuestreoDallas():
     except:
         return int(60)
 
+#Metodo que informa si la configuracion para el procesamiento NDVI de las imagenes esta activa o no
+def isNDVIConfigurationActivo():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("Camara", "ndviProcessingActive")
+        return int(t)
+    except:
+        return "valor vacio"
 
+#Metodo que informa el path base donde se escribiran las imagenes ndvi despues de su procesamiento
+def getNDVIBasePath():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        pathBase = cfg.get("Camara", "ndviBasePath")
+        return pathBase
+    except:
+        return "/data/hab_sonda/utilities/ndvi"
+
+#Metodo que devuelve el balance de rojos de la camara para su configuracion compatible con el procesamiento ndvi
+def getRedAWB():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        red = cfg.get("Camara", "redAWB")
+        return float(red)
+    except:
+        return float(1)
+
+#Metodo que devuelve el balance de azules de la camara para su configuracion compatible con el procesamieento ndvi
+def getBlueAWB():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        blue = cfg.get("Camara", "blueAWB")
+        return float(blue)
+    except:
+        return float(1)

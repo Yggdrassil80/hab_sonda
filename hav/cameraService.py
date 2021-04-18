@@ -28,6 +28,12 @@ basePathImage = ConfigHelper.getPathImagenesBase()
 loggerLog.info("[CameraService][Conf] basePathImage: " + str(basePathImage))
 tiempoTomaImagen = ConfigHelper.getTiempoTomaImagen()
 loggerLog.info("[CameraService][Conf] tiempoTomaImagen: " + str(tiempoTomaImagen))
+ndviActive=ConfigHelper.isNDVIConfigurationActivo()
+loggerLog.info("[CameraService][Conf] ndviActive: " + str(ndviActive))
+redAWB=ConfigHelper.getRedAWB()
+loggerLog.info("[CameraService][Conf] redAWB: " + str(redAWB))
+blueAWB=ConfigHelper.getBlueAWB()
+loggerLog.info("[CameraService][Conf] blueAWB: " + str(blueAWB))
 
 if act == 1:
 
@@ -36,7 +42,7 @@ if act == 1:
             #INICIO: Espacio para recuperar los datos del sensor a partir de la libreria
             loggerLog.info("[CameraService][Main] Inicio de toma de imagen de camara interna...")
             #Toma imagen de alta resolucion para despues
-            nombreImagen = Camara.tomarImagen(resolucionMax, basePathImage, int(5), "HD", "png")
+            nombreImagen = Camara.tomarImagen(resolucionMax, basePathImage, int(5), "HD", "png", ndviActive, redAWB, blueAWB)
             loggerLog.info("[cameraService][Main] Imagen tomada OK")
             #Toma Image de baja resolucion para su envio
             #nombreImagen = Camara.tomarImagen(gpsData, resolucionRF, basePathImage, int(3), "RF", "jpeg")
