@@ -629,13 +629,13 @@ Ejecutar:
 sudo pip install picamera
 ```
 
-##### NDVI
+##### Sobre NDVI
 
 El módulo de cámara permite poder tomar imágenes modificando el balance de rojos y azules para poder procesar las imágenes tomadas a posteriori con procesamientos de tipo NDVI. Se han definido 4 propiedades adicionales que permiten la configuración. Se detallan en la sección siguiente.
 
 Adicionalmente se ofrece una pequeña utilidad dentro del directorio /utilities/ndvi que permite el procesamiento de todas las imagenes almacenadas en el directorio de imagenes, por defecto (/data/hab_sonda/images) y las almacena procesadas en /data/hab_sonda/utilities/ndvi/ndvi.
 
-El detalle de su funcionamiento se puede encontrar en el Anexo [ndvi](ndvi)
+El detalle de su funcionamiento se puede encontrar en el Anexo [ndvi](#ndvi)
 
 #### Configuración
 
