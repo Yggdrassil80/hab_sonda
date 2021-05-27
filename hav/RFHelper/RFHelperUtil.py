@@ -49,7 +49,7 @@ def putUltimoDatoRF(usbPort, archivoDatos):
                 loggerLog.debug("[RFHelper][putUltimoDatoRF] Inicio envio datos...");
                 bytesEscritos = puertoUSB.write(dato.encode())
                 loggerLog.debug("[RFHelper][putUltimoDatoRF] Dato enviado!");
-                time.sleep(0.05)
+                time.sleep(0.2)
 
                 #print ('Datos enviados: ' + str(dato))
 
