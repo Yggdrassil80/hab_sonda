@@ -76,7 +76,7 @@ sudo apt get update
 2. Conectar todos los sistemas periféricos (camara, sensores, etc.)
 
 3. Activar el bus I2C. 
-Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#activaci-n-i2c-en-raspbian)
+Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#activacion-i2c-en-raspbian)
 
 4. Instalar librerias de Python3 de apoyo. Las librerias de python necesarias son las siguientes:
    * image
@@ -257,9 +257,9 @@ El módulo BMP testado es el BMP280. Básicamente se trata de un sensor de presi
 #### Descripción
 
 Las funcionalidades de este sensor lo hacen especialmente interesante:
-- Presión: Ofrece datos de presión atmosferica a nivel del mar en Pa (Pascales).
-- Temperatura: Temperaturas en ºC
-- Altura Barométrica: En base a la presión y la temperatura, dispone de modelos atmosféricos primitivos pero relativamente precesios de la altura a la que se encuentra el sensor. La altura es en metros.
+* Presión: Ofrece datos de presión atmosferica a nivel del mar en Pa (Pascales).
+* Temperatura: Temperaturas en ºC
+* Altura Barométrica: En base a la presión y la temperatura, dispone de modelos atmosféricos primitivos pero relativamente precesios de la altura a la que se encuentra el sensor. La altura es en metros.
 
 Puede utilizarse para medir temperaturas externas o internas de la sonda, depende donde se ubique.
 
@@ -279,8 +279,11 @@ Existen dentro del código del módulo del BMP280 que se puede encontrar en hav/
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
+<code>
 bmp_activo=1
+
 tiempoMuestreoBMP=10
+</code>
 
 donde,
 
@@ -331,9 +334,11 @@ No se tratará en este proyecto.
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
+<code>
 mpu_activo=1
+	
 tiempoMuestreoMPU=11
-
+</code>
 donde,
 
 - <b>mpu_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
@@ -383,8 +388,11 @@ Otras configuraciones adicionales son aplicadas también, como el filtrado de pa
 
 Adicionalmente, también existen configuraciones estáticas en el archivo conf/hav.conf
 
+<code>
 usbGPS=/dev/ttyUSB0
+
 tiempoMuestreoGPS=10
+</code>
 
 donde,
 
@@ -415,18 +423,18 @@ Toda la configuración los parametros de LoRa del chip se basa en el parametro d
 
 Los siguientes parámetros de configuración de LoRa son los que corresponden a cada airRate.
 
- - 0.3 Kbps, BW:125Mhz, SF: 12, CR: 4/5
- - 1.2 Kbps, BW:250Mhz, SF: 11, CR: 4/5
- - 2.4 Kbps, BW:500Mhz, SF: 12, CR: 4/5
- - 4.8 Kbps, BW:250Mhz, SF: 8, CR: 4/6
- - 9.6 Kbps, BW:500Mhz, SF: 8, CR: 4/6
- - 19.2 Kbps, BW:500Mhz, SF: 7, CR: 4/6
+ * 0.3 Kbps, BW:125Mhz, SF: 12, CR: 4/5
+ * 1.2 Kbps, BW:250Mhz, SF: 11, CR: 4/5
+ * 2.4 Kbps, BW:500Mhz, SF: 12, CR: 4/5
+ * 4.8 Kbps, BW:250Mhz, SF: 8, CR: 4/6
+ * 9.6 Kbps, BW:500Mhz, SF: 8, CR: 4/6
+ * 19.2 Kbps, BW:500Mhz, SF: 7, CR: 4/6
 
  donde,
 
- - BW: Significa BandWith
- - SF: Spread Factor
- - CR: Coding Rate
+ * BW: Significa BandWith
+ * SF: Spread Factor
+ * CR: Coding Rate
 
 La frecuencia central se encuentra en los 433 Mhz. Si se desea cambiar la frecuencia de operación se puede consultar como hacerlo en el siguiente enlace del [Anexo](#Cambio-frecuencias-lora).
 
@@ -442,7 +450,9 @@ Se ha de dejado un único método al cual se le pasa una cadena de texto (que re
 
 Existe configuración estática para este modulo en el archivo de configuración conf/hav.conf
 
+<code>
 usbRF=/dev/ttyUSB2
+</code>
 
 donde,
 
@@ -472,13 +482,16 @@ Mas información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?S
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
+<code>
 uv_activo=1
+
 tiempoMuestreoUV=10
+</code>
 
 donde,
 
-- <b>uv_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
-- <b>tiempoMuestreoUV</b>: informa sobre el tiempo de toma de datos del sensor.
+* <b>uv_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
+* <b>tiempoMuestreoUV</b>: informa sobre el tiempo de toma de datos del sensor.
 
 ### INA3221
 
@@ -510,13 +523,16 @@ Más información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
+<code>
 ina3221_activo=1
-tiempoMuestreoINA3221=10
 
+tiempoMuestreoINA3221=10
+</code>
+	
 donde,
 
-- <b>ina3221_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
-- <b>tiempoMuestreoINA3221</b>: informa sobre el tiempo de toma de datos del sensor.
+* <b>ina3221_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
+* <b>tiempoMuestreoINA3221</b>: informa sobre el tiempo de toma de datos del sensor.
 
 ### INA219
 
@@ -544,18 +560,23 @@ Más información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
+<code>
 ina219_activo=1
+
 tiempoMuestreoINA219=10
+</code>
 
 donde,
 
-- <b>ina219_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
-- <b>tiempoMuestreoINA219</b>: informa sobre el tiempo de toma de datos del sensor.
+* <b>ina219_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
+* <b>tiempoMuestreoINA219</b>: informa sobre el tiempo de toma de datos del sensor.
 
 Para poder utilizarlo es necesario descargar la libreria de ADAfruit correspondiente mediante la instrucción.
 
+<code>
 sudo pip3 install adafruit-circuitpython-ina219
-
+</code>
+	
 ### DS18B20
 
 #### Introducción
@@ -570,8 +591,8 @@ Es muy sencilla, dispone de 3 pines, el GND y VDD que han de ir conectados a Gro
 
 Como el resto de componentes, dispone de un servicio propio denominado "dallas.service" que se configura igual que el resto de servicios disponibles. Dispone de 3 parámetros de configuración:
 
-- <b>tiempoMuestreoDallas:</b> que informa sobre el tiempo entre muestra y muestra que se esperar el time interno del servicio para leer el sensor y escribir los datos de temperatura leídos en un archivo de datos temporal.
-- <b>dallas_activo:</b> 0 o 1 indicando si el módulo esta activo o no.
+* <b>tiempoMuestreoDallas:</b> que informa sobre el tiempo entre muestra y muestra que se esperar el time interno del servicio para leer el sensor y escribir los datos de temperatura leídos en un archivo de datos temporal.
+* <b>dallas_activo:</b> 0 o 1 indicando si el módulo esta activo o no.
 
 ### GSM
 
@@ -595,23 +616,31 @@ El modulo se conecta a la raspberry por puerto série y se utiliza un adaptador 
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
+<code>
 gsm_activo=1
+	
 alturaActivacion=300
+	
 alturaDesactivacion=3000
+	
 usbGSM=/dev/ttyUSB1
+	
 listaMoviles=+34666666666,+34699999999
+
 pin=6666
+	
 tiempoTrazaGSM=45
+</code>
 
 donde,
 
-- <b>gsm_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
-- <b>tiempoTrazaGSM</b>: informa sobre el tiempo que transcurre entre el envio de datos por SMS
-- <b>alturaActivacion</b>: Altura a partir de la cual el módulo intentará enviar SMSs con la última traa de datos que disponga. El valor se recomienda configurarlo 100 o 200 metros por encima de la altura del lugar de lanzamiento para que, una vez se encienda la sonda, no empiece a enviar SMS inmediatamente (ahorro de costes)
-- <b>alturaDesactivacion</b>: Altura a partir de la cual el módulo de GSM dejará de enviar SMSs. Esto debe ser así porque superados los 2 o 3mil metros, ya no hay cobertura GSM (ahorro de costes)
-- <b>usbGSM</b>: corresponde al puerto USB al que esta conectado el adaptador cp2102 del componente de GSM. Es importante destacar que este puerto puede cambiar en función de los dispositivos conectados a la raspberry y el slot USB donde se conecten, con lo que se deberá comprobar manualmente que esta configuración es correcta.
-- <b>listaMoviles</b>: lista de numeros de telefono movil a los cuales se enviará el SMS con la traza. Es importante que el numero tengo +34 (código pais españa) y sin ningún espacio.
-- <b>pin</b>: código pin de la tarjeta SIM que utiliza el componente.
+* <b>gsm_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
+* <b>tiempoTrazaGSM</b>: informa sobre el tiempo que transcurre entre el envio de datos por SMS
+* <b>alturaActivacion</b>: Altura a partir de la cual el módulo intentará enviar SMSs con la última traa de datos que disponga. El valor se recomienda configurarlo 100 o 200 metros por encima de la altura del lugar de lanzamiento para que, una vez se encienda la sonda, no empiece a enviar SMS inmediatamente (ahorro de costes)
+* <b>alturaDesactivacion</b>: Altura a partir de la cual el módulo de GSM dejará de enviar SMSs. Esto debe ser así porque superados los 2 o 3mil metros, ya no hay cobertura GSM (ahorro de costes)
+* <b>usbGSM</b>: corresponde al puerto USB al que esta conectado el adaptador cp2102 del componente de GSM. Es importante destacar que este puerto puede cambiar en función de los dispositivos conectados a la raspberry y el slot USB donde se conecten, con lo que se deberá comprobar manualmente que esta configuración es correcta.
+* <b>listaMoviles</b>: lista de numeros de telefono movil a los cuales se enviará el SMS con la traza. Es importante que el numero tengo +34 (código pais españa) y sin ningún espacio.
+* <b>pin</b>: código pin de la tarjeta SIM que utiliza el componente.
 
 ### Camara
 
@@ -625,9 +654,9 @@ El módulo de control de la camara requiere de una série de librerias de python
 
 Ejecutar:
 
-```
+<code>
 sudo pip install picamera
-```
+</code>
 
 ##### Sobre NDVI
 
@@ -641,33 +670,46 @@ El detalle de su funcionamiento se puede encontrar en el Anexo [ndvi](#ndvi)
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
+<code>
 camara_activo=1
+
 tiempoTomaImagen=30
+
 tiempoExposicion=3
+
 resolucionRFX=320
+
 resolucionRFY=240
+
 resolucionMaxX=1920
+
 resolucionMaxY=1080
+
 pathImagenesBase=/data/hab_sonda/images/
+
 ndviProcessingActive=1
+
 ndviBasePath=/data/hab_sonda/utilities/ndvi
+
 redAWB=2.26
+
 blueAWB=0.74
+</code>
 
 donde,
 
-- <b>camara_activo</b>: informa sobre si el módulo esta activo o no.
-- <b>tiempoTomaImagen</b>: tiempo entre foto y foto.
-- <b>tiempoExposicion</b>: tiempo de exposición del sensor cmos de la camara(equivalente al tiempo de apertura del diafragma de la camara)
-- <b>resolucionRFX</b>: resolución mínima en el ejeX (anchura) de la foto que tomará la camara.
-- <b>resolucionRFY</b>: resolución mínima en el ejeY (altura) de la foto que tomará la camara.
-- <b>resolucionMaxX</b>: resolución máxima en el ejeX (anchura) de la foto que tomará la camara.
-- <b>resolucionMaxY</b>: resolución máxima en el ejeY (altura) de la foto que tomará la camara.
-- <b>pathImagenesBase:</b> path base en el filesystem del SO donde se ubicaran las fotos.
-- <b>ndviProcessingActive:</b> informa si se tendran en cuenta o no las configuraciones para la toma de imágenes compatibles con el procesamiento NDVI
-- <b>ndviBasePath:</b> path base donde se encuentra la utilidad para el procesamiento de los calculos NDVI
-- <b>redAWB:</b> Configuración de cámara para balance de rojos
-- <b>blueAWB:</b> Configuración de cámara para el balance de azules
+* <b>camara_activo</b>: informa sobre si el módulo esta activo o no.
+* <b>tiempoTomaImagen</b>: tiempo entre foto y foto.
+* <b>tiempoExposicion</b>: tiempo de exposición del sensor cmos de la camara(equivalente al tiempo de apertura del diafragma de la camara)
+* <b>resolucionRFX</b>: resolución mínima en el ejeX (anchura) de la foto que tomará la camara.
+* <b>resolucionRFY</b>: resolución mínima en el ejeY (altura) de la foto que tomará la camara.
+* <b>resolucionMaxX</b>: resolución máxima en el ejeX (anchura) de la foto que tomará la camara.
+* <b>resolucionMaxY</b>: resolución máxima en el ejeY (altura) de la foto que tomará la camara.
+* <b>pathImagenesBase:</b> path base en el filesystem del SO donde se ubicaran las fotos.
+* <b>ndviProcessingActive:</b> informa si se tendran en cuenta o no las configuraciones para la toma de imágenes compatibles con el procesamiento NDVI
+* <b>ndviBasePath:</b> path base donde se encuentra la utilidad para el procesamiento de los calculos NDVI
+* <b>redAWB:</b> Configuración de cámara para balance de rojos
+* <b>blueAWB:</b> Configuración de cámara para el balance de azules
 
 Mas información en su datasheet [aquí](https://www.raspberrypi.org/documentation/hardware/camera/)
 
@@ -683,7 +725,9 @@ Este módulo se encarga de, mediante una configuración previa, recuperar los ar
 
 Todos los archivos de datos de los sensores tienen la forma siguiente:
 
+<code>
 timestamp|dato1|...|datoN|
+</code>
 
 el proceso recupera, en función de la lista de módulos sobre los que ha de iterar, la ultima traza de datos disponible.
 
@@ -695,15 +739,19 @@ Es sobre este archivo sobre el que trabajaran los modulos de RF y GSM para poder
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
+<code>
 tiempoMuestreo=15
+
 configuracionTraza=gps,bmp,uv,ina3221
+
 idMision=NOMBREMISION
+</code>
 
 donde,
 
-- <b>tiempoMuestreo</b>: corresponde al intervalo de tiempo en el que se realizará la acción se sintesis de archivos de datos para construir una linea del archivo de datos sensores.log
-- <b>configuracionTraza</b>: corresponde a la lista de modulos de los cuales se intentará recuperar archivos de datos. El orden de los datos en el archivo sensores.log lo determina el orden de los módulos de esta lista.
-- <b>idMision</b>: Este valor será el string que se adjuntará a cada traza que se envíe. Es muy importante, ya que en caso de que hubiera mas HABs volando a la vez, identifica de forma unequívoca el HAB que emite trazas.
+* <b>tiempoMuestreo</b>: corresponde al intervalo de tiempo en el que se realizará la acción se sintesis de archivos de datos para construir una linea del archivo de datos sensores.log
+* <b>configuracionTraza</b>: corresponde a la lista de modulos de los cuales se intentará recuperar archivos de datos. El orden de los datos en el archivo sensores.log lo determina el orden de los módulos de esta lista.
+* <b>idMision</b>: Este valor será el string que se adjuntará a cada traza que se envíe. Es muy importante, ya que en caso de que hubiera mas HABs volando a la vez, identifica de forma unequívoca el HAB que emite trazas.
 
 ### Servicio de Configuracion
 
@@ -717,16 +765,24 @@ Ayuda a hacer mas mantenible el código y a una mejor parametrización del softw
 
 Se basa en una libreria interna de python denominada "configparser" que es capaz de leer configuraciones del tipo:
 
-```
+<code>
 [nombre_seccion1]
+
 param11=valor11
+
 ...
+
 param1N=valor1N
-....
+
+...
+
 [nombre_seccionM]
+
 paramM1=valorM1
+
 paramMZ=valorMX
-```
+
+</code>
 
 Para cada nuevo parámetro que se dese añadir al archivo de configuración se ha de crear un método de lectura en este módulo.
 
@@ -750,18 +806,18 @@ Finalmente, la libreria permite configurar la severidad de las trazas. Esto es, 
 
 La severidad esta predefinida en niveles:
 
-- debug
-- info
-- warn
-- error
+* debug
+* info
+* warn
+* error
 
 ### Tipos de log
 
 Los servicios de cada componente, una vez configurados para arrancarse en el inicio, generan, potencialmente varios tipos de logs.
 
-- Logs de datos del componente. Acostumbran a encontrarse en /[PATH_DE_INSTALACION/hab_sonda/logs/[nombre_componente]data.log
-- Logs del funcionamiento del componente. Se pueden encontrar en /[PATH_DE_INSTALACION/hab_sonda/logs/[nombre_componente]Service.log
-- Logs del sistema Operativo. Se pueden encontrar en /var/log y pueden contener información relevante sobre los servicios, fallos en buses, etc.
+* Logs de datos del componente. Acostumbran a encontrarse en /[PATH_DE_INSTALACION/hab_sonda/logs/[nombre_componente]data.log
+* Logs del funcionamiento del componente. Se pueden encontrar en /[PATH_DE_INSTALACION/hab_sonda/logs/[nombre_componente]Service.log
+* Logs del sistema Operativo. Se pueden encontrar en /var/log y pueden contener información relevante sobre los servicios, fallos en buses, etc.
 
 ## Hardware
 
@@ -791,84 +847,84 @@ En este caso, se ha optado por utilizar adaptadores CP2102 de puerto serie a USB
 
 A continuación se expone la lista de componentes utilizados:
 
-- Raspberry pi Zero W (aunque puede ser una 3B o 4) mas tarjeta de memoria (16Gb)
+* Raspberry pi Zero W (aunque puede ser una 3B o 4) mas tarjeta de memoria (16Gb)
 
 ![raspberry_pi_zero](/doc/img/Raspberry_pi_zero_w.jpg)
 
-- Adaptador para baterias de litio de tipo 16850 y bateria
+* Adaptador para baterias de litio de tipo 16850 y bateria
 
 ![Adaptador baterias 18650](/doc/img/cargador_18650.jpg)
 
-- Chip de GPS UBLOX NEO 6M o 7.
+* Chip de GPS UBLOX NEO 6M o 7.
 
 ![Descripción](/doc/img/GPS-Ublox-NEO-6M.jpg)
 
-- Chips adaptadores de serie a USB CP2102
+* Chips adaptadores de serie a USB CP2102
 
 ![Descripción](/doc/img/cp2102.jpg)
 
-- Chip SIM900A para el envio de SMS por GSM + tarjeta SIM 
+* Chip SIM900A para el envio de SMS por GSM + tarjeta SIM 
 
 ![Descripción](/doc/img/sim900a.jpg)
 
-- Chip ebyte E32-TTL-100 para el envio de datos por RF LoRa en 433Mhz.
+* Chip ebyte E32-TTL-100 para el envio de datos por RF LoRa en 433Mhz.
 
 ![Descripción](/doc/img/e32-ttl-100.jpg)
 
-- Chip BMP280 para temperatura y presión
+* Chip BMP280 para temperatura y presión
 
 ![Descripción](/doc/img/bmp280.jpg)
 
-- Chip INA219 para control de voltage
+* Chip INA219 para control de voltage
 
 ![Descripción](/doc/img/ina219.jpg)
 
-- Chip VEML6070 para la medida de radiación UV
+* Chip VEML6070 para la medida de radiación UV
 
 ![Descripción](/doc/img/veml6070.jpg)
 
-- Chip MPU9250 para la medida de la aceleración, inclinación y orientación.
+* Chip MPU9250 para la medida de la aceleración, inclinación y orientación.
 
 ![Descripción](/doc/img/mpu9250.jpg)
 
 Como material de soporte sera preciso:
 
-- Tornilleria de m2 de nylon
+* Tornilleria de m2 de nylon
 
 ![Descripción](/doc/img/nylon.jpg)
 
-- cables de circuito de tipo hembra-hembra
+* cables de circuito de tipo hembra-hembra
 
 ![Descripción](/doc/img/cable-circuito.jpg)
 
-- Conectores para circuito
+* Conectores para circuito
 
 ![Descripción](/doc/img/conector-circuito.jpg)
 
-- Soporte adaptable para los circuitos (carton-pluma o equivalente)
-- Antena para 433 del chip de RF
+* Soporte adaptable para los circuitos (carton-pluma o equivalente)
+* Antena para 433 del chip de RF
 
 ![Descripción](/doc/img/antena_433.jpg)
 
-- Antena con adaptador a ufl para el GPS
+* Antena con adaptador a ufl para el GPS
 
 ![Descripción](/doc/img/ufl-cable.jpg)
 
-- Si se usa el SIM900A, antena de GSM
+* Si se usa el SIM900A, antena de GSM
 
 ![Descripción](/doc/img/antena_gsm.jpg)
 
-- Cable de antena estrecho
+* Cable de antena estrecho
 
-- Adaptadores de cable de antena SMA (macho-hembra) y RP-SMA (macho-hembra)
+* Adaptadores de cable de antena SMA (macho-hembra) y RP-SMA (macho-hembra)
 
 ![Descripción](/doc/img/sma-smarp.jpg)
 
 De las herramientas, las mas específicas serían:
 
-- Soldador
-- Estaño
-- Tornavis estrella fino (m2 o m3)
+* Soldador
+* Estaño
+* Tornavis estrella fino (m2 o m3)
 
 ### Tecnicas y procedimientos de ensamblado
 
@@ -892,8 +948,8 @@ La configuración se propone efectuarla utilizando el software propio de ebyte. 
 
 <b>IMPORTANTE</b>: Estos software corren solo en SO windows. 
 
-- RF-Setting: La ultima versión compatible con los E32-ttl-100 es [esta](https://www.ebyte.com/en/pdf-down.aspx?id=1741). Aunque se pueden buscar otras variantes de este software [aqui](https://www.ebyte.com/en/data-download.html?page=2&id=37&cid=31#load)
-- Access Port: La versión compatible con el E32-ttl-100 es [esta](https://www.ebyte.com/en/pdf-down.aspx?id=204)
+* RF-Setting: La ultima versión compatible con los E32-ttl-100 es [esta](https://www.ebyte.com/en/pdf-down.aspx?id=1741). Aunque se pueden buscar otras variantes de este software [aqui](https://www.ebyte.com/en/data-download.html?page=2&id=37&cid=31#load)
+* Access Port: La versión compatible con el E32-ttl-100 es [esta](https://www.ebyte.com/en/pdf-down.aspx?id=204)
 
 Además será necesario disponer de un componente de conversión de puerto serie a USB <b>Cp2102</b> y los drivers para windows de este, que se pueden descargar desde [aqui](https://www.silabs.com/documents/public/software/CP210x_Universal_Windows_Driver.zip) 
 
