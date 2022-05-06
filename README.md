@@ -62,16 +62,18 @@ Este sistema permite que, en caso de fallo de alguno de estos sensores, buses u 
 
 ## Getting Started
 
-Este apartado esta pensado para, sin tener el detalle exacto de todos los componentes y tecnicas que se explican mas adelante, poner en funcionamiento el software de la sonda.
-IMPORTANTE: En este tutorial se asume que se dispone de una raspberry pi zero o equivalente con una versión de raspbian instalada correctamente. Si se esta en este punto, consultar el punto de instalación de raspbian y luego volver a este punto.
+Este apartado esta pensado para, sin tener el detalle exacto de todos los componentes y tecnicas que se explican mas adelante, poner en funcionamiento el software de la sonda.</br>
+<b>IMPORTANTE:</b> En este tutorial se asume que se dispone de una raspberry pi zero o equivalente con una versión de raspbian instalada correctamente. Si se esta en este punto, consultar el punto de instalación de raspbian y luego volver a este punto.
 
 Los pasos son:
 
 1. Disponer de una raspberry Pi con una versión de raspbian instalada y funcionando correctamente. Ejecutar antes de nada:
 
-```
+<code>
 sudo apt get update
-```
+</code>
+
+Este paso actualizará la lista de librerias y dependencias iniciales del raspbian
 
 2. Conectar todos los sistemas periféricos (camara, sensores, etc.)
 
@@ -101,40 +103,55 @@ sudo apt-get install libtiff5
 ``` 
 
 6. Realizar un clone del proyecto hab_sonda sobre la raspberry
+
    El proceso es simple.
+   
    1. Abrir una consola del SO.
-   2. Posicionarse en el directorio que se desee (se recomienda /data)
+   2. Posicionarse en el directorio que se desee (se recomienda /data, NOTA: se puede crear con los comandos:
+
+<code>
+cd /
+
+mkdir data
+</code>
+
    3. Ejecutar la instrucción de clonado del repositorio "hab_sonda" con el comando:
-```
+
+<code>
+cd /data
+	
 git clone https://github.com/Yggdrassil80/hab_sonda
-```
+
+</code>
 <b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependeran de ese path base.
 
 7. Si no existe, crear manualmente el directorio images:
 
-```
+<code>
 cd /data/hab_sonda/
+
 mkdir images
-```
+</code>
 
 8. Configurar el archivo de configuración.
    1. Para realizar esta acción se ha de configurar el archivo /data/hab_sonda/conf/hav.conf
    2. Los detalles de configuración de cada sensor se pueden consultar en la sección de configuración de cada módulo descritos en la sección [Componentes](#componentes)
 
-* <b>NOTA</b>: Llegado es punto, si se deseara, se puede cambiar el nombre "hab_sonda" por el nombre que se desee. Esto se puede hacer utilizando los comandos siguiente:
+* <b>NOTA</b>: Llegado es punto, si se deseara (si no se tiene experiencia, se recomienda no hacerlo), se puede cambiar el nombre "hab_sonda" por el nombre que se desee. Esto se puede hacer utilizando los comandos siguiente:
 
-```
+<code>
 cd /data/hab_sonda
+
 grep -rli 'hab_sonda' * | xargs -i@ sed -i 's/hab_sonda/nombre_nuevo/g' @
-```
+</code>
 
 Para que los cambios no provoquen errores de configuración, todo el directorio de configuración debería cambiar también a /data/nombre_nuevo
 
 Esto se puede hacer utilizando el comando:
 
-```
+<code>
 mv -rf /data/hab_sonda /data/nombre_nuevo
-```
+</code>
 
 9. Configurar y activar los servicios. Ver el punto [Generacion de Servicios](#generacion-de-servicios)
 
@@ -142,9 +159,22 @@ mv -rf /data/hab_sonda /data/nombre_nuevo
 
 ### Generacion de Servicios
 
-Como se ha indicado, la idea es que cada componente nuevo que se agrege, se conciba como un servicio que se ejecute en el arranque de la pi en un orden preestablecido y con las dependencias que se desee.
+Los servicios son programas que correran en modo desatendido, sin que se observe su ejecución de forma directa, y que trabajaran por detrás con los diferentes sensores y componentes que tendrá la sonda.
+Estos servicios, una vez configurados (siguiendo las instrucciones siguientes) harán que, siempre que se arranque la raspberry, estos se ejecuten en el arranque de esta y por consiguiente, no sea necesario volver a tener que arrancarlos manualmente. Esto tiene como objetivo que si la raspberry se reiniciase por cualquier motivo durante el vuelo, al volver a arrancar, todos estos servicios que manejan los sensores, radio, gps y demas, volverian a funcionar.
 
-Para poder arrancar el servicio de un componente:
+Existen una serie de servicios mínimos necesarios para que la sonda, funcionalmente, tenga sentido, y son los siguientes:
+
+* gps.service
+* habMain.service
+* lora1.service
+
+La definición de estos servicios se puede encontrar en el directorio /data/hab_sonda/hav/services.
+
+El resto de servicios actualmente disponibles operan con diferentes sensores y sistemas que se pueden considerar secundarios.
+
+Si se desea mas detalle de estos servicios y de estos tres que se consideran mínimos, se puede consultar la sección de [Componentes](#componentes). 
+
+Los servicios para poder configurarse por primera vez han de cargarse en el arranque del Raspbian, para poder hacer esto, seguir el procedimiento siguiente por cada servicio que se desee activar:  
 
 1. Se debe disponer del archivo [Nombre_modulo.service] donde se ha de describir, genericamente, lo siguiente:
 
@@ -164,26 +194,31 @@ WantedBy=multi-user.target
 ```
 
 2. Copiar el archivo del servico al directorio de systemd
-```
+
+<code>
 sudo cp [nombre_servicio].service /etc/systemd/system/[nombre_servicio].service
-```
+</code>
 
 3. Refrescar la lista de servicios y activar el nuevo que se desea dar de alta.
-```
+<code>
 sudo systemctl daemon-reload
+
 sudo systemctl enable [nombre_servicio].service
-```
+</code>
 
 <b>IMPORTANTE</b>: Asegurarse que el script de python definido en el [Nombre_modulo.service] tiene permisos de ejecución (chmod 755)
 
 4. Finalmente, para arrancar o parar el servicio una vez la el SO haya arrancado, utilizar.
-```
+
+<code>
 sudo systemctl start [nombre_servicio].service
+</code>
 
 o
 
+<code>
 sudo systemctl stop [nombre_servicio].service
-```
+</code>
 
 Finalmente, comentar que estas acciones estan actualmente automatizadas a traves de un script en el directorio /data/hav_sonda/utilities. 
 
@@ -195,9 +230,9 @@ En dicho directorio se encuentran 3 scritps que agilizan la gestion de los servi
 
 para poder ejecutar cualquiera de estos comandos, posicionarse en el directorio utilities y ejecutar:
 
-```
+<code>
 sudo ./{nombre_script}.sh {opciones_si_las_tuviera}
-```
+</code>
 
 Sobre el archivo services.conf, se encuentra en /data/hav_sonda/utilities y unicamente contiene una linea con el nombre de los servicios separados por un espacio simple. Este archivo determina que servicios se cargaran en el arranque de la pi y el orden en que se desea que arranquen.
 
