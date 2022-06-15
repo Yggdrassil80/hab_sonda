@@ -620,7 +620,17 @@ El DS18B20 es un sensor de temperatura muy utilizado para soluciones con arduino
 
 #### Conexión
 
-Es muy sencilla, dispone de 3 pines, el GND y VDD que han de ir conectados a Ground y VDD (3.3v) en la raspberry. Dispone de un pin adicional de datos que por defecto siempre será el <b>GPIO4</b>. El único requisito es que se deberá configurar la interfaz "1-wire" de raspberry (procedimiento análogo a la activación del I2C, pero seleccionando 1-wire).
+Es muy sencilla, dispone de 3 pines, el GND y VDD que han de ir conectados a Ground y VDD (3.3v) en la raspberry. Dispone de un pin adicional de datos que por defecto siempre será el <b>GPIO4</b>. El único requisito es que se deberá configurar la interfaz "1-wire" de raspberry (procedimiento análogo a la activación del I2C, pero seleccionando 1-wire). Para ello, seguir el procedimiento siguiente:
+
+1. Ejecutar:
+
+```
+sudo raspi-config
+```
+
+2. Navegar por las opciones siguientes [Interfacing Options -> 1-wire -> Activate]. Pasados unos segundos la interface 1-wire queda activada.
+
+<b>IMPORTANTE</b> La configuración solicitará reiniciar la pi.
 
 #### Configuración
 
