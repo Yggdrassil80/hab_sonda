@@ -360,3 +360,39 @@ def getBlueAWB():
         return float(blue)
     except:
         return float(1)
+
+def isRuleActivo():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("rules", "rules_activo")
+        return int(t)
+    except:
+        return "valor vacio"
+
+def getTiempoMuestreoMotorReglas():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("rules", "tiempoMuestreoMotorReglas")
+        return int(t)
+    except:
+        return int(60)
+
+def getListaSensoresOperables():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        conf = cfg.get("rules", "listaSensoresOperables")
+        return conf
+    except:
+        return "null"
+
+def getRuleList():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        conf = cfg.get("rules", "listaReglas")
+        return conf
+    except:
+        return "null"
