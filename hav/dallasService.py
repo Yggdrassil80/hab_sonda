@@ -39,7 +39,8 @@ if act == 1:
 	while True:
 
 		try:
-                        #INICIO: Espacio para recuperar los datos del sensor a partir de la libreria
+			tiempoMuestreoDallas = ConfigHelper.getToken("DALLAS", "tiempoMuestreoDallas", tiempoMuestreoDallas)
+            #INICIO: Espacio para recuperar los datos del sensor a partir de la libreria
 			#loggerLog.info("[dallasService] inicio")
 			dallasTemp = sensor.get_temperature()
                         #Escritura de datos en el archivo de datos del sensor. Todo lo que se escriba aqui sera lo que potencialmente se acabe enviando por telemetria.

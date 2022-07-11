@@ -91,6 +91,7 @@ loggerLog.info("[GPSService][Main] Fecha seteada OK!")
 while True:
 
     try:
+        tiempoMuestreoGPS = ConfigHelper.getToken("GPS", "tiempoMuestreoGPS", tiempoMuestreoGPS)
         gpsData = GPSHelper.getGPSData(puertoUSB)
         loggerLog.debug("[GPSService] lectura de datos basicos OK")
         gpsDataExtendet = GPSHelper.getGPSDataExtendet(puertoUSB)

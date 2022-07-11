@@ -36,6 +36,7 @@ loggerLog.info("[Lora1Service][Conf] Puerto USB RF: " + usbRF);
 
 while True:
     try:
+        tiempoEnvio = ConfigHelper.getToken("LORA1", "tiempoEnvio", tiempoEnvio)
         #2.   Comprobar que el archivo sensores.log existe
         sensor_file = Path(SENSOR_FILE)
         isSensorFileFull = os.stat(sensor_file).st_size>0

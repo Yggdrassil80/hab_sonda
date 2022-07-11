@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import configparser
+import os
 import logging
 
 #loggerLog = logging.getLogger('server_logger-config')
@@ -12,6 +13,7 @@ import logging
 #loggerLog.addHandler(inf)
 
 CONF_PATH = "/data/hab_sonda/conf/hav.conf"
+BASE_PATH_TOKEN = "/data/hab_sonda/hab/"
 
 #Metodo que informa sobre la configuracion de la traza de sensores que se quiere enviar
 def getConfiguracionTraza():
@@ -396,3 +398,47 @@ def getRuleList():
         return conf
     except:
         return "null"
+
+#metodo que busca en la raiz del FS donde se ejecutan los servicios tokens de control para poder alterar el comportamiento
+#de los servicios, devolviendo para ello, el valor del token encontrado.
+def getToken(serviceTokenName, serviceTokenVariable, serviceTokenVariableIni):
+
+    #0. calcular el path para encontrar los archivos de token
+    pathToken = BASE_PATH_TOKEN + serviceTokenName
+    #1. Ver si existe el token
+    if (os.path.exists(pathToken)):
+        #1.1. Si existe, lo abrimos
+        f=open(pathToken,"r")
+        isTokenExists = os.stat(pathToken).st_size>0
+        #1.2. Ver si tiene contenido
+        if (isTokenExists):
+            #1.3. Leer su contenido
+            tokenContent = f.readlines()[-1]
+            tokenContentArray = tokenContent.split(':')
+            #1.4. Si tiene 3 posiciones es un token de tipo {serviceName}:{serviceVariable}:{serviceVariableValue}
+            if len(tokenContentArray) == 3:
+                #1.5. Si el serviceTokenName coincide con el buscado
+                if serviceTokenName == tokenContentArray[0]:
+                    #1.6. Si el serviceTokenVariable coincide con la buscada
+                    if serviceTokenVariable = tokenContentArray[1]:
+                        #1.7. Entonces se devuelve el nuevo valor
+                        return tokenContentArray[2]
+                    else:
+                        return serviceTokenVariableIni
+                else:
+                    return serviceTokenVariableIni
+            #1.4bis Si tiene 2 posiciones es un token de tipo {serviceName}:{on/off}
+            if len(tokenContentArray) == 2:
+                #1.5bis Si el serviceTokenName coincide con el buscado
+                if serviceTokenName == tokenContentArray[0]:
+                    return tokenContentArray[1]
+                else:
+                    return serviceTokenVariableIni
+            else:
+                return serviceTokenVariableIni
+         #Si el token no tiene contenido, no se hace nada porque no es un token valido
+         else:
+             return serviceTokenVariableIni
+    else:
+        return serviceTokenVariableIni
+        #el archivo con el nombre del token no existe, tampoco se hace nada

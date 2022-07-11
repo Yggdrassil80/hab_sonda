@@ -40,7 +40,9 @@ if act == 1:
 	while True:
 
 		try:
-                        #INICIO: Espacio para recuperar los datos del sensor a partir de la libreria
+			tiempoMuestreoBMP = ConfigHelper.getToken("BMP", "tiempoMuestreoBMP", tiempoMuestreoBMP)
+
+            #INICIO: Espacio para recuperar los datos del sensor a partir de la libreria
 			#loggerLog.info("[bmpService] inicio")
 			bmpTemp = sensor.get_temperature()
 			#loggerLog.info("[bmpService] temperatura leida")
