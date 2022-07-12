@@ -85,6 +85,7 @@ Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#act
    * picamera
    * lib2
    * adafruit-circuitpython-ina219
+   * i2cdevice
    * W1ThermSensor
    * ...
    
