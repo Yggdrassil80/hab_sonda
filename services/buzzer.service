@@ -1,0 +1,12 @@
+[Unit]
+Description=Buzzer Service
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python3 /data/hab_sonda/hav/buzzerService.py
+Restart=always
+RestartSec=0
+
+[Install]
+WantedBy=multi-user.target

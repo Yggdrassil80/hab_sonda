@@ -83,7 +83,6 @@ Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#act
 4. Instalar librerias de Python3 de apoyo. Las librerias de python necesarias son las siguientes:
    * image
    * picamera
-   * lib2
    * adafruit-circuitpython-ina219
    * i2cdevice
    * W1ThermSensor
@@ -250,6 +249,8 @@ sudo raspi-config
 ```
 
 2. Navegar por las opciones siguientes [Interfacing Options -> I2C -> Activate]. Pasados unos segundos el I2C queda activado.
+
+3. sudo apt-get install i2c-tools
 
 A modo de comprobación, se puede utilizar la herramienta i2c-detect, simplemente ejecutando "i2cdetect -y 1" en linea de comandos y donde se muestra los dispositivos que estan usando el mapa de registros del I2C
 
@@ -1128,7 +1129,7 @@ El código se ejecuta en <b>python2</b> no en python3, como el resto del código
 El código tiene una dependencia externa que hay que cargarla para que funcione correctamente:
 
 ```
-sudo apt-get install python-matplotlib
+sudo pip3 install matplotlib
 ```
 
 ### Funcionamiento
