@@ -59,7 +59,7 @@ listaReglas = ConfigHelper.getRuleList()
 #inputDataId: identificador del dato de entrada del servicio que se alterara
 #operator[eq]: operador asignacion "eq: equal"
 #valueInputDataToChange: valor del dato que se cambiara
-#activator[on/off]: valor que activa o desactiva un servicio
+#activator[1/0]: valor que activa o desactiva un servicio
 #
 #Ejemplo1:
 #Regla que informa que si el campo 0 de los datos del gps (altura) es mas pequeña de 10000 metros se informara
@@ -68,7 +68,7 @@ listaReglas = ConfigHelper.getRuleList()
 #
 #Ejemplo2:
 # Regla que informa que si el campo 0 del gps (altura) esta por debajo de 10000 metros, se active (on) ek servicio del buzzer
-#thresholdOp:GPS.0.lt.10000:buzzer.on
+#thresholdOp:GPS.0.lt.10000:buzzer.1
 
 def sensorLogFile(idSensor):
     path = BASE_PATH_LOG + idSensor + "data.log"

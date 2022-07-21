@@ -412,7 +412,7 @@ def getToken(serviceTokenName, serviceTokenVariable, serviceTokenVariableIni):
         isTokenExists = os.stat(pathToken).st_size>0
         #1.2. Ver si tiene contenido
         if (isTokenExists):
-            #1.3. Leer su contenido
+            #1.3. Leer su contenido (la ultima linea)
             tokenContent = f.readlines()[-1]
             tokenContentArray = tokenContent.split(':')
             #1.4. Si tiene 3 posiciones es un token de tipo {serviceName}:{serviceVariable}:{serviceVariableValue}
@@ -420,7 +420,7 @@ def getToken(serviceTokenName, serviceTokenVariable, serviceTokenVariableIni):
                 #1.5. Si el serviceTokenName coincide con el buscado
                 if serviceTokenName == tokenContentArray[0]:
                     #1.6. Si el serviceTokenVariable coincide con la buscada
-                    if serviceTokenVariable = tokenContentArray[1]:
+                    if serviceTokenVariable == tokenContentArray[1]:
                         #1.7. Entonces se devuelve el nuevo valor
                         return tokenContentArray[2]
                     else:
@@ -442,3 +442,50 @@ def getToken(serviceTokenName, serviceTokenVariable, serviceTokenVariableIni):
     else:
         return serviceTokenVariableIni
         #el archivo con el nombre del token no existe, tampoco se hace nada
+
+def getRecivedCommandRaw():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("COMMAND", "commandPathRaw")
+        return str(t)
+    except:
+        return "defectID"
+
+def getRecivedCommand():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("COMMAND", "commandPath")
+        return str(t)
+    except:
+        return "defectID"
+
+def getTokenPath():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("COMMAND", "tokenPath")
+        return str(t)
+    except:
+        return "defectID"
+
+#Metodo que informa sobre el estado de activacion de la antena de recepcion de comandos
+def isCOMActivo():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("COMMAND", "coms_active")
+        return int(t)
+    except:
+        return "valor vacio"
+
+#Metodo que recupera el puerto del usb de la antena de comandos
+def getUsbCommand():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        puerto = cfg.get("COMMAND", "usbCommand")
+        return puerto
+    except:
+        return "Puerto Vacio"
