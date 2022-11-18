@@ -63,7 +63,7 @@ Este sistema permite que, en caso de fallo de alguno de estos sensores, buses u 
 ## Getting Started
 
 Este apartado está pensado para, sin tener el detalle exacto de todos los componentes y técnicas que se explican más adelante, poner en funcionamiento el software de la sonda.</br>
-<b>IMPORTANTE:</b> En este tutorial se asume que se dispone de una Raspberry Pi Zero o equivalente con una versión de Raspbian (o la nueva versión Raspberry Pi OS) instalada correctamente. Si aún no se está en este punto, consultar el apartado de [Instalación Raspberry Pi OS](#instalacion-raspberry-pi-os) y luego volver a este punto.
+<b>IMPORTANTE:</b> En este tutorial se asume que se dispone de una Raspberry Pi Zero o equivalente con una versión de Raspbian (o la nueva versión Raspberry Pi OS) instalada correctamente. Si aún no se está en este punto, consultar el apartado de [Instalación Raspberry Pi OS](#instalación-raspberry-pi-os) y luego volver a este punto.
 
 Los pasos son:
 
