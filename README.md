@@ -37,7 +37,7 @@
       - [Cableado de Operación](#cableado-de-operaci-n)
     + [Configuracion Lora](#configuracion-lora)
     + [Verificación](#verificaci-n)
-  * [Instalación Raspberry Pi OS](#instalacion-raspberry-pi-os)
+  * [Instalación Raspberry Pi OS](#instalación-raspberry-pi-os)
     + [Requisitos previos](#requisitos-previos)
     + [Proceso de Instalación](#proceso-de-instalacion)
   * [ndvi](#ndvi)
