@@ -1061,7 +1061,7 @@ Adicionalmente, se puede utilizar la tool "Access Port" para comprobar que los c
 - A través de la interfaz grafica, escribir lo que se desee (texto cualesquiera) y observar que este aparece en la otra instancia de "Access Port" tal cual.
 - Verificar el procedimiento a la inversa, escribiendo desde la otra instancia y viendo que es recibido el texto desde la primera.
 
-## Instalacion Raspberry Pi OS
+## Instalación Raspberry Pi OS
 
 ### Requisitos previos
 
