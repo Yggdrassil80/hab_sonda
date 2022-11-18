@@ -37,7 +37,7 @@
       - [Cableado de Operación](#cableado-de-operaci-n)
     + [Configuracion Lora](#configuracion-lora)
     + [Verificación](#verificaci-n)
-  * [Instalación Raspbian.](#instalacion-raspbian)
+  * [Instalación Raspberry Pi OS (Raspbian)](#instalacion-raspbian)
     + [Requisitos previos](#requisitos-previos)
     + [Proceso de Instalación](#proceso-de-instalacion)
   * [ndvi](#ndvi)
@@ -62,25 +62,25 @@ Este sistema permite que, en caso de fallo de alguno de estos sensores, buses u 
 
 ## Getting Started
 
-Este apartado esta pensado para, sin tener el detalle exacto de todos los componentes y tecnicas que se explican mas adelante, poner en funcionamiento el software de la sonda.</br>
-<b>IMPORTANTE:</b> En este tutorial se asume que se dispone de una raspberry pi zero o equivalente con una versión de raspbian instalada correctamente. Si se esta en este punto, consultar el punto de instalación de raspbian y luego volver a este punto.
+Este apartado está pensado para, sin tener el detalle exacto de todos los componentes y técnicas que se explican más adelante, poner en funcionamiento el software de la sonda.</br>
+<b>IMPORTANTE:</b> En este tutorial se asume que se dispone de una Raspberry Pi Zero o equivalente con una versión de Raspbian (o la nueva versión Raspberry Pi OS) instalada correctamente. Si aún no se está en este punto, consultar el apartado de [Instalación Raspberry Pi OS](#instalacion-raspbian) y luego volver a este punto.
 
 Los pasos son:
 
-1. Disponer de una raspberry Pi con una versión de raspbian instalada y funcionando correctamente. Ejecutar antes de nada:
+1. Disponer de una Raspberry Pi con una versión de Raspbian (o Raspberry Pi OS) instalada y funcionando correctamente. Ejecutar antes de nada:
 
-<code>
-sudo apt get update
-</code>
+	<code>
+	sudo apt update
+	</code>
 
-Este paso actualizará la lista de librerias y dependencias iniciales del raspbian
+	Este paso actualizará la lista de librerías y dependencias iniciales del Raspbian
 
-2. Conectar todos los sistemas periféricos (camara, sensores, etc.)
+2. Conectar todos los sistemas periféricos (cámara, sensores, etc.)
 
 3. Activar el bus I2C. 
 Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#activacion-i2c-en-raspbian)
 
-4. Instalar librerias de Python3 de apoyo. Las librerias de python necesarias son las siguientes:
+4. Instalar librerías de Python3 de apoyo. Las librerías de Python necesarias son las siguientes:
    * image
    * picamera
    * lib2
@@ -94,7 +94,7 @@ y la forma de instalarlas es mediante la instrucción
    sudo pip3 install [nombre_libreria]
 ```
 
-<b>NOTA:</b> Es muy importante utilizar sudo para la instalación de las librerias, ya que la instalación con pip3 instala la libreria para el usuario que ejecuta la instrucción. Si no se instala con sudo, al crear posteriormente los servicios, es posible que estos fallen al no poder utulizar las librerias instaladas con el usuario pi (usuario por defecto)
+<b>NOTA:</b> Es muy importante utilizar sudo para la instalación de las librerías, ya que la instalación con pip3 instala la libreria para el usuario que ejecuta la instrucción. Si no se instala con sudo, al crear posteriormente los servicios, es posible que estos fallen al no poder utulizar las librerias instaladas con el usuario pi (usuario por defecto)
 
 5. Instalar librerias del SO necesarias para algunas dependencias del componente software de la camara integrada.
 
@@ -1061,55 +1061,55 @@ Adicionalmente, se puede utilizar la tool "Access Port" para comprobar que los c
 - A través de la interfaz grafica, escribir lo que se desee (texto cualesquiera) y observar que este aparece en la otra instancia de "Access Port" tal cual.
 - Verificar el procedimiento a la inversa, escribiendo desde la otra instancia y viendo que es recibido el texto desde la primera.
 
-## Instalacion Raspbian.
+## Instalación Raspberry Pi OS (Raspbian)
 
 ### Requisitos previos
 
-Para poder instalar raspbian en una raspberry pi zero, 3 o 4, se han de disponer de unos materiales previos mínimos:
+Para poder instalar Raspberry Pi OS (también conocido como Raspbian) en una Raspberry Pi Zero, 3 o 4, se han de disponer de unos materiales previos mínimos:
 
-- Una targeta microSD de 8Gb como mínimo.
-- Un adaptador para tarjetas microSD a tarjetas SD para portatil
-- Un portatil o ordenador de sobremesa con lector de tarjetas SD o microSD (lo anterior no haria falta si fuera este último el caso)
-- Conexion a internet.
+- Una tarjeta microSD de 8Gb como mínimo.
+- Un portátil u ordenador de sobremesa con lector de tarjetas microSD o SD o puerto USB.
+- (Opcionalmente) Un adaptador para tarjetas microSD a tarjetas SD, si se utiliza el lector de tarjetas SD.
+- (Opcionalmente) Un adaptador para tarjetas microSD a USB, si se usa un puerto USB.
+- Conexión a internet.
 
-### Proceso de Instalacion
+### Proceso de Instalación
 
 Para realizar la instalación se han de seguir los siguientes pasos:
 
-- Ir a la página web de [raspbian|https://www.raspberrypi.org/] y descargarse el [PI Imager|https://www.raspberrypi.org/software/] en la sección de software.
+- Ir a la página web de [Raspberry](https://www.raspberrypi.org/) y descargarse el programa **Raspberry Pi Imager** en la sección de [software](https://www.raspberrypi.org/software/).
 - Una vez descargado, instalarlo. 
-- Arrancar el programa. Mediante la opción "Operating System" nos permitirá seleccionar el Sistema Operativo que queramos. Seleccionar "Raspberry Pi OS 32"
-- Introducir la MicroSD (con o sin el adaptador) en la ranura del PC o portatil.
-- En la opción "SD Card" seleccionar la microSD introducida (se deberia presentar como una unidad de disco adicional en el SO).
-- Darle a "Write". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la SD.
+- Arrancar el programa. Mediante la opción "Operating System" nos permitirá seleccionar el Sistema Operativo que queramos. Seleccionar "Raspberry Pi OS (32-bit)"
+- Introducir la microSD (con o sin el adaptador) en la ranura o puerto USB del PC o portátil. La microSD se asignará a una unidad de disco del sistema operativo (p.e. E:, F:, ...). Se puede utilizar el explorador de archivos para ver a qué unidad se ha asignado.
+- En la opción "Storage" seleccionar la unidad de disco de la microSD.
+- Darle a "Write". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la microSD.
 - Al finalizar, se pide que se extraiga la tarjeta microSD.
-- Volver a insertar la tarjeta, esta vez, para copiar dos archivos en el Filesystem que nos aparezca.
-       - Un archivo vacio que se llame, "ssh", tal cual, sin ningun contenido.
-       - Un archivo que lo llamaremos "wpa_supplicant.conf" que tendrá la lista de SSID de las wifis que queramos que la Pi se conecte automaticamente.
-
-Ejemplo de wpa_supplicant.conf:
-
-country=ES</br>
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</br>
-update_config=1</br>
-network={</br>
-	ssid="micasa"</br>
-	psk="XXXXXXXXXXX"</br>
-}</br>
-
-network={</br>
-	ssid="MOVISTOR_AE27"</br>
-	psk="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"</br>
-	key_mgmt=WPA-PSK</br>
-}</br>
-
-network={</br>
-	ssid="miOtracasa"</br>
-	psk="XXXXXXXXXXXXXXXXX"</br>
-	key_mgmt=WPA-PSK</br>
-}</br>
-
-9.- Ahora si extraemos la tarjeta y la ponemos en la pi antes de arrancarla</br>
+- Volver a insertar la tarjeta, esta vez, para copiar dos archivos en el Filesystem que nos aparezca:
+  - Un archivo vacío que se llame "ssh", tal cual, sin ningún contenido.
+  - Un archivo que lo llamaremos "wpa_supplicant.conf", que tendrá la lista de SSID de las wifis que queramos que la Pi se conecte automáticamente.
+    Ejemplo de wpa_supplicant.conf:
+  
+      country=ES</br>
+      ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</br>
+      update_config=1</br>
+      network={</br>
+        ssid="micasa"</br>
+        psk="XXXXXXXXXXX"</br>
+      }</br>
+      </br>
+      network={</br>
+        ssid="MOVISTOR_AE27"</br>
+        psk="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"</br>
+        key_mgmt=WPA-PSK</br>
+      }</br>
+      </br>
+      network={</br>
+        ssid="miOtracasa"</br>
+        psk="XXXXXXXXXXXXXXXXX"</br>
+        key_mgmt=WPA-PSK</br>
+      }</br>
+  
+- Ahora sí, extraemos la tarjeta y la ponemos en la Rasperry Pi antes de arrancarla.
 
 ## ndvi
 
