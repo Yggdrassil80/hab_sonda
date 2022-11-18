@@ -37,7 +37,7 @@
       - [Cableado de Operación](#cableado-de-operaci-n)
     + [Configuracion Lora](#configuracion-lora)
     + [Verificación](#verificaci-n)
-  * [Instalación Raspberry Pi OS](#instalacion-raspbian)
+  * [Instalacion Raspberry Pi OS](#instalacion-raspberry-pi-os)
     + [Requisitos previos](#requisitos-previos)
     + [Proceso de Instalación](#proceso-de-instalacion)
   * [ndvi](#ndvi)
@@ -1061,7 +1061,7 @@ Adicionalmente, se puede utilizar la tool "Access Port" para comprobar que los c
 - A través de la interfaz grafica, escribir lo que se desee (texto cualesquiera) y observar que este aparece en la otra instancia de "Access Port" tal cual.
 - Verificar el procedimiento a la inversa, escribiendo desde la otra instancia y viendo que es recibido el texto desde la primera.
 
-## Instalación Raspberry Pi OS {#instalacion-raspbian}
+## Instalacion Raspberry Pi OS
 
 ### Requisitos previos
 
