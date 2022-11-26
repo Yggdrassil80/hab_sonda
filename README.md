@@ -110,11 +110,11 @@ sudo apt-get install libtiff5
    1. Abrir una consola del SO.
    2. Posicionarse en el directorio que se desee (se recomienda /data, NOTA: se puede crear con los comandos:
 
-<code>
-cd /
-
-mkdir data
-</code>
+      <code>
+      cd /
+      
+      mkdir data
+      </code>
 
    3. Ejecutar la instrucción de clonado del repositorio "hab_sonda" con el comando:
 
