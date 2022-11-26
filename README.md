@@ -112,19 +112,17 @@ sudo apt-get install libtiff5
 
       <code>
       cd /
-      
       mkdir data
       </code>
 
    3. Ejecutar la instrucción de clonado del repositorio "hab_sonda" con el comando:
 
-<code>
-cd /data
-	
-git clone https://github.com/Yggdrassil80/hab_sonda
-
-</code>
-<b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependerán de ese path base.
+      <code>
+      cd /data
+      git clone https://github.com/Yggdrassil80/hab_sonda
+      </code>
+      
+      <b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependerán de ese path base.
 
 7. Si no existe, crear manualmente el directorio images:
 
