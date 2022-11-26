@@ -126,11 +126,10 @@ sudo apt-get install libtiff5
 
 7. Si no existe, crear manualmente el directorio images:
 
-<code>
-cd /data/hab_sonda/
-
-mkdir images
-</code>
+   <code>
+   cd /data/hab_sonda/
+   mkdir images
+   </code>
 
 8. Configurar el archivo de configuración.
    1. Para realizar esta acción se ha de configurar el archivo /data/hab_sonda/conf/hav.conf
