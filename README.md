@@ -46,15 +46,15 @@
 
 ## Introduccion
 
-Proyecto que recoge el código fuente base de una sonda de tipo HAB basada en Raspbian (Raspberry Pi ,3B o Zero W) y que pueda trabajar con diferentes tipos de sensores (Temperatura, Presión, Camara, Barometros, GPS, Radio Lora, Telemetria por SM, otros), que recupere datos de los mismos y los pueda enviar a una estación terrestre para, como objetivo final, poder ser recuperada y reutilizada.
+Proyecto que recoge el código fuente base de una sonda de tipo HAB basada en Raspbian (Raspberry Pi 3B o Zero W) y que pueda trabajar con diferentes tipos de sensores (Temperatura, Presión, Cámara, Barómetros, GPS, Radio Lora, Telemetría por SM, otros), que recupere datos de los mismos y los pueda enviar a una estación terrestre para, como objetivo final, poder ser recuperada y reutilizada.
 
 ## Diagrama de Sistemas
 
-El software para la sonda esta pensado de forma que todos los procesos de generación de datos y de envio de datos se ejecuten como un proceso del Sistema Operativo (Raspbian) aislado. Cada uno de estos procesos tiene su propio control de errores y su configuración. Además, cada uno de ellos generan un archivo de log y otro de datos. En el archivo de datos, con la frecuencia configurada, aparecen los datos de dicho sensor.
+El software para la sonda está pensado de forma que todos los procesos de generación de datos y de envío de datos se ejecuten como un proceso del Sistema Operativo (Raspbian) aislado. Cada uno de estos procesos tiene su propio control de errores y su configuración. Además, cada uno de ellos generan un archivo de log y otro de datos. En el archivo de datos, con la frecuencia configurada, aparecen los datos de dicho sensor.
 
-Luego, un proceso principal, que es el encargado de leer los archivos de datos que los procesos de los modulos de sensores van dejando y conformar lo que será la traza de sensores final. Notar que, los diferentes instrumentos configurados pueden tener tiempos de muestreo diferentes, esto implica que, en el momento de ejecución de este proceso principal, se tomaran los últimos datos que existan en los archivos de datos de cada uno de los sensores. Esto es importante porque lo que se acabará enviando por RF o SMS no es mas que una síntesis de los datos generados. Para poder tener todos los datos con su máxima precisión, es imprescindible recuperar la sonda.
+Luego, un proceso principal, que es el encargado de leer los archivos de datos que los procesos de los módulos de sensores van dejando y conformar lo que será la traza de sensores final. Notar que los diferentes instrumentos configurados pueden tener tiempos de muestreo diferentes, esto implica que, en el momento de ejecución de este proceso principal, se tomarán los últimos datos que existan en los archivos de datos de cada uno de los sensores. Esto es importante porque lo que se acabará enviando por RF o SMS no es más que una síntesis de los datos generados. Para poder tener todos los datos con su máxima precisión, es imprescindible recuperar la sonda.
 
-La traza fusión con todos los datos es recuperada por los procesos de envio de datos (RF-Lora o SMS-GSM), que funcionan igual que los procesos de sensores, de forma aislada, enviando los datos que puedan encontrarse en el archivo unificado de trazas.
+La traza fusión con todos los datos es recuperada por los procesos de envío de datos (RF-Lora o SMS-GSM), que funcionan igual que los procesos de sensores, de forma aislada, enviando los datos que puedan encontrarse en el archivo unificado de trazas.
 
 Este sistema permite que, en caso de fallo de alguno de estos sensores, buses u otros componentes, el resto de procesos sigan funcionando correctamente, aumentando la robustez del sistema. Esta arquitectura además permite una gran escalabilidad, pudiendo añadir sistemas nuevos o sistemas resilientes llegado al caso, con suma facilidad.
 
@@ -73,7 +73,7 @@ Los pasos son:
 	sudo apt update
 	</code>
 
-	Este paso actualizará la lista de librerías y dependencias iniciales del Raspbian
+	Este paso actualizará la lista de librerías y dependencias iniciales del Raspbian.
 
 2. Conectar todos los sistemas periféricos (cámara, sensores, etc.)
 
@@ -94,9 +94,9 @@ y la forma de instalarlas es mediante la instrucción
    sudo pip3 install [nombre_libreria]
 ```
 
-<b>NOTA:</b> Es muy importante utilizar sudo para la instalación de las librerías, ya que la instalación con pip3 instala la libreria para el usuario que ejecuta la instrucción. Si no se instala con sudo, al crear posteriormente los servicios, es posible que estos fallen al no poder utulizar las librerias instaladas con el usuario pi (usuario por defecto)
+<b>NOTA:</b> Es muy importante utilizar sudo para la instalación de las librerías, ya que la instalación con pip3 instala la libreria para el usuario que ejecuta la instrucción. Si no se instala con sudo, al crear posteriormente los servicios, es posible que estos fallen al no poder utilizar las librerías instaladas con el usuario "pi" (usuario por defecto)
 
-5. Instalar librerias del SO necesarias para algunas dependencias del componente software de la camara integrada.
+5. Instalar librerías del SO necesarias para algunas dependencias del componente software de la cámara integrada.
 
 ```
 sudo apt-get install libopenjp2-7
@@ -124,7 +124,7 @@ cd /data
 git clone https://github.com/Yggdrassil80/hab_sonda
 
 </code>
-<b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependeran de ese path base.
+<b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependerán de ese path base.
 
 7. Si no existe, crear manualmente el directorio images:
 
