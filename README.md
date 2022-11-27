@@ -112,6 +112,7 @@ sudo apt-get install libtiff5
 
       <code>
       cd /
+
       mkdir data
       </code>
 
@@ -119,6 +120,7 @@ sudo apt-get install libtiff5
 
       <code>
       cd /data
+
       git clone https://github.com/Yggdrassil80/hab_sonda
       </code>
       
