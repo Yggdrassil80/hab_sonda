@@ -4,7 +4,7 @@
   * [Getting Started](#getting-started)
   * [Configuraciones Genericas](#configuraciones-genericas)
     + [Generación de Servicios](#generacion-de-servicios)
-    + [Activación I2C en Raspbian](#activacion-i2c-en-raspbian)
+    + [Activación I2C en Raspbian](#activación-i2c-en-raspbian)
     + [Activación Cámara](#activacion-camara)
   * [Componentes](#componentes)
     + [BMP](#bmp)
@@ -237,7 +237,7 @@ sudo ./{nombre_script}.sh {opciones_si_las_tuviera}
 
 Sobre el archivo services.conf, se encuentra en /data/hav_sonda/utilities y unicamente contiene una linea con el nombre de los servicios separados por un espacio simple. Este archivo determina que servicios se cargaran en el arranque de la pi y el orden en que se desea que arranquen.
 
-### Activacion I2C en Raspbian
+### Activación I2C en Raspbian
 
 El bus I2C permite el mapeo de los componentes que están conectados al mismo a través de una serie de registros de datos y control. Estos registros son específicos por cada componente, leyendo y escribiendo en estos registros de la forma indicada por cada fabricante es como se controlan.
 
@@ -296,9 +296,9 @@ El módulo BMP testado es el BMP280. Básicamente se trata de un sensor de presi
 #### Descripción
 
 Las funcionalidades de este sensor lo hacen especialmente interesante:
-* Presión: Ofrece datos de presión atmosferica a nivel del mar en Pa (Pascales).
+* Presión: Ofrece datos de presión atmosférica a nivel del mar en Pa (Pascales).
 * Temperatura: Temperaturas en ºC
-* Altura Barométrica: En base a la presión y la temperatura, dispone de modelos atmosféricos primitivos pero relativamente precesios de la altura a la que se encuentra el sensor. La altura es en metros.
+* Altura Barométrica: En base a la presión y la temperatura, dispone de modelos atmosféricos primitivos pero relativamente precisos de la altura a la que se encuentra el sensor. La altura es en metros.
 
 Puede utilizarse para medir temperaturas externas o internas de la sonda, depende donde se ubique.
 
@@ -306,7 +306,7 @@ Puede utilizarse para medir temperaturas externas o internas de la sonda, depend
 
 Este componente se conecta a la Pi a través del bus I2C, luego no tiene requerimientos de conexión especiales.
 
-Para la activación del bus I2C, revisar la sección de configuración "Activación I2C en Raspbian".
+Para la activación del bus I2C, revisar la sección de configuración ["Activación I2C en Raspbian"](#activación-i2c-en-raspbian).
 
 #### Calibración
 
