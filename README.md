@@ -236,7 +236,7 @@ Sobre el archivo services.conf, se encuentra en /data/hav_sonda/utilities y unic
 
 ### Activacion I2C en Raspbian
 
-El bus I2C permite el mapeo de los componentes que estan conectados al mismo a través de una serie de registros de datos y control. Estos registros son específicos por cada componente, leyendo y escribiendo en estos registros de la forma indicada por cada fabricante es como se controlan.
+El bus I2C permite el mapeo de los componentes que están conectados al mismo a través de una serie de registros de datos y control. Estos registros son específicos por cada componente, leyendo y escribiendo en estos registros de la forma indicada por cada fabricante es como se controlan.
 
 Para poder activar el bus I2C en la Pi. Se han de seguir los pasos siguientes:
 
@@ -248,7 +248,7 @@ sudo raspi-config
 
 2. Navegar por las opciones siguientes [Interfacing Options -> I2C -> Activate]. Pasados unos segundos el I2C queda activado.
 
-A modo de comprobación, se puede utilizar la herramienta i2c-detect, simplemente ejecutando "i2cdetect -y 1" en linea de comandos y donde se muestra los dispositivos que estan usando el mapa de registros del I2C
+A modo de comprobación, se puede utilizar la herramienta i2c-detect, simplemente ejecutando "i2cdetect -y 1" en linea de comandos y donde se muestra los dispositivos que están usando el mapa de registros del I2C
 
 ```
 pi@raspberrypi:/data/hab_sonda/hav $ i2cdetect -y 1
