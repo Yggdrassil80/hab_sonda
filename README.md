@@ -126,10 +126,11 @@ sudo apt-get install libtiff5
       
       <b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependerán de ese path base.
 
-7. Si no existe, crear manualmente el directorio images:
+7. Si no existe, crear manualmente el directorio /data/hab_sonda/images:
 
    <code>
    cd /data/hab_sonda/
+
    mkdir images
    </code>
 
