@@ -363,7 +363,7 @@ Se puede encontrar información de la calibración en el apartado siguiente.
 
 Este componente se conecta a la Pi a través de un bus I2C, con lo que no tiene ninguna complicación.
 
-Para la activación del bus I2C, revisar la sección de configuración "Activación I2C en Raspbian".
+Para la activación del bus I2C, revisar la sección de configuración "[Activación I2C en Raspbian]"(#activación-i2c-en-raspbian).
 
 #### Calibración
 
@@ -544,7 +544,7 @@ Este módulo es muy util para conocer cual es el estado de la bateria o voltajes
 
 El módulo ina3221 se conecta a través del bus I2C, con lo que no es precisa ninguna conexión especial salvo la alimentación, que se recomienda que se externa a 5V.
 
-Para la activación del bus I2C, revisar la sección de configuración "Activación I2C en Raspbian".
+Para la activación del bus I2C, revisar la sección de configuración "[Activación I2C en Raspbian]"(#activación-i2c-en-raspbian).
 
 #### Descripción
 
