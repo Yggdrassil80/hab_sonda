@@ -246,9 +246,12 @@ Para poder activar el bus I2C en la Pi. Se han de seguir los pasos siguientes:
 sudo raspi-config
 ```
 
-2. Navegar por las opciones siguientes [Interfacing Options -> I2C -> Activate]. Pasados unos segundos el I2C queda activado.
+2. Navegar por las opciones siguientes [Interfacing Options -> I2C -> Yes]. Pasados unos segundos el I2C queda activado.
 
-A modo de comprobación, se puede utilizar la herramienta i2c-detect, simplemente ejecutando "i2cdetect -y 1" en linea de comandos y donde se muestra los dispositivos que están usando el mapa de registros del I2C
+3. Seleccionar la opción <Finish> para salir de reaspi-config.
+
+4. A modo de comprobación, se puede utilizar la herramienta i2c-detect, simplemente ejecutando "i2cdetect -y 1" desde linea de comandos y donde se muestra los dispositivos que están usando el mapa de registros del I2C.
+Ejemplo:
 
 ```
 pi@raspberrypi:/data/hab_sonda/hav $ i2cdetect -y 1
