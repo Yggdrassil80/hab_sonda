@@ -78,7 +78,7 @@ Los pasos son:
 2. Conectar todos los sistemas periféricos (cámara, sensores, etc.)
 
 3. Activar el bus I2C. 
-Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#activacion-i2c-en-raspbian)
+Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#activación-i2c-en-raspbian)
 
 4. Instalar librerías de Python3 de apoyo. Las librerías de Python necesarias son las siguientes:
    * image
