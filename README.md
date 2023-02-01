@@ -1083,7 +1083,7 @@ Para realizar la instalación se han de seguir los siguientes pasos:
 - Ir a la página web de [Raspberry](https://www.raspberrypi.org/) y descargarse el programa **Raspberry Pi Imager** en la sección de [software](https://www.raspberrypi.org/software/).
 - Una vez descargado, instalarlo. 
 - Arrancar el programa. Mediante la opción "Operating System" nos permitirá seleccionar el Sistema Operativo que queramos. Seleccionar "Raspberry Pi OS (32-bit)"
-- Introducir la microSD (con o sin el adaptador) en la ranura o puerto USB del PC o portátil. La microSD se asignará a una unidad de disco del sistema operativo (p.e. E:, F:, ...). Se puede utilizar el explorador de archivos para ver a qué unidad se ha asignado.
+- Introducir la microSD (con o sin el adaptador) en la ranura MicroSD/SD o puerto USB del PC o portátil. La microSD se asignará a una unidad de disco del sistema operativo (p.e. E:, F:, ...). Se puede utilizar el explorador de archivos para ver a qué unidad se ha asignado.
 - En la opción "Storage" seleccionar la unidad de disco de la microSD.
 - Darle a "Write". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la microSD.
 - Al finalizar, se pide que se extraiga la tarjeta microSD.
