@@ -68,12 +68,11 @@ Este apartado está pensado para, sin tener el detalle exacto de todos los compo
 Los pasos son:
 
 1. Disponer de una Raspberry Pi con una versión de Raspbian (o Raspberry Pi OS) instalada y funcionando correctamente. Ejecutar antes de nada:
+   ```
+   sudo apt update
+   ```
 
-	<code>
-	sudo apt update
-	</code>
-
-	Este paso actualizará la lista de librerías y dependencias iniciales del Raspbian.
+   Este paso actualizará la lista de librerías y dependencias iniciales del Raspbian.
 
 2. Conectar todos los sistemas periféricos (cámara, sensores, etc.)
 
@@ -90,18 +89,18 @@ Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#act
    * ...
    
 y la forma de instalarlas es mediante la instrucción
-```
+   ```
    sudo pip3 install [nombre_libreria]
-```
+   ```
 
 <b>NOTA:</b> Es muy importante utilizar sudo para la instalación de las librerías, ya que la instalación con pip3 instala la libreria para el usuario que ejecuta la instrucción. Si no se instala con sudo, al crear posteriormente los servicios, es posible que estos fallen al no poder utilizar las librerías instaladas con el usuario "pi" (usuario por defecto)
 
 5. Instalar librerías del SO necesarias para algunas dependencias del componente software de la cámara integrada.
 
-```
-sudo apt-get install libopenjp2-7
-sudo apt-get install libtiff5
-``` 
+   ```
+   sudo apt-get install libopenjp2-7
+   sudo apt-get install libtiff5
+   ``` 
 
 6. Realizar un clone del proyecto hab_sonda sobre la raspberry
 
@@ -110,29 +109,26 @@ sudo apt-get install libtiff5
    1. Abrir una consola del SO.
    2. Posicionarse en el directorio que se desee (se recomienda /data, NOTA: se puede crear con los comandos:
 
-      <code>
+      ```
       cd /
-
       mkdir data
-      </code>
+      ```
 
    3. Ejecutar la instrucción de clonado del repositorio "hab_sonda" con el comando:
 
-      <code>
+      ```
       cd /data
-
       git clone https://github.com/Yggdrassil80/hab_sonda
-      </code>
+      ```
       
       <b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependerán de ese path base.
 
 7. Si no existe, crear manualmente el directorio /data/hab_sonda/images:
 
-   <code>
+   ```
    cd /data/hab_sonda/
-
    mkdir images
-   </code>
+   ```
 
 8. Configurar el archivo de configuración.
    1. Para realizar esta acción se ha de configurar el archivo /data/hab_sonda/conf/hav.conf
@@ -140,19 +136,18 @@ sudo apt-get install libtiff5
 
 * <b>NOTA</b>: Llegado es punto, si se deseara (si no se tiene experiencia, se recomienda no hacerlo), se puede cambiar el nombre "hab_sonda" por el nombre que se desee. Esto se puede hacer utilizando los comandos siguiente:
 
-<code>
-cd /data/hab_sonda
-
-grep -rli 'hab_sonda' * | xargs -i@ sed -i 's/hab_sonda/nombre_nuevo/g' @
-</code>
+   ```
+   cd /data/hab_sonda
+   grep -rli 'hab_sonda' * | xargs -i@ sed -i 's/hab_sonda/nombre_nuevo/g' @
+   ```
 
 Para que los cambios no provoquen errores de configuración, todo el directorio de configuración debería cambiar también a /data/nombre_nuevo
 
 Esto se puede hacer utilizando el comando:
 
-<code>
-mv -rf /data/hab_sonda /data/nombre_nuevo
-</code>
+   ```
+   mv -rf /data/hab_sonda /data/nombre_nuevo
+   ```
 
 9. Configurar y activar los servicios. Ver el punto [Generacion de Servicios](#generacion-de-servicios)
 
@@ -196,30 +191,29 @@ WantedBy=multi-user.target
 
 2. Copiar el archivo del servico al directorio de systemd
 
-<code>
-sudo cp [nombre_servicio].service /etc/systemd/system/[nombre_servicio].service
-</code>
+   ```
+   sudo cp [nombre_servicio].service /etc/systemd/system/[nombre_servicio].service
+   ```
 
 3. Refrescar la lista de servicios y activar el nuevo que se desea dar de alta.
-<code>
-sudo systemctl daemon-reload
-
-sudo systemctl enable [nombre_servicio].service
-</code>
+   ```
+   sudo systemctl daemon-reload
+   sudo systemctl enable [nombre_servicio].service
+   ```
 
 <b>IMPORTANTE</b>: Asegurarse que el script de python definido en el [Nombre_modulo.service] tiene permisos de ejecución (chmod 755)
 
 4. Finalmente, para arrancar o parar el servicio una vez la el SO haya arrancado, utilizar.
 
-<code>
-sudo systemctl start [nombre_servicio].service
-</code>
+   ```
+   sudo systemctl start [nombre_servicio].service
+   ```
 
-o
+   o
 
-<code>
-sudo systemctl stop [nombre_servicio].service
-</code>
+   ```
+   sudo systemctl stop [nombre_servicio].service
+   ```
 
 Finalmente, comentar que estas acciones estan actualmente automatizadas a traves de un script en el directorio /data/hav_sonda/utilities. 
 
@@ -231,9 +225,9 @@ En dicho directorio se encuentran 3 scritps que agilizan la gestion de los servi
 
 para poder ejecutar cualquiera de estos comandos, posicionarse en el directorio utilities y ejecutar:
 
-<code>
-sudo ./{nombre_script}.sh {opciones_si_las_tuviera}
-</code>
+   ```
+   sudo ./{nombre_script}.sh {opciones_si_las_tuviera}
+   ```
 
 Sobre el archivo services.conf, se encuentra en /data/hav_sonda/utilities y unicamente contiene una linea con el nombre de los servicios separados por un espacio simple. Este archivo determina que servicios se cargaran en el arranque de la pi y el orden en que se desea que arranquen.
 
@@ -245,9 +239,9 @@ Para poder activar el bus I2C en la Pi. Se han de seguir los pasos siguientes:
 
 1. Ejecutar: 
 
-```
-sudo raspi-config
-```
+   ```
+   sudo raspi-config
+   ```
 
 2. Navegar por las opciones siguientes [Interfacing Options -> I2C -> Yes]. Pasados unos segundos el I2C queda activado.
 
@@ -277,9 +271,9 @@ De forma muy similar a la activación del bus I2C, se han de ejecutar los siguie
 
 1. Ejecutar:
 
-```
-sudo raspi-config
-```
+   ```
+   sudo raspi-config
+   ```
 
 2. Navegar por las opciones siguientes [Interfacing Options -> Camera -> Activate]. Pasados unos segundos la camara queda activada.
 
@@ -318,11 +312,11 @@ Existen dentro del código del módulo del BMP280 que se puede encontrar en hav/
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
-bmp_activo=1
-
-tiempoMuestreoBMP=10
-</code>
+   ```
+   bmp_activo=1
+   
+   tiempoMuestreoBMP=10
+   ```
 
 donde,
 
@@ -373,11 +367,11 @@ No se tratará en este proyecto.
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
-mpu_activo=1
+   ```
+   mpu_activo=1
 	
-tiempoMuestreoMPU=11
-</code>
+   tiempoMuestreoMPU=11
+   ```
 donde,
 
 - <b>mpu_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
@@ -427,11 +421,11 @@ Otras configuraciones adicionales son aplicadas también, como el filtrado de pa
 
 Adicionalmente, también existen configuraciones estáticas en el archivo conf/hav.conf
 
-<code>
-usbGPS=/dev/ttyUSB0
+   ```
+   usbGPS=/dev/ttyUSB0
 
-tiempoMuestreoGPS=10
-</code>
+   tiempoMuestreoGPS=10
+   ```
 
 donde,
 
@@ -489,9 +483,9 @@ Se ha de dejado un único método al cual se le pasa una cadena de texto (que re
 
 Existe configuración estática para este modulo en el archivo de configuración conf/hav.conf
 
-<code>
-usbRF=/dev/ttyUSB2
-</code>
+   ```
+   usbRF=/dev/ttyUSB2
+   ```
 
 donde,
 
@@ -521,11 +515,11 @@ Mas información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?S
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
-uv_activo=1
-
-tiempoMuestreoUV=10
-</code>
+   ```
+   uv_activo=1
+   
+   tiempoMuestreoUV=10
+   ```
 
 donde,
 
@@ -562,11 +556,11 @@ Más información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
-ina3221_activo=1
-
-tiempoMuestreoINA3221=10
-</code>
+   ```
+   ina3221_activo=1
+   
+   tiempoMuestreoINA3221=10
+   ```
 	
 donde,
 
