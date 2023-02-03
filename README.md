@@ -4,7 +4,7 @@
   * [Getting Started](#getting-started)
   * [Configuraciones Genericas](#configuraciones-genericas)
     + [Generación de Servicios](#generacion-de-servicios)
-    + [Activación I2C en Raspbian](#activacion-i2c-en-raspbian)
+    + [Activación I2C en Raspbian](#activación-i2c-en-raspbian)
     + [Activación Cámara](#activacion-camara)
   * [Componentes](#componentes)
     + [BMP](#bmp)
@@ -37,7 +37,7 @@
       - [Cableado de Operación](#cableado-de-operaci-n)
     + [Configuracion Lora](#configuracion-lora)
     + [Verificación](#verificaci-n)
-  * [Instalación Raspbian.](#instalacion-raspbian)
+  * [Instalación Raspberry Pi OS](#instalación-raspberry-pi-os)
     + [Requisitos previos](#requisitos-previos)
     + [Proceso de Instalación](#proceso-de-instalacion)
   * [ndvi](#ndvi)
@@ -46,15 +46,15 @@
 
 ## Introduccion
 
-Proyecto que recoge el código fuente base de una sonda de tipo HAB basada en Raspbian (Raspberry Pi ,3B o Zero W) y que pueda trabajar con diferentes tipos de sensores (Temperatura, Presión, Camara, Barometros, GPS, Radio Lora, Telemetria por SM, otros), que recupere datos de los mismos y los pueda enviar a una estación terrestre para, como objetivo final, poder ser recuperada y reutilizada.
+Proyecto que recoge el código fuente base de una sonda de tipo HAB basada en Raspbian (Raspberry Pi 3B o Zero W) y que pueda trabajar con diferentes tipos de sensores (Temperatura, Presión, Cámara, Barómetros, GPS, Radio Lora, Telemetría por SM, otros), que recupere datos de los mismos y los pueda enviar a una estación terrestre para, como objetivo final, poder ser recuperada y reutilizada.
 
 ## Diagrama de Sistemas
 
-El software para la sonda esta pensado de forma que todos los procesos de generación de datos y de envio de datos se ejecuten como un proceso del Sistema Operativo (Raspbian) aislado. Cada uno de estos procesos tiene su propio control de errores y su configuración. Además, cada uno de ellos generan un archivo de log y otro de datos. En el archivo de datos, con la frecuencia configurada, aparecen los datos de dicho sensor.
+El software para la sonda está pensado de forma que todos los procesos de generación de datos y de envío de datos se ejecuten como un proceso del Sistema Operativo (Raspbian) aislado. Cada uno de estos procesos tiene su propio control de errores y su configuración. Además, cada uno de ellos generan un archivo de log y otro de datos. En el archivo de datos, con la frecuencia configurada, aparecen los datos de dicho sensor.
 
-Luego, un proceso principal, que es el encargado de leer los archivos de datos que los procesos de los modulos de sensores van dejando y conformar lo que será la traza de sensores final. Notar que, los diferentes instrumentos configurados pueden tener tiempos de muestreo diferentes, esto implica que, en el momento de ejecución de este proceso principal, se tomaran los últimos datos que existan en los archivos de datos de cada uno de los sensores. Esto es importante porque lo que se acabará enviando por RF o SMS no es mas que una síntesis de los datos generados. Para poder tener todos los datos con su máxima precisión, es imprescindible recuperar la sonda.
+Luego, un proceso principal, que es el encargado de leer los archivos de datos que los procesos de los módulos de sensores van dejando y conformar lo que será la traza de sensores final. Notar que los diferentes instrumentos configurados pueden tener tiempos de muestreo diferentes, esto implica que, en el momento de ejecución de este proceso principal, se tomarán los últimos datos que existan en los archivos de datos de cada uno de los sensores. Esto es importante porque lo que se acabará enviando por RF o SMS no es más que una síntesis de los datos generados. Para poder tener todos los datos con su máxima precisión, es imprescindible recuperar la sonda.
 
-La traza fusión con todos los datos es recuperada por los procesos de envio de datos (RF-Lora o SMS-GSM), que funcionan igual que los procesos de sensores, de forma aislada, enviando los datos que puedan encontrarse en el archivo unificado de trazas.
+La traza fusión con todos los datos es recuperada por los procesos de envío de datos (RF-Lora o SMS-GSM), que funcionan igual que los procesos de sensores, de forma aislada, enviando los datos que puedan encontrarse en el archivo unificado de trazas.
 
 Este sistema permite que, en caso de fallo de alguno de estos sensores, buses u otros componentes, el resto de procesos sigan funcionando correctamente, aumentando la robustez del sistema. Esta arquitectura además permite una gran escalabilidad, pudiendo añadir sistemas nuevos o sistemas resilientes llegado al caso, con suma facilidad.
 
@@ -62,25 +62,24 @@ Este sistema permite que, en caso de fallo de alguno de estos sensores, buses u 
 
 ## Getting Started
 
-Este apartado esta pensado para, sin tener el detalle exacto de todos los componentes y tecnicas que se explican mas adelante, poner en funcionamiento el software de la sonda.</br>
-<b>IMPORTANTE:</b> En este tutorial se asume que se dispone de una raspberry pi zero o equivalente con una versión de raspbian instalada correctamente. Si se esta en este punto, consultar el punto de instalación de raspbian y luego volver a este punto.
+Este apartado está pensado para, sin tener el detalle exacto de todos los componentes y técnicas que se explican más adelante, poner en funcionamiento el software de la sonda.</br>
+<b>IMPORTANTE:</b> En este tutorial se asume que se dispone de una Raspberry Pi Zero o equivalente con una versión de Raspbian (o la nueva versión Raspberry Pi OS) instalada correctamente. Si aún no se está en este punto, consultar el apartado de [Instalación Raspberry Pi OS](#instalación-raspberry-pi-os) y luego volver a este punto.
 
 Los pasos son:
 
-1. Disponer de una raspberry Pi con una versión de raspbian instalada y funcionando correctamente. Ejecutar antes de nada:
+1. Disponer de una Raspberry Pi con una versión de Raspbian (o Raspberry Pi OS) instalada y funcionando correctamente. Ejecutar antes de nada:
+   ```
+   sudo apt update
+   ```
 
-<code>
-sudo apt get update
-</code>
+   Este paso actualizará la lista de librerías y dependencias iniciales del Raspbian.
 
-Este paso actualizará la lista de librerias y dependencias iniciales del raspbian
-
-2. Conectar todos los sistemas periféricos (camara, sensores, etc.)
+2. Conectar todos los sistemas periféricos (cámara, sensores, etc.)
 
 3. Activar el bus I2C. 
-Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#activacion-i2c-en-raspbian)
+Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#activación-i2c-en-raspbian)
 
-4. Instalar librerias de Python3 de apoyo. Las librerias de python necesarias son las siguientes:
+4. Instalar librerías de Python3 de apoyo. Las librerías de Python necesarias son las siguientes:
    * image
    * picamera
    * lib2
@@ -90,18 +89,18 @@ Para poder realizar esta acción ver el punto [Activación I2C en Raspbian](#act
    * ...
    
 y la forma de instalarlas es mediante la instrucción
-```
+   ```
    sudo pip3 install [nombre_libreria]
-```
+   ```
 
-<b>NOTA:</b> Es muy importante utilizar sudo para la instalación de las librerias, ya que la instalación con pip3 instala la libreria para el usuario que ejecuta la instrucción. Si no se instala con sudo, al crear posteriormente los servicios, es posible que estos fallen al no poder utulizar las librerias instaladas con el usuario pi (usuario por defecto)
+<b>NOTA:</b> Es muy importante utilizar sudo para la instalación de las librerías, ya que la instalación con pip3 instala la libreria para el usuario que ejecuta la instrucción. Si no se instala con sudo, al crear posteriormente los servicios, es posible que estos fallen al no poder utilizar las librerías instaladas con el usuario "pi" (usuario por defecto)
 
-5. Instalar librerias del SO necesarias para algunas dependencias del componente software de la camara integrada.
+5. Instalar librerías del SO necesarias para algunas dependencias del componente software de la cámara integrada.
 
-```
-sudo apt-get install libopenjp2-7
-sudo apt-get install libtiff5
-``` 
+   ```
+   sudo apt-get install libopenjp2-7
+   sudo apt-get install libtiff5
+   ``` 
 
 6. Realizar un clone del proyecto hab_sonda sobre la raspberry
 
@@ -110,29 +109,26 @@ sudo apt-get install libtiff5
    1. Abrir una consola del SO.
    2. Posicionarse en el directorio que se desee (se recomienda /data, NOTA: se puede crear con los comandos:
 
-<code>
-cd /
-
-mkdir data
-</code>
+      ```
+      cd /
+      mkdir data
+      ```
 
    3. Ejecutar la instrucción de clonado del repositorio "hab_sonda" con el comando:
 
-<code>
-cd /data
-	
-git clone https://github.com/Yggdrassil80/hab_sonda
+      ```
+      cd /data
+      git clone https://github.com/Yggdrassil80/hab_sonda
+      ```
+      
+      <b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependerán de ese path base.
 
-</code>
-<b>IMPORTANTE</b>: Inmediatamente despúes de realizar esta accion, todo el código de la sonda se encontrará en /data/hab_sonda. Esto implica que todas las configuraciones dependeran de ese path base.
+7. Si no existe, crear manualmente el directorio /data/hab_sonda/images:
 
-7. Si no existe, crear manualmente el directorio images:
-
-<code>
-cd /data/hab_sonda/
-
-mkdir images
-</code>
+   ```
+   cd /data/hab_sonda/
+   mkdir images
+   ```
 
 8. Configurar el archivo de configuración.
    1. Para realizar esta acción se ha de configurar el archivo /data/hab_sonda/conf/hav.conf
@@ -140,19 +136,18 @@ mkdir images
 
 * <b>NOTA</b>: Llegado es punto, si se deseara (si no se tiene experiencia, se recomienda no hacerlo), se puede cambiar el nombre "hab_sonda" por el nombre que se desee. Esto se puede hacer utilizando los comandos siguiente:
 
-<code>
-cd /data/hab_sonda
-
-grep -rli 'hab_sonda' * | xargs -i@ sed -i 's/hab_sonda/nombre_nuevo/g' @
-</code>
+   ```
+   cd /data/hab_sonda
+   grep -rli 'hab_sonda' * | xargs -i@ sed -i 's/hab_sonda/nombre_nuevo/g' @
+   ```
 
 Para que los cambios no provoquen errores de configuración, todo el directorio de configuración debería cambiar también a /data/nombre_nuevo
 
 Esto se puede hacer utilizando el comando:
 
-<code>
-mv -rf /data/hab_sonda /data/nombre_nuevo
-</code>
+   ```
+   mv -rf /data/hab_sonda /data/nombre_nuevo
+   ```
 
 9. Configurar y activar los servicios. Ver el punto [Generacion de Servicios](#generacion-de-servicios)
 
@@ -196,30 +191,29 @@ WantedBy=multi-user.target
 
 2. Copiar el archivo del servico al directorio de systemd
 
-<code>
-sudo cp [nombre_servicio].service /etc/systemd/system/[nombre_servicio].service
-</code>
+   ```
+   sudo cp [nombre_servicio].service /etc/systemd/system/[nombre_servicio].service
+   ```
 
 3. Refrescar la lista de servicios y activar el nuevo que se desea dar de alta.
-<code>
-sudo systemctl daemon-reload
-
-sudo systemctl enable [nombre_servicio].service
-</code>
+   ```
+   sudo systemctl daemon-reload
+   sudo systemctl enable [nombre_servicio].service
+   ```
 
 <b>IMPORTANTE</b>: Asegurarse que el script de python definido en el [Nombre_modulo.service] tiene permisos de ejecución (chmod 755)
 
 4. Finalmente, para arrancar o parar el servicio una vez la el SO haya arrancado, utilizar.
 
-<code>
-sudo systemctl start [nombre_servicio].service
-</code>
+   ```
+   sudo systemctl start [nombre_servicio].service
+   ```
 
-o
+   o
 
-<code>
-sudo systemctl stop [nombre_servicio].service
-</code>
+   ```
+   sudo systemctl stop [nombre_servicio].service
+   ```
 
 Finalmente, comentar que estas acciones estan actualmente automatizadas a traves de un script en el directorio /data/hav_sonda/utilities. 
 
@@ -231,27 +225,30 @@ En dicho directorio se encuentran 3 scritps que agilizan la gestion de los servi
 
 para poder ejecutar cualquiera de estos comandos, posicionarse en el directorio utilities y ejecutar:
 
-<code>
-sudo ./{nombre_script}.sh {opciones_si_las_tuviera}
-</code>
+   ```
+   sudo ./{nombre_script}.sh {opciones_si_las_tuviera}
+   ```
 
 Sobre el archivo services.conf, se encuentra en /data/hav_sonda/utilities y unicamente contiene una linea con el nombre de los servicios separados por un espacio simple. Este archivo determina que servicios se cargaran en el arranque de la pi y el orden en que se desea que arranquen.
 
-### Activacion I2C en Raspbian
+### Activación I2C en Raspbian
 
-El bus I2C permite el mapeo de los componentes que estan conectados al mismo a través de una serie de registros de datos y control. Estos registros son específicos por cada componente, leyendo y escribiendo en estos registros de la forma indicada por cada fabricante es como se controlan.
+El bus I2C permite el mapeo de los componentes que están conectados al mismo a través de una serie de registros de datos y control. Estos registros son específicos por cada componente, leyendo y escribiendo en estos registros de la forma indicada por cada fabricante es como se controlan.
 
 Para poder activar el bus I2C en la Pi. Se han de seguir los pasos siguientes:
 
 1. Ejecutar: 
 
-```
-sudo raspi-config
-```
+   ```
+   sudo raspi-config
+   ```
 
-2. Navegar por las opciones siguientes [Interfacing Options -> I2C -> Activate]. Pasados unos segundos el I2C queda activado.
+2. Navegar por las opciones siguientes [Interfacing Options -> I2C -> Yes]. Pasados unos segundos el I2C queda activado.
 
-A modo de comprobación, se puede utilizar la herramienta i2c-detect, simplemente ejecutando "i2cdetect -y 1" en linea de comandos y donde se muestra los dispositivos que estan usando el mapa de registros del I2C
+3. Seleccionar la opción <Finish> para salir de reaspi-config.
+
+4. A modo de comprobación, se puede utilizar la herramienta i2c-detect, simplemente ejecutando "i2cdetect -y 1" desde linea de comandos y donde se muestra los dispositivos que están usando el mapa de registros del I2C.
+Ejemplo:
 
 ```
 pi@raspberrypi:/data/hab_sonda/hav $ i2cdetect -y 1
@@ -274,9 +271,9 @@ De forma muy similar a la activación del bus I2C, se han de ejecutar los siguie
 
 1. Ejecutar:
 
-```
-sudo raspi-config
-```
+   ```
+   sudo raspi-config
+   ```
 
 2. Navegar por las opciones siguientes [Interfacing Options -> Camera -> Activate]. Pasados unos segundos la camara queda activada.
 
@@ -293,9 +290,9 @@ El módulo BMP testado es el BMP280. Básicamente se trata de un sensor de presi
 #### Descripción
 
 Las funcionalidades de este sensor lo hacen especialmente interesante:
-* Presión: Ofrece datos de presión atmosferica a nivel del mar en Pa (Pascales).
+* Presión: Ofrece datos de presión atmosférica a nivel del mar en Pa (Pascales).
 * Temperatura: Temperaturas en ºC
-* Altura Barométrica: En base a la presión y la temperatura, dispone de modelos atmosféricos primitivos pero relativamente precesios de la altura a la que se encuentra el sensor. La altura es en metros.
+* Altura Barométrica: En base a la presión y la temperatura, dispone de modelos atmosféricos primitivos pero relativamente precisos de la altura a la que se encuentra el sensor. La altura es en metros.
 
 Puede utilizarse para medir temperaturas externas o internas de la sonda, depende donde se ubique.
 
@@ -303,7 +300,7 @@ Puede utilizarse para medir temperaturas externas o internas de la sonda, depend
 
 Este componente se conecta a la Pi a través del bus I2C, luego no tiene requerimientos de conexión especiales.
 
-Para la activación del bus I2C, revisar la sección de configuración "Activación I2C en Raspbian".
+Para la activación del bus I2C, revisar la sección de configuración ["Activación I2C en Raspbian"](#activación-i2c-en-raspbian).
 
 #### Calibración
 
@@ -315,11 +312,11 @@ Existen dentro del código del módulo del BMP280 que se puede encontrar en hav/
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
-bmp_activo=1
-
-tiempoMuestreoBMP=10
-</code>
+   ```
+   bmp_activo=1
+   
+   tiempoMuestreoBMP=10
+   ```
 
 donde,
 
@@ -360,7 +357,7 @@ Se puede encontrar información de la calibración en el apartado siguiente.
 
 Este componente se conecta a la Pi a través de un bus I2C, con lo que no tiene ninguna complicación.
 
-Para la activación del bus I2C, revisar la sección de configuración "Activación I2C en Raspbian".
+Para la activación del bus I2C, revisar la sección de configuración "[Activación I2C en Raspbian]"(#activación-i2c-en-raspbian).
 
 #### Calibración
 
@@ -370,11 +367,11 @@ No se tratará en este proyecto.
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
-mpu_activo=1
+   ```
+   mpu_activo=1
 	
-tiempoMuestreoMPU=11
-</code>
+   tiempoMuestreoMPU=11
+   ```
 donde,
 
 - <b>mpu_activo</b>: informa sobre el estado de activación del modulo, 0 o 1 en función de si se desea que este activo o no.
@@ -424,11 +421,11 @@ Otras configuraciones adicionales son aplicadas también, como el filtrado de pa
 
 Adicionalmente, también existen configuraciones estáticas en el archivo conf/hav.conf
 
-<code>
-usbGPS=/dev/ttyUSB0
+   ```
+   usbGPS=/dev/ttyUSB0
 
-tiempoMuestreoGPS=10
-</code>
+   tiempoMuestreoGPS=10
+   ```
 
 donde,
 
@@ -486,9 +483,9 @@ Se ha de dejado un único método al cual se le pasa una cadena de texto (que re
 
 Existe configuración estática para este modulo en el archivo de configuración conf/hav.conf
 
-<code>
-usbRF=/dev/ttyUSB2
-</code>
+   ```
+   usbRF=/dev/ttyUSB2
+   ```
 
 donde,
 
@@ -518,11 +515,11 @@ Mas información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?S
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
-uv_activo=1
-
-tiempoMuestreoUV=10
-</code>
+   ```
+   uv_activo=1
+   
+   tiempoMuestreoUV=10
+   ```
 
 donde,
 
@@ -541,7 +538,7 @@ Este módulo es muy util para conocer cual es el estado de la bateria o voltajes
 
 El módulo ina3221 se conecta a través del bus I2C, con lo que no es precisa ninguna conexión especial salvo la alimentación, que se recomienda que se externa a 5V.
 
-Para la activación del bus I2C, revisar la sección de configuración "Activación I2C en Raspbian".
+Para la activación del bus I2C, revisar la sección de configuración "[Activación I2C en Raspbian]"(#activación-i2c-en-raspbian).
 
 #### Descripción
 
@@ -559,11 +556,11 @@ Más información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
-ina3221_activo=1
-
-tiempoMuestreoINA3221=10
-</code>
+   ```
+   ina3221_activo=1
+   
+   tiempoMuestreoINA3221=10
+   ```
 	
 donde,
 
@@ -1061,55 +1058,55 @@ Adicionalmente, se puede utilizar la tool "Access Port" para comprobar que los c
 - A través de la interfaz grafica, escribir lo que se desee (texto cualesquiera) y observar que este aparece en la otra instancia de "Access Port" tal cual.
 - Verificar el procedimiento a la inversa, escribiendo desde la otra instancia y viendo que es recibido el texto desde la primera.
 
-## Instalacion Raspbian.
+## Instalación Raspberry Pi OS
 
 ### Requisitos previos
 
-Para poder instalar raspbian en una raspberry pi zero, 3 o 4, se han de disponer de unos materiales previos mínimos:
+Para poder instalar Raspberry Pi OS (también conocido como Raspbian) en una Raspberry Pi Zero, 3 o 4, se han de disponer de unos materiales previos mínimos:
 
-- Una targeta microSD de 8Gb como mínimo.
-- Un adaptador para tarjetas microSD a tarjetas SD para portatil
-- Un portatil o ordenador de sobremesa con lector de tarjetas SD o microSD (lo anterior no haria falta si fuera este último el caso)
-- Conexion a internet.
+- Una tarjeta microSD de 8Gb como mínimo.
+- Un portátil u ordenador de sobremesa con lector de tarjetas microSD o SD o puerto USB.
+- (Opcionalmente) Un adaptador para tarjetas microSD a tarjetas SD, si se utiliza el lector de tarjetas SD.
+- (Opcionalmente) Un adaptador para tarjetas microSD a USB, si se usa un puerto USB.
+- Conexión a internet.
 
-### Proceso de Instalacion
+### Proceso de Instalación
 
 Para realizar la instalación se han de seguir los siguientes pasos:
 
-- Ir a la página web de [raspbian|https://www.raspberrypi.org/] y descargarse el [PI Imager|https://www.raspberrypi.org/software/] en la sección de software.
+- Ir a la página web de [Raspberry](https://www.raspberrypi.org/) y descargarse el programa **Raspberry Pi Imager** en la sección de [software](https://www.raspberrypi.org/software/).
 - Una vez descargado, instalarlo. 
-- Arrancar el programa. Mediante la opción "Operating System" nos permitirá seleccionar el Sistema Operativo que queramos. Seleccionar "Raspberry Pi OS 32"
-- Introducir la MicroSD (con o sin el adaptador) en la ranura del PC o portatil.
-- En la opción "SD Card" seleccionar la microSD introducida (se deberia presentar como una unidad de disco adicional en el SO).
-- Darle a "Write". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la SD.
+- Arrancar el programa. Mediante la opción "Operating System" nos permitirá seleccionar el Sistema Operativo que queramos. Seleccionar "Raspberry Pi OS (32-bit)"
+- Introducir la microSD (con o sin el adaptador) en la ranura MicroSD/SD o puerto USB del PC o portátil. La microSD se asignará a una unidad de disco del sistema operativo (p.e. E:, F:, ...). Se puede utilizar el explorador de archivos para ver a qué unidad se ha asignado.
+- En la opción "Storage" seleccionar la unidad de disco de la microSD.
+- Darle a "Write". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la microSD.
 - Al finalizar, se pide que se extraiga la tarjeta microSD.
-- Volver a insertar la tarjeta, esta vez, para copiar dos archivos en el Filesystem que nos aparezca.
-       - Un archivo vacio que se llame, "ssh", tal cual, sin ningun contenido.
-       - Un archivo que lo llamaremos "wpa_supplicant.conf" que tendrá la lista de SSID de las wifis que queramos que la Pi se conecte automaticamente.
-
-Ejemplo de wpa_supplicant.conf:
-
-country=ES</br>
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</br>
-update_config=1</br>
-network={</br>
-	ssid="micasa"</br>
-	psk="XXXXXXXXXXX"</br>
-}</br>
-
-network={</br>
-	ssid="MOVISTOR_AE27"</br>
-	psk="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"</br>
-	key_mgmt=WPA-PSK</br>
-}</br>
-
-network={</br>
-	ssid="miOtracasa"</br>
-	psk="XXXXXXXXXXXXXXXXX"</br>
-	key_mgmt=WPA-PSK</br>
-}</br>
-
-9.- Ahora si extraemos la tarjeta y la ponemos en la pi antes de arrancarla</br>
+- Volver a insertar la tarjeta, esta vez, para copiar dos archivos en el Filesystem que nos aparezca:
+  - Un archivo vacío que se llame "ssh", tal cual, sin ningún contenido.
+  - Un archivo que lo llamaremos "wpa_supplicant.conf", que tendrá la lista de SSID de las wifis que queramos que la Pi se conecte automáticamente.
+    Ejemplo de wpa_supplicant.conf:
+  
+      country=ES</br>
+      ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</br>
+      update_config=1</br>
+      network={</br>
+        ssid="micasa"</br>
+        psk="XXXXXXXXXXX"</br>
+      }</br>
+      </br>
+      network={</br>
+        ssid="MOVISTOR_AE27"</br>
+        psk="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"</br>
+        key_mgmt=WPA-PSK</br>
+      }</br>
+      </br>
+      network={</br>
+        ssid="miOtracasa"</br>
+        psk="XXXXXXXXXXXXXXXXX"</br>
+        key_mgmt=WPA-PSK</br>
+      }</br>
+  
+- Ahora sí, extraemos la tarjeta y la ponemos en la Rasperry Pi antes de arrancarla.
 
 ## ndvi
 
