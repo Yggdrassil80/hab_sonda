@@ -593,11 +593,11 @@ Más información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
-ina219_activo=1
-
-tiempoMuestreoINA219=10
-</code>
+   ```
+   ina219_activo=1
+   
+   tiempoMuestreoINA219=10
+   ```
 
 donde,
 
@@ -606,9 +606,9 @@ donde,
 
 Para poder utilizarlo es necesario descargar la libreria de ADAfruit correspondiente mediante la instrucción.
 
-<code>
+```
 sudo pip3 install adafruit-circuitpython-ina219
-</code>
+```
 	
 ### DS18B20
 
@@ -659,7 +659,7 @@ El modulo se conecta a la raspberry por puerto série y se utiliza un adaptador 
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
+```
 gsm_activo=1
 	
 alturaActivacion=300
@@ -673,7 +673,7 @@ listaMoviles=+34666666666,+34699999999
 pin=6666
 	
 tiempoTrazaGSM=45
-</code>
+```
 
 donde,
 
@@ -697,9 +697,9 @@ El módulo de control de la camara requiere de una série de librerias de python
 
 Ejecutar:
 
-<code>
+```
 sudo pip install picamera
-</code>
+```
 
 ##### Sobre NDVI
 
@@ -713,7 +713,7 @@ El detalle de su funcionamiento se puede encontrar en el Anexo [ndvi](#ndvi)
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
+```
 camara_activo=1
 
 tiempoTomaImagen=30
@@ -737,7 +737,7 @@ ndviBasePath=/data/hab_sonda/utilities/ndvi
 redAWB=2.26
 
 blueAWB=0.74
-</code>
+```
 
 donde,
 
@@ -768,9 +768,9 @@ Este módulo se encarga de, mediante una configuración previa, recuperar los ar
 
 Todos los archivos de datos de los sensores tienen la forma siguiente:
 
-<code>
+```
 timestamp|dato1|...|datoN|
-</code>
+```
 
 el proceso recupera, en función de la lista de módulos sobre los que ha de iterar, la ultima traza de datos disponible.
 
@@ -782,13 +782,13 @@ Es sobre este archivo sobre el que trabajaran los modulos de RF y GSM para poder
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
+```
 tiempoMuestreo=15
 
 configuracionTraza=gps,bmp,uv,ina3221
 
 idMision=NOMBREMISION
-</code>
+```
 
 donde,
 
@@ -808,7 +808,7 @@ Ayuda a hacer mas mantenible el código y a una mejor parametrización del softw
 
 Se basa en una libreria interna de python denominada "configparser" que es capaz de leer configuraciones del tipo:
 
-<code>
+```
 [nombre_seccion1]
 
 param11=valor11
@@ -825,7 +825,7 @@ paramM1=valorM1
 
 paramMZ=valorMX
 
-</code>
+```
 
 Para cada nuevo parámetro que se dese añadir al archivo de configuración se ha de crear un método de lectura en este módulo.
 
