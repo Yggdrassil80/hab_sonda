@@ -1079,13 +1079,40 @@ Para realizar la instalación se han de seguir los siguientes pasos:
 - Arrancar el programa. Mediante la opción "Operating System" nos permitirá seleccionar el Sistema Operativo que queramos. Seleccionar "Raspberry Pi OS (32-bit)"
 - Introducir la microSD (con o sin el adaptador) en la ranura MicroSD/SD o puerto USB del PC o portátil. La microSD se asignará a una unidad de disco del sistema operativo (p.e. E:, F:, ...). Se puede utilizar el explorador de archivos para ver a qué unidad se ha asignado.
 - En la opción "Storage" seleccionar la unidad de disco de la microSD.
-- Darle a "Write". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la microSD.
-- Al finalizar, se pide que se extraiga la tarjeta microSD.
-- Volver a insertar la tarjeta, esta vez, para copiar dos archivos en el Filesystem que nos aparezca:
+
+  <img width="500" src="doc/img/RasperryPiImager-Opciones.png" alt="Raspberry Pi Imager">
+
+- Seleccionar la opción de Advanced Options (![Rasperry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions.png)
+) y configurar las siguientes opciones
+  - Seleccionar la opción "Set hostname". Se puede dejar con el valor por defecto (raspberrypi.local) o poner el valor que se desee. Este el nombre que se utilizará posteriormente para conectar a la Raspberry.
+  - Seleccionar la opción "Enable SSH" y "Use password authentication"
+  - Seleccionar la opción "Set username and password". Aquí se configura el usuario (username) y contraseña (password) que se utilizará para conectar a la Raspberry. Se recomienda configurar una contraseña (password). Se puede dejar el usernae por defecto (pi) o poner el valor que se desee.
+  - Seleccionar la opción "Configure wireless LAN". Aquí se configura la red wifi que utilizará la Raspberry para conectarse. Hay que informar:
+    - el nombre de la red (SSID) y la contraseña de la wifi (Password). Si el PC desde el que se está haciendo la instalando está conectado a una wifi aparecerá su configuración, así que si queremos configurar esa misma wifi en la Raspberry se puede dejar la configuración por defecto.
+    - Dejar el campo "Hiden SSH" desactivado.
+    - Configura el campo "Wireless LAN country" con el valor "ES" (de España).
+  - Seleccionar la opción "Ser locale settings" y configurar las siguientes opciones:
+    - Time zone: Seleccionar "Europe/Madrid"
+    - Keyboard layout: Seleccionar "es"
+  - Cuando se hayan configurado todas las opciones seleccionar "Save".
+
+    | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions1.png) | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions2.png)  | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions3.png)  | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions4.png)  |
+    | ------------- | ------------- | ------------- | ------------- |
+
+- Darle a "WRITE". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la microSD.
+- Al finalizar, se pide que se extraiga la tarjeta microSD. Extraemos la tarjeta y la ponemos en la Rasperry Pi antes de arrancarla.
+
+  <img width="500" src="doc/img/RasperryPiImager-Completed.png" alt="Raspberry Pi Imager Instalación completa">
+
+#### Configuracion manual de la conexión a la Raspberry 
+> **_NOTA:_** Estas instrucciones sólo es necesario ejecutarlas si por alguna razón no se configuró el acceso SSH y la red wifi durante la instalación de Raspberry Pi OS o Raspbian en la tarjeta microSD (ver apartado anterior).
+
+Para configurar el acceso SSH y la red wifi en un Raspberry Pi OS o Raspbian que no se hayan configurado previsamente se han de seguir las siguientes instrucciones:
+- Volver a insertar la tarjeta en el PC. En el Explorador de archivos ir a la unidad asignada la tarjeta microSD. Aquí veremos los archivos de Raspberry Pi OS o Raspbian. En la carpeta principal crearemos dos nuevos archivos:
   - Un archivo vacío que se llame "ssh", tal cual, sin ningún contenido.
-  - Un archivo que lo llamaremos "wpa_supplicant.conf", que tendrá la lista de SSID de las wifis que queramos que la Pi se conecte automáticamente.
+  - Un archivo que lo llamaremos "wpa_supplicant.conf", que tendrá la lista de SSID de las wifis que queramos que la Raspbery Pi se conecte automáticamente.
     Ejemplo de wpa_supplicant.conf:
-  
+      ``` 
       country=ES</br>
       ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</br>
       update_config=1</br>
@@ -1105,8 +1132,8 @@ Para realizar la instalación se han de seguir los siguientes pasos:
         psk="XXXXXXXXXXXXXXXXX"</br>
         key_mgmt=WPA-PSK</br>
       }</br>
-  
-- Ahora sí, extraemos la tarjeta y la ponemos en la Rasperry Pi antes de arrancarla.
+      ```
+- Extraemos la tarjeta y la ponemos en la Rasperry Pi antes de arrancarla.
 
 ## ndvi
 
