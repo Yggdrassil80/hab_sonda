@@ -1096,8 +1096,9 @@ Para realizar la instalación se han de seguir los siguientes pasos:
     - Keyboard layout: Seleccionar "es"
   - Cuando se hayan configurado todas las opciones seleccionar "Save".
 
-    | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions1.png) | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions2.png)  | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions3.png)  | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions4.png)  |
-    | ------------- | ------------- | ------------- | ------------- |
+    | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions1.png) | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions2.png)  |
+    | ------------- | ------------- |
+    | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions3.png)  | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions4.png)  |
 
 - Darle a "WRITE". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la microSD.
 - Al finalizar, se pide que se extraiga la tarjeta microSD. Extraemos la tarjeta y la ponemos en la Rasperry Pi antes de arrancarla.
