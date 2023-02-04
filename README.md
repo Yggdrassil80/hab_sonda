@@ -593,11 +593,11 @@ Más información en su datasheet [aquí](https://www.alldatasheet.com/view.jsp?
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
-ina219_activo=1
-
-tiempoMuestreoINA219=10
-</code>
+   ```
+   ina219_activo=1
+   
+   tiempoMuestreoINA219=10
+   ```
 
 donde,
 
@@ -606,9 +606,9 @@ donde,
 
 Para poder utilizarlo es necesario descargar la libreria de ADAfruit correspondiente mediante la instrucción.
 
-<code>
+```
 sudo pip3 install adafruit-circuitpython-ina219
-</code>
+```
 	
 ### DS18B20
 
@@ -659,7 +659,7 @@ El modulo se conecta a la raspberry por puerto série y se utiliza un adaptador 
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
+```
 gsm_activo=1
 	
 alturaActivacion=300
@@ -673,7 +673,7 @@ listaMoviles=+34666666666,+34699999999
 pin=6666
 	
 tiempoTrazaGSM=45
-</code>
+```
 
 donde,
 
@@ -697,9 +697,9 @@ El módulo de control de la camara requiere de una série de librerias de python
 
 Ejecutar:
 
-<code>
+```
 sudo pip install picamera
-</code>
+```
 
 ##### Sobre NDVI
 
@@ -713,7 +713,7 @@ El detalle de su funcionamiento se puede encontrar en el Anexo [ndvi](#ndvi)
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
+```
 camara_activo=1
 
 tiempoTomaImagen=30
@@ -737,7 +737,7 @@ ndviBasePath=/data/hab_sonda/utilities/ndvi
 redAWB=2.26
 
 blueAWB=0.74
-</code>
+```
 
 donde,
 
@@ -768,9 +768,9 @@ Este módulo se encarga de, mediante una configuración previa, recuperar los ar
 
 Todos los archivos de datos de los sensores tienen la forma siguiente:
 
-<code>
+```
 timestamp|dato1|...|datoN|
-</code>
+```
 
 el proceso recupera, en función de la lista de módulos sobre los que ha de iterar, la ultima traza de datos disponible.
 
@@ -782,13 +782,13 @@ Es sobre este archivo sobre el que trabajaran los modulos de RF y GSM para poder
 
 El módulo dispone de confguración específica en el archivo conf/hav.conf
 
-<code>
+```
 tiempoMuestreo=15
 
 configuracionTraza=gps,bmp,uv,ina3221
 
 idMision=NOMBREMISION
-</code>
+```
 
 donde,
 
@@ -808,7 +808,7 @@ Ayuda a hacer mas mantenible el código y a una mejor parametrización del softw
 
 Se basa en una libreria interna de python denominada "configparser" que es capaz de leer configuraciones del tipo:
 
-<code>
+```
 [nombre_seccion1]
 
 param11=valor11
@@ -825,7 +825,7 @@ paramM1=valorM1
 
 paramMZ=valorMX
 
-</code>
+```
 
 Para cada nuevo parámetro que se dese añadir al archivo de configuración se ha de crear un método de lectura en este módulo.
 
@@ -1079,13 +1079,40 @@ Para realizar la instalación se han de seguir los siguientes pasos:
 - Arrancar el programa. Mediante la opción "Operating System" nos permitirá seleccionar el Sistema Operativo que queramos. Seleccionar "Raspberry Pi OS (32-bit)"
 - Introducir la microSD (con o sin el adaptador) en la ranura MicroSD/SD o puerto USB del PC o portátil. La microSD se asignará a una unidad de disco del sistema operativo (p.e. E:, F:, ...). Se puede utilizar el explorador de archivos para ver a qué unidad se ha asignado.
 - En la opción "Storage" seleccionar la unidad de disco de la microSD.
-- Darle a "Write". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la microSD.
-- Al finalizar, se pide que se extraiga la tarjeta microSD.
-- Volver a insertar la tarjeta, esta vez, para copiar dos archivos en el Filesystem que nos aparezca:
+
+  <img width="500" src="doc/img/RasperryPiImager-Opciones.png" alt="Raspberry Pi Imager">
+
+- Seleccionar la opción de Advanced Options (![Rasperry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions.png)
+) y configurar las siguientes opciones
+  - Seleccionar la opción "Set hostname". Se puede dejar con el valor por defecto (raspberrypi.local) o poner el valor que se desee. Este el nombre que se utilizará posteriormente para conectar a la Raspberry.
+  - Seleccionar la opción "Enable SSH" y "Use password authentication"
+  - Seleccionar la opción "Set username and password". Aquí se configura el usuario (username) y contraseña (password) que se utilizará para conectar a la Raspberry. Se recomienda configurar una contraseña (password). Se puede dejar el usernae por defecto (pi) o poner el valor que se desee.
+  - Seleccionar la opción "Configure wireless LAN". Aquí se configura la red wifi que utilizará la Raspberry para conectarse. Hay que informar:
+    - el nombre de la red (SSID) y la contraseña de la wifi (Password). Si el PC desde el que se está haciendo la instalando está conectado a una wifi aparecerá su configuración, así que si queremos configurar esa misma wifi en la Raspberry se puede dejar la configuración por defecto.
+    - Dejar el campo "Hiden SSH" desactivado.
+    - Configura el campo "Wireless LAN country" con el valor "ES" (de España).
+  - Seleccionar la opción "Ser locale settings" y configurar las siguientes opciones:
+    - Time zone: Seleccionar "Europe/Madrid"
+    - Keyboard layout: Seleccionar "es"
+  - Cuando se hayan configurado todas las opciones seleccionar "Save".
+
+    | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions1.png) | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions2.png)  | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions3.png)  | ![Raspberry Pi Imager Advanced Options](doc/img/RasperryPiImager-AdvancedOptions4.png)  |
+    | ------------- | ------------- | ------------- | ------------- |
+
+- Darle a "WRITE". El proceso dura unos minutos mientras se formatea, descarga y plancha la nueva imagen en la microSD.
+- Al finalizar, se pide que se extraiga la tarjeta microSD. Extraemos la tarjeta y la ponemos en la Rasperry Pi antes de arrancarla.
+
+  <img width="500" src="doc/img/RasperryPiImager-Completed.png" alt="Raspberry Pi Imager Instalación completa">
+
+#### Configuracion manual de la conexión a la Raspberry 
+> **_NOTA:_** Estas instrucciones sólo es necesario ejecutarlas si por alguna razón no se configuró el acceso SSH y la red wifi durante la instalación de Raspberry Pi OS o Raspbian en la tarjeta microSD (ver apartado anterior).
+
+Para configurar el acceso SSH y la red wifi en un Raspberry Pi OS o Raspbian que no se hayan configurado previsamente se han de seguir las siguientes instrucciones:
+- Volver a insertar la tarjeta en el PC. En el Explorador de archivos ir a la unidad asignada la tarjeta microSD. Aquí veremos los archivos de Raspberry Pi OS o Raspbian. En la carpeta principal crearemos dos nuevos archivos:
   - Un archivo vacío que se llame "ssh", tal cual, sin ningún contenido.
-  - Un archivo que lo llamaremos "wpa_supplicant.conf", que tendrá la lista de SSID de las wifis que queramos que la Pi se conecte automáticamente.
+  - Un archivo que lo llamaremos "wpa_supplicant.conf", que tendrá la lista de SSID de las wifis que queramos que la Raspbery Pi se conecte automáticamente.
     Ejemplo de wpa_supplicant.conf:
-  
+      ``` 
       country=ES</br>
       ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</br>
       update_config=1</br>
@@ -1105,8 +1132,8 @@ Para realizar la instalación se han de seguir los siguientes pasos:
         psk="XXXXXXXXXXXXXXXXX"</br>
         key_mgmt=WPA-PSK</br>
       }</br>
-  
-- Ahora sí, extraemos la tarjeta y la ponemos en la Rasperry Pi antes de arrancarla.
+      ```
+- Extraemos la tarjeta y la ponemos en la Rasperry Pi antes de arrancarla.
 
 ## ndvi
 
