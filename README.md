@@ -265,7 +265,7 @@ pi@raspberrypi:/data/hab_sonda/hav $ i2cdetect -y 1
 
 ### Activacion Camara
 
-Si se desea utilizar la camara de la raspberry pi que estaría conectada a través del puerto SPI de la pi será preciso antes habilitarla.
+Si se desea utilizar la cámara de la Raspberry Pi que estaría conectada a través del puerto CSI de la Pi será preciso antes habilitarla.
 
 De forma muy similar a la activación del bus I2C, se han de ejecutar los siguientes comandos:
 
@@ -275,9 +275,9 @@ De forma muy similar a la activación del bus I2C, se han de ejecutar los siguie
    sudo raspi-config
    ```
 
-2. Navegar por las opciones siguientes [Interfacing Options -> Camera -> Activate]. Pasados unos segundos la camara queda activada.
+2. Navegar por las opciones siguientes [Interfacing Options -> Legacy Camera -> Activate]. Pasados unos segundos la cámara queda activada.
 
-<b>IMPORTANTE</b> La configuración solicitará reiniciar la pi.
+<b>IMPORTANTE</b> Es posible que la configuración solicite reiniciar la Pi.
 
 ## Componentes
 
