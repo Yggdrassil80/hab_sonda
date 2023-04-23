@@ -29,7 +29,7 @@
     + [Listado de componentes](#listado-de-componentes)
     + [Tecnicas y procedimientos de ensamblado](#tecnicas-y-procedimientos-de-ensamblado)
 - [Anexos](#anexos)
-  * [Cambio frecuencias lora](#cambio-frecuencias-lora)
+  * [Cambio frecuencias LoRa](#cambio-frecuencias-lora)
     + [Introduccion](#introduccion-3)
     + [Requisitos previos](#requisitos-previos)
     + [Esquema electrico](#esquema-electrico)
@@ -975,7 +975,7 @@ De las herramientas, las mas específicas serían:
 
 # Anexos
 
-## Cambio frecuencias lora
+## Cambio frecuencias LoRa
 
 ### Introduccion
 
