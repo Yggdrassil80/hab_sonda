@@ -6,7 +6,7 @@
 
 import time
 import logging
-import Camara
+import CamaraV2
 
 import ConfigHelper
 
@@ -21,19 +21,19 @@ loggerLog.addHandler(inf)
 
 act = ConfigHelper.isCamaraActivo()
 resolucionRF = ConfigHelper.getResolucionImagenRF()
-loggerLog.info("[CameraService][Conf] ResolucionRF: " + str(resolucionRF))
+loggerLog.info("[CameraServiceV2][Conf] ResolucionRF: " + str(resolucionRF))
 resolucionMax = ConfigHelper.getResolucionImagenMax()
-loggerLog.info("[CameraService][Conf] resolucionMax: " + str(resolucionMax))
+loggerLog.info("[CameraServiceV2][Conf] resolucionMax: " + str(resolucionMax))
 basePathImage = ConfigHelper.getPathImagenesBase()
-loggerLog.info("[CameraService][Conf] basePathImage: " + str(basePathImage))
+loggerLog.info("[CameraServiceV2][Conf] basePathImage: " + str(basePathImage))
 tiempoTomaImagen = ConfigHelper.getTiempoTomaImagen()
-loggerLog.info("[CameraService][Conf] tiempoTomaImagen: " + str(tiempoTomaImagen))
+loggerLog.info("[CameraServiceV2][Conf] tiempoTomaImagen: " + str(tiempoTomaImagen))
 ndviActive=ConfigHelper.isNDVIConfigurationActivo()
-loggerLog.info("[CameraService][Conf] ndviActive: " + str(ndviActive))
+loggerLog.info("[CameraServiceV2][Conf] ndviActive: " + str(ndviActive))
 redAWB=ConfigHelper.getRedAWB()
-loggerLog.info("[CameraService][Conf] redAWB: " + str(redAWB))
+loggerLog.info("[CameraServiceV2][Conf] redAWB: " + str(redAWB))
 blueAWB=ConfigHelper.getBlueAWB()
-loggerLog.info("[CameraService][Conf] blueAWB: " + str(blueAWB))
+loggerLog.info("[CameraServiceV2][Conf] blueAWB: " + str(blueAWB))
 
 if act == 1:
 
@@ -42,7 +42,7 @@ if act == 1:
             #INICIO: Espacio para recuperar los datos del sensor a partir de la libreria
             loggerLog.info("[CameraServiceV2][Main] Inicio de toma de imagen de camara interna...")
             #Toma imagen de alta resolucion para despues
-            nombreImagen = Camara.tomarImagen(resolucionMax, basePathImage, tiempoTomaImagen, "HD", "jpg", ndviActive, redAWB, blueAWB)
+            nombreImagen = CamaraV2.tomarImagen(resolucionMax, basePathImage, tiempoTomaImagen, "HD", "jpg", ndviActive, redAWB, blueAWB)
             loggerLog.info("[cameraServiceV2][Main] Imagen tomada OK")
             #Toma Image de baja resolucion para su envio
             #nombreImagen = Camara.tomarImagen(gpsData, resolucionRF, basePathImage, int(3), "RF", "jpeg")
@@ -51,7 +51,6 @@ if act == 1:
 
             time.sleep(tiempoTomaImagen)
             
-
         except Exception as e:
             loggerLog.error("[CameraServiceV2] Exception: " + str(e))
             loggerLog.error("[CameraServiceV2] Se ha producido un error, se sigue iterando...")
