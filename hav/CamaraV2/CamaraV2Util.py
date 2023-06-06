@@ -23,8 +23,8 @@ def tomarImagen(res, baseImagePath, tiempoEspera, tipo, formato, ndviActive, red
 
     try:
         loggerLog.debug("[CamaraV2][tomarImagen] Inicio");
-        camera = PiCamera2()
-        loggerLog.debug("[CamaraV2][tomarImagen] PiCamera2 inicializado");
+        camera = Picamera2()
+        loggerLog.debug("[CamaraV2][tomarImagen] Picamera2 inicializado");
         camera_config = camera.create_still_configuration(main={"size": (int(res[0]), int(res[1]))}, lores={"size": (640, 480)}, display="lores")
         camera.configure(camera_config)
         loggerLog.debug("[CamaraV2][tomarImagen] Resolucion definida: " + res[0] + "x" + res[1]);
