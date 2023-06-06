@@ -37,6 +37,8 @@ loggerLog.info("[CameraServiceV2][Conf] blueAWB: " + str(blueAWB))
 
 if act == 1:
 
+    CamaraV2.configurarCamara(resolucionMax)
+    
     while True:
         try:
             #INICIO: Espacio para recuperar los datos del sensor a partir de la libreria

@@ -17,6 +17,22 @@ infCam.setFormatter(formatterInformer)
 loggerLog.addHandler(infCam)
 
 
+def configurarCamara(res):
+    try:
+        loggerLog.debug("[CamaraV2][tomarImagen] Inicio");
+        camera = Picamera2()
+        loggerLog.debug("[CamaraV2][tomarImagen] Picamera2 inicializado");
+        camera_config = camera.create_still_configuration(main={"size": (int(res[0]), int(res[1]))}, lores={"size": (640, 480)}, display="lores")
+        camera.configure(camera_config)
+
+    except Exception:
+        e = sys.exc_info()[1]
+        print(e.args[0])
+        loggerLog.error("[CamaraV2][tomarImagen] " + e.args[0])
+        loggerLog.error("[CamaraV2][tomarImagen] ERROR. La imagen puedo no haberse tomado!");
+        return "CamaraError"
+
+
 #Metodo que toma una imagen con una resolucion concreta, con un tiempo de exposicion concreto
 # con un tipo (RF o HD) concreto y con un formato concreto.
 def tomarImagen(res, baseImagePath, tiempoEspera, tipo, formato, ndviActive, redAWB, blueAWB):
