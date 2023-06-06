@@ -4,7 +4,7 @@ import time
 import datetime
 import os, sys
 import logging
-from picamera2 import PiCamera2
+from picamera2 import Picamera2
 
 
 #Creacion del logger para los logs de aplicacion
