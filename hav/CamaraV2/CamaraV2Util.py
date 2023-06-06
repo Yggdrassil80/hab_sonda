@@ -30,7 +30,7 @@ def tomarImagen(res, baseImagePath, tiempoEspera, tipo, formato, ndviActive, red
         loggerLog.debug("[CamaraV2][tomarImagen] Resolucion definida: " + res[0] + "x" + res[1]);
         camera.start()
         loggerLog.debug("[CamaraV2][tomarImagen] Tomando datos raw...");
-        time.sleep(tiempoEspera)
+        #time.sleep(tiempoEspera)
         fecha = datetime.datetime.now().strftime("%y-%m-%d-%H-%M-%S")
         camera.capture_file(baseImagePath + fecha + '-' + tipo + '.' + formato)
         loggerLog.debug("[CamaraV2][tomarImagen] Foto tomada y guardada en: " + baseImagePath + fecha + "-" + tipo + "." + formato)
