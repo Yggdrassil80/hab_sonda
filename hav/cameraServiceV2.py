@@ -5,8 +5,9 @@
 #################################################################################
 
 import time
+import datetime
 import logging
-import CamaraV2
+from picamera2 import Picamera2
 
 import ConfigHelper
 
@@ -37,19 +38,24 @@ loggerLog.info("[CameraServiceV2][Conf] blueAWB: " + str(blueAWB))
 
 if act == 1:
 
-    CamaraV2.configurarCamara(resolucionMax)
-    
+    loggerLog.debug("[CamaraV2][tomarImagen] Inicio");
+    camera = Picamera2()
+    loggerLog.debug("[CamaraV2][tomarImagen] Picamera2 inicializado");
+    camera_config = camera.create_still_configuration(main={"size": (int(resolucionMax[0]), int(resolucionMax[1]))}, lores={"size": (640, 480)}, display="lores")
+    camera.configure(camera_config)
+    loggerLog.debug("[CamaraV2][tomarImagen] Resolucion definida: " + resolucionMax[0] + "x" + resolucionMax[1]);
+
     while True:
         try:
-            #INICIO: Espacio para recuperar los datos del sensor a partir de la libreria
-            loggerLog.info("[CameraServiceV2][Main] Inicio de toma de imagen de camara interna...")
-            #Toma imagen de alta resolucion para despues
-            nombreImagen = CamaraV2.tomarImagen(resolucionMax, basePathImage, tiempoTomaImagen, "HD", "jpg", ndviActive, redAWB, blueAWB)
-            loggerLog.info("[cameraServiceV2][Main] Imagen tomada OK")
-            #Toma Image de baja resolucion para su envio
-            #nombreImagen = Camara.tomarImagen(gpsData, resolucionRF, basePathImage, int(3), "RF", "jpeg")
-            #nombreImagenRaw = Camara.convertirImagenToRaw(nombreImagen, basePathImage)
-            #FINAL: Espacio para recuperar los datos del sensor a partir de la libreria
+            camera.start()
+            loggerLog.debug("[CamaraV2][tomarImagen] Tomando datos raw...");
+            #time.sleep(tiempoEspera)
+            fecha = datetime.datetime.now().strftime("%y-%m-%d-%H-%M-%S")
+            camera.capture_file(basePathImage + fecha + '-' + 'HD' + '.' + 'jpg')
+            loggerLog.debug("[CamaraV2][tomarImagen] Foto tomada y guardada en: " + basePathImage + fecha + "-" + 'HD' + "." + 'jpg')
+            camera.stop()
+            loggerLog.debug("[CamaraV2][tomarImagen] Foto tomada y guardada en: " + basePathImage + fecha + "-" + 'HD' + "." + 'jpg')
+            loggerLog.debug("[CamaraV2][tomarImagen] Fin");
 
             time.sleep(tiempoTomaImagen)
             
