@@ -1089,7 +1089,7 @@ Para realizar la instalación se han de seguir los siguientes pasos:
   - Seleccionar la opción "Set username and password". Aquí se configura el usuario (username) y contraseña (password) que se utilizará para conectar a la Raspberry. Se recomienda configurar una contraseña (password). Se puede dejar el usernae por defecto (pi) o poner el valor que se desee.
   - Seleccionar la opción "Configure wireless LAN". Aquí se configura la red wifi que utilizará la Raspberry para conectarse. Hay que informar:
     - el nombre de la red (SSID) y la contraseña de la wifi (Password). Si el PC desde el que se está haciendo la instalando está conectado a una wifi aparecerá su configuración, así que si queremos configurar esa misma wifi en la Raspberry se puede dejar la configuración por defecto.
-    - Dejar el campo "Hiden SSH" desactivado.
+    - Dejar el campo "Hiden SSID" desactivado.
     - Configura el campo "Wireless LAN country" con el valor "ES" (de España).
   - Seleccionar la opción "Ser locale settings" y configurar las siguientes opciones:
     - Time zone: Seleccionar "Europe/Madrid"
@@ -1114,25 +1114,25 @@ Para configurar el acceso SSH y la red wifi en un Raspberry Pi OS o Raspbian que
   - Un archivo que lo llamaremos "wpa_supplicant.conf", que tendrá la lista de SSID de las wifis que queramos que la Raspbery Pi se conecte automáticamente.
     Ejemplo de wpa_supplicant.conf:
       ``` 
-      country=ES</br>
-      ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</br>
-      update_config=1</br>
-      network={</br>
-        ssid="micasa"</br>
-        psk="XXXXXXXXXXX"</br>
-      }</br>
-      </br>
-      network={</br>
-        ssid="MOVISTOR_AE27"</br>
-        psk="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"</br>
-        key_mgmt=WPA-PSK</br>
-      }</br>
-      </br>
-      network={</br>
-        ssid="miOtracasa"</br>
-        psk="XXXXXXXXXXXXXXXXX"</br>
-        key_mgmt=WPA-PSK</br>
-      }</br>
+      country=ES
+      ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+      update_config=1
+      network={
+        ssid="micasa"
+        psk="XXXXXXXXXXX"
+      }
+      
+      network={
+        ssid="MOVISTOR_AE27"
+        psk="XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        key_mgmt=WPA-PSK
+      }
+      
+      network={
+        ssid="miOtracasa"
+        psk="XXXXXXXXXXXXXXXXX"
+        key_mgmt=WPA-PSK
+      }
       ```
 - Extraemos la tarjeta y la ponemos en la Rasperry Pi antes de arrancarla.
 
