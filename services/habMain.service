@@ -1,5 +1,5 @@
 [Unit]
-Description=UV Service
+Description=HabMain Service
 After=multi-user.target
 
 [Service]
