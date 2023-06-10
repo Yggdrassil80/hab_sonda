@@ -10,6 +10,7 @@ import logging
 import ConfigHelper
 
 import MPUHelper.mpu9250 as mpu9250
+import MPUHelper.mpu6050 as mpu6050
 
 #Creacion del loger para los datos cientificos
 logger = logging.getLogger('server_logger')
@@ -31,7 +32,18 @@ loggerLog.addHandler(inf)
 
 ################################################################################
 
+isMPU9250Active = ConfigHelper.isMPU9250()
+isMPU6050Active = ConfigHelper.isMPU6050()
+
+#Se inicializa al 9250 por defecto
 sensor = mpu9250.MPU9250()
+if isMPU9250Active==1:
+    sensor = mpu9250.MPU9250()
+    loggerLog.info("[mpuService] Configuracion para mpu9250 activada")
+if isMPU6050Active==1:
+    #Se inicializa el registro de control del mpu6050 con la direccion extraida del comando (sudo i2cdetect -y 1)
+    sensor = mpu6050(0x68)
+    loggerLog.info("[mpuService] Configuracion para mpu6050 activada")
 
 act = ConfigHelper.isMPUActivo()
 tiempoMuestreoMPU = ConfigHelper.getTiempoMuestreoMPU()
@@ -43,10 +55,26 @@ if act == 1:
     while True:
 
         try:
-            acel_data = sensor.readAccel()
-            gyro_data = sensor.readGyro()
-            magt_data = sensor.readMagnet()
-            temp_data = sensor.readTemperature()
+            ax = 0.0
+            ay = 0.0
+            az = 0.0
+            gx = 0.0
+            gy = 0.0
+            gz = 0.0
+            mx = 0.0
+            my = 0.0
+            mz = 0.0
+
+            if isMPU9250Active==1:
+                acel_data = sensor.readAccel()
+                gyro_data = sensor.readGyro()
+                magt_data = sensor.readMagnet()
+                temp_data = sensor.readTemperature()
+
+            if isMPU6050Active==1:
+                acel_data = sensor.get_accel_data()
+                gyro_data = sensor.get_gyro_data()
+                temp_data = sensor.get_temp()
 
             ax = acel_data["x"]
             ay = acel_data["y"]
@@ -54,9 +82,11 @@ if act == 1:
             gx = gyro_data["x"]
             gy = gyro_data["y"]
             gz = gyro_data["z"]
-            mx = magt_data["x"]
-            my = magt_data["y"]
-            mz = magt_data["z"]
+
+            if isMPU9250Active==1:
+                mx = magt_data["x"]
+                my = magt_data["y"]
+                mz = magt_data["z"]
 
             dgx_tmp = math.degrees(gx)
             dgy_tmp = math.degrees(gy)

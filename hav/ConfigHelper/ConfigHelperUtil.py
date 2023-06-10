@@ -93,6 +93,26 @@ def isMPUActivo():
     except:
         return "valor vacio"
 
+#Metodo que informa que chipset de mpu se usara
+def isMPU9250():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("MPU", "mpu9250")
+        return int(t)
+    except:
+        return "valor vacio"
+
+#Metodo que informa que chipset de mpu se usara
+def isMPU6050():
+    try:
+        cfg = configparser.ConfigParser()
+        cfg.read([CONF_PATH])
+        t = cfg.get("MPU", "mpu6050")
+        return int(t)
+    except:
+        return "valor vacio"
+
 #Metodo que informa sobre el estado de activacion del BMP
 def isBMPActivo():
     try:
