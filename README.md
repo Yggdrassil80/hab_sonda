@@ -301,6 +301,8 @@ Puede utilizarse para medir temperaturas externas o internas de la sonda, depend
 Este componente se conecta a la Pi a través del bus I2C, luego no tiene requerimientos de conexión especiales.
 
 Para la activación del bus I2C, revisar la sección de configuración ["Activación I2C en Raspbian"](#activación-i2c-en-raspbian).
+	
+IMPORTANTE: La alimentación de los BPM280 y versiones superiores es a 3.3V. 
 
 #### Calibración
 
@@ -342,9 +344,9 @@ Este sensor recupera los valores siguientes:
 - gx: inclinación en el eje X
 - gy: inclinación en el eje Y
 - gz: inclinación en el eje Z
-- ox: orientación magnética en el eje X
-- oy: orientación magnética en el eje Y
-- oz: orientación magnética en el eje Z
+- ox: orientación magnética en el eje X <- El magnetometro solo esta disponible en las versiones del mpu9250, no esta disponible en los mpu6050
+- oy: orientación magnética en el eje Y <- El magnetometro solo esta disponible en las versiones del mpu9250, no esta disponible en los mpu6050
+- oz: orientación magnética en el eje Z <- El magnetometro solo esta disponible en las versiones del mpu9250, no esta disponible en los mpu6050
 - temp: temperatura del sensor embebido que lleva el circuito
 
 En el caso de los sensores con magnetometros y giroscopios, para poder obtener medidas correctas y precisas, es necesario calibrar estos sistemas.
@@ -358,6 +360,8 @@ Se puede encontrar información de la calibración en el apartado siguiente.
 Este componente se conecta a la Pi a través de un bus I2C, con lo que no tiene ninguna complicación.
 
 Para la activación del bus I2C, revisar la sección de configuración "[Activación I2C en Raspbian]"(#activación-i2c-en-raspbian).
+					   
+IMPORTANTE: Los componentes mpu6050 y mpu9250 van alimentados a 3.3V
 
 #### Calibración
 
@@ -369,8 +373,9 @@ El módulo dispone de confguración específica en el archivo conf/hav.conf
 
    ```
    mpu_activo=1
-	
-   tiempoMuestreoMPU=11
+   tiempoMuestreoMPU=10
+   mpu9250=1
+   mpu6050=0
    ```
 donde,
 
@@ -378,6 +383,10 @@ donde,
 - <b>tiempoMuestreoMPU</b>: informa sobre el tiempo de toma de datos del sensor.
 
 Más información en su datasheet [aquí](https://components101.com/processors/mpu9250-9-axis-digital-motion-processor)
+
+#### Software
+
+La gestión del mpu6050 y del mpu9250 se efectua a través de dos librerias diferentes incluidas dentro del modulo python MPUHelper. Por defecto, la configuración que esta escrita en el mpuService.py es para gestionar el mpu9250. Si se desea cambiar y utilizar el chipset del mpu6050 incluir en el bloque de configuración, el campo mpu6050=1 y mpu9250=0.
 
 ### GPS
 
